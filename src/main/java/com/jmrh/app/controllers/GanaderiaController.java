@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jmrh.app.models.dao.GanaderiaDAOInterface;
 import com.jmrh.app.models.entities.Ganaderia;
+import com.jmrh.app.models.services.GanaderiaServiceInterface;
 
 @Controller
 public class GanaderiaController {
 
 	@Autowired
-	private GanaderiaDAOInterface ganaderiaDAO;
+	private GanaderiaServiceInterface ganaderiaService;
 	
 	@GetMapping("/ganaderia/listado")
 	public String listado(Model model) {
 		model.addAttribute("titulo", "Cruce de Ganado - Listado Ganaderías");
-		model.addAttribute("ganaderias", ganaderiaDAO.findAll());
+		model.addAttribute("ganaderias", ganaderiaService.findAll());
 		return "/ganaderia/listado";
 	}
 	
@@ -33,7 +33,7 @@ public class GanaderiaController {
 	
 	@GetMapping("/ganaderia/form/{idGan}")
 	public String form(@PathVariable Long idGan, Model model) {
-		Ganaderia ganaderia = ganaderiaDAO.findOne(idGan);
+		Ganaderia ganaderia = ganaderiaService.findOne(idGan);
 		model.addAttribute("titulo", "Cruce de Ganado - Modificación");
 		model.addAttribute("ganaderia",ganaderia);
 		return "/ganaderia/form";
@@ -41,21 +41,21 @@ public class GanaderiaController {
 	
 	@GetMapping("/ganaderia/eliminar/{idGan}")
 	public String eliminar(@PathVariable Long idGan) {
-		ganaderiaDAO.remove(idGan);
+		ganaderiaService.remove(idGan);
 		return "redirect:/ganaderia/listado";
 	}
 	
 	@PostMapping("/ganaderia/form")
 	public String form(Ganaderia ganaderia, Model model) {
-		ganaderiaDAO.save(ganaderia);
+		ganaderiaService.save(ganaderia);
 		return "redirect:/ganaderia/listado";
 	}
 	
 	@GetMapping("/ganaderia/rellenar")
 	public String rellenar(Model model) {
-		ganaderiaDAO.save(new Ganaderia("g1","Martinez"));
-		ganaderiaDAO.save(new Ganaderia("g2","Vitorino"));
-		ganaderiaDAO.save(new Ganaderia("g3","Cebada Gago"));
+		ganaderiaService.save(new Ganaderia("g1","Martinez"));
+		ganaderiaService.save(new Ganaderia("g2","Vitorino"));
+		ganaderiaService.save(new Ganaderia("g3","Cebada Gago"));
 		return "redirect:/ganaderia/listado";
 	}
 	

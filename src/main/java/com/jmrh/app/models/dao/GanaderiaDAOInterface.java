@@ -1,13 +1,9 @@
 package com.jmrh.app.models.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 import com.jmrh.app.models.entities.Ganaderia;
 
-public interface GanaderiaDAOInterface {
+public interface GanaderiaDAOInterface extends CrudRepository<Ganaderia, Long> {
 
-	public List<Ganaderia> findAll();
-	public Ganaderia findOne(Long idGan);
-	public void save(Ganaderia ganaderia);
-	public void remove(Long idGan);
 }
