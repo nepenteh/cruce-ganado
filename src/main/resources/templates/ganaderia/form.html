@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+
+<a th:href="@{/ganaderia/listado}">Volver al listado</a><br>
+
+<form th:object="${ganaderia}" method="post" th:action="@{/ganaderia/form}">
+<div>
+<label>Código</label>
+<input type="text" th:field="*{codigoGan}">
+</div>
+<div>
+<label>Nombre</label>
+<input type="text" th:field="*{nombreGan}">
+</div>
+<div>
+<input type="hidden" th:field="*{idGan}">
+<input type="submit" value="Enviar">
+</div>
+</form>
+
+</body>
+</html>
