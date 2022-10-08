@@ -13,13 +13,14 @@
 <div>
 <label>Código</label>
 <input type="text" th:field="*{codigoGan}">
+<div th:if="${#fields.hasErrors('codigoGan')}" th:errors="*{codigoGan}"></div>
 </div>
 <div>
 <label>Nombre</label>
 <input type="text" th:field="*{nombreGan}">
+<div th:if="${#fields.hasErrors('nombreGan')}" th:errors="*{nombreGan}"></div>
 </div>
 <div>
-<input type="hidden" th:field="*{idGan}">
 <input type="submit" value="Enviar">
 </div>
 </form>

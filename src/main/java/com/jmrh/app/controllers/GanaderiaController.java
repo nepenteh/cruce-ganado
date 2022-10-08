@@ -1,16 +1,22 @@
 package com.jmrh.app.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.GanaderiaServiceInterface;
 
 @Controller
+@SessionAttributes("ganaderia")
 public class GanaderiaController {
 
 	@Autowired
@@ -46,18 +52,17 @@ public class GanaderiaController {
 	}
 	
 	@PostMapping("/ganaderia/form")
-	public String form(Ganaderia ganaderia, Model model) {
+	public String form(@Valid Ganaderia ganaderia,  BindingResult result, Model model, SessionStatus status) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("titulo", "Cruce de Ganado".concat(ganaderia.getIdGan()==null ? " - Alta" : " - Modificación"));
+			return "/ganaderia/form";
+		}
+		
 		ganaderiaService.save(ganaderia);
+		status.setComplete();
 		return "redirect:/ganaderia/listado";
 	}
 	
-	@GetMapping("/ganaderia/rellenar")
-	public String rellenar(Model model) {
-		ganaderiaService.save(new Ganaderia("g1","Martinez"));
-		ganaderiaService.save(new Ganaderia("g2","Vitorino"));
-		ganaderiaService.save(new Ganaderia("g3","Cebada Gago"));
-		return "redirect:/ganaderia/listado";
-	}
-	
-	
+		
 }

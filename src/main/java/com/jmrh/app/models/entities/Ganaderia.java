@@ -3,22 +3,32 @@ package com.jmrh.app.models.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "ganaderias")
 public class Ganaderia implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_gan")
 	public Long idGan;
+	
+	@NotEmpty
+	@Size(max=50)
+	@Column(name="codigo_gan")
 	public String codigoGan;
+	
+	@NotEmpty
+	@Size(max=255)
+	@Column(name="nombre_gan")
 	public String nombreGan;
 
 	public Ganaderia() {
@@ -77,6 +87,6 @@ public class Ganaderia implements Serializable {
 		return "Ganaderia [idGan=" + idGan + ", codigoGan=" + codigoGan + ", nombreGan=" + nombreGan + "]";
 	}
 
-	
+	private static final long serialVersionUID = 1L;
 
 }
