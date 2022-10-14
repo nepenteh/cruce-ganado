@@ -30,6 +30,9 @@ public class Ganaderia implements Serializable {
 	@Size(max=255)
 	@Column(name="nombre_gan")
 	public String nombreGan;
+	
+	@Column(name="hierro_gan")
+	public String hierroGan;
 
 	public Ganaderia() {
 
@@ -62,6 +65,14 @@ public class Ganaderia implements Serializable {
 
 	public void setNombreGan(String nombreGan) {
 		this.nombreGan = nombreGan;
+	}
+	
+	public String getHierroGan() {
+		return hierroGan;
+	}
+
+	public void setHierroGan(String hierroGan) {
+		this.hierroGan = hierroGan;
 	}
 
 	@Override

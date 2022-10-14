@@ -9,16 +9,20 @@
 
 <a th:href="@{/ganaderia/listado}">Volver al listado</a><br>
 
-<form th:object="${ganaderia}" method="post" th:action="@{/ganaderia/form}">
+<form th:object="${ganaderia}" method="post" th:action="@{/ganaderia/form}" enctype="multipart/form-data">
 <div>
 <label>Código</label>
 <input type="text" th:field="*{codigoGan}">
-<div th:if="${#fields.hasErrors('codigoGan')}" th:errors="*{codigoGan}"></div>
+<div th:if="${#fields.hasErrors('codigoGan')}" th:uerrors="*{codigoGan}"></div>
 </div>
 <div>
 <label>Nombre</label>
 <input type="text" th:field="*{nombreGan}">
-<div th:if="${#fields.hasErrors('nombreGan')}" th:errors="*{nombreGan}"></div>
+<div th:if="${#fields.hasErrors('nombreGan')}" th:uerrors="*{nombreGan}"></div>
+</div>
+<div>
+<label>Hierro</label>
+<input type="file" name="hierrogan">
 </div>
 <div>
 <input type="submit" value="Enviar">

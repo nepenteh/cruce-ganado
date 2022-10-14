@@ -5,16 +5,26 @@
 <title th:text="${titulo}"></title>
 </head>
 <body>
+
+<div th:if="${success!=null}" th:text="${success}"></div>
+<div th:if="${error!=null}" th:text="${error}"></div>
+<div th:if="${warning!=null}" th:text="${warning}"></div>
+<div th:if="${info!=null}" th:text="${info}"></div>
+
 <h1 th:text="${titulo}"></h1>
 
 <a th:href="@{/ganaderia/form}">Alta Ganaderia</a>
 
-<table>
+<p th:if="${ganaderias.size()==0}">No hay ganaderías que  mostrar</p>
+<p th:if="${ganaderias.size()==1}" th:text="${'Listando '+numeroganaderias+' ganaderia'}"></p>
+<p th:if="${ganaderias.size()>1}" th:text="${'Listando '+numeroganaderias+' ganaderias'}"></p>
+<table th:if="${ganaderias.size()>0}">
 <thead>
 	<tr>
 	<th>IdGan</th>
 	<th>CodigoGan</th>
 	<th>NombreGan</th>
+	<th>Hierro</th>
 	<th>Opciones</th>
 	</tr>
 </thead>
@@ -23,6 +33,9 @@
 	<td th:text="${ganaderia.idGan}"></td>
 	<td th:text="${ganaderia.codigoGan}"></td>
 	<td th:text="${ganaderia.nombreGan}"></td>
+	<td><img th:if="${ganaderia.hierroGan != null}" th:src="@{'/uploads/' + ${ganaderia.hierroGan}}" width="100px">
+		<span th:if="${ganaderia.hierroGan == null}" th:text="---"></span>
+	</td>
 	<td><a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}">Modificar</a> 
 		<a th:href="@{'/ganaderia/eliminar/'+${ganaderia.idGan}}">Eliminar</a>
 	</tr>

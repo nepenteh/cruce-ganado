@@ -41,6 +41,12 @@ public class GanaderiaService implements GanaderiaServiceInterface {
 		ganaderiaDAO.deleteById(idGan);
 	}
 	
+	@Transactional(readOnly=true)
+	@Override
+	public Long count() {
+		return ganaderiaDAO.count();
+	}
+	
 
 	
 }

@@ -10,5 +10,6 @@ public interface GanaderiaServiceInterface {
 	public Ganaderia findOne(Long idGan);
 	public void save(Ganaderia ganaderia);
 	public void remove(Long idGan);
+	public Long count();
 	
 }
