@@ -21,18 +21,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jmrh.app.models.entities.Ganaderia;
-import com.jmrh.app.models.services.GanaderiaServiceInterface;
-import com.jmrh.app.models.services.UploadServiceInterface;
+import com.jmrh.app.models.services.IGanaderiaService;
+import com.jmrh.app.models.services.IUploadService;
 
 @Controller
 @SessionAttributes("ganaderia")
 public class GanaderiaController {
 
 	@Autowired
-	private GanaderiaServiceInterface ganaderiaService;
+	private IGanaderiaService ganaderiaService;
 	
 	@Autowired
-	private UploadServiceInterface uploadService;
+	private IUploadService uploadService;
 	
 	
 	@GetMapping("/ganaderia/listado")

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UploadService implements UploadServiceInterface {
+public class UploadService implements IUploadService {
 
 	// carpeta de imagenes subidas del proyecto
 	final static String UPLOAD_FOLDER = "uploads";

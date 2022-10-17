@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.jmrh.app.models.entities.Ganaderia;
 
-public interface GanaderiaDAOInterface extends CrudRepository<Ganaderia, Long> {
+public interface IGanaderiaDAO extends CrudRepository<Ganaderia, Long> {
 
 }

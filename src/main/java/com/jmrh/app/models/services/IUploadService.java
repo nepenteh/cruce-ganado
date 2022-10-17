@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface UploadServiceInterface {
+public interface IUploadService {
 
 	//Para cargar la imagen para verla
 	public Resource load(String filename) throws MalformedURLException;

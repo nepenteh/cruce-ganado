@@ -75,29 +75,7 @@ public class Ganaderia implements Serializable {
 		this.hierroGan = hierroGan;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(codigoGan, idGan, nombreGan);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Ganaderia other = (Ganaderia) obj;
-		return Objects.equals(codigoGan, other.codigoGan) && Objects.equals(idGan, other.idGan)
-				&& Objects.equals(nombreGan, other.nombreGan);
-	}
-
-	@Override
-	public String toString() {
-		return "Ganaderia [idGan=" + idGan + ", codigoGan=" + codigoGan + ", nombreGan=" + nombreGan + "]";
-	}
-
+	
 	private static final long serialVersionUID = 1L;
 
 }

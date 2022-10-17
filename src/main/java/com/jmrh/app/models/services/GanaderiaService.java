@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import com.jmrh.app.models.dao.GanaderiaDAOInterface;
+import com.jmrh.app.models.dao.IGanaderiaDAO;
 import com.jmrh.app.models.entities.Ganaderia;
 
 
 @Service
-public class GanaderiaService implements GanaderiaServiceInterface {
+public class GanaderiaService implements IGanaderiaService {
 
 	@Autowired
-	private GanaderiaDAOInterface ganaderiaDAO;
+	private IGanaderiaDAO ganaderiaDAO;
 
 	@Transactional(readOnly=true)
 	@Override
