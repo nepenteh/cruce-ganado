@@ -7,7 +7,7 @@
 <body>
 <h1 th:text="${titulo}"></h1>
 
-<a th:href="@{/ganaderia/listado}">Volver al listado</a><br>
+<a th:href="@{/ganaderia/listado}">Volver al listado de Ganaderías</a><br>
 
 <form th:object="${ganaderia}" method="post" th:action="@{/ganaderia/form}" enctype="multipart/form-data">
 <div>

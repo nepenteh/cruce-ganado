@@ -46,7 +46,7 @@ public class GanaderiaController {
 	@GetMapping("/ganaderia/form")
 	public String form(Model model) {
 		Ganaderia ganaderia = new Ganaderia();
-		model.addAttribute("titulo", "Cruce de Ganado - Alta");
+		model.addAttribute("titulo", "Cruce de Ganado - Alta Ganadería");
 		model.addAttribute("ganaderia",ganaderia);
 		return "/ganaderia/form";
 	}
@@ -58,33 +58,11 @@ public class GanaderiaController {
 			flash.addFlashAttribute("error","Ganadería no existente");
 			return "redirect:/ganaderia/listado";
 		}
-		model.addAttribute("titulo", "Cruce de Ganado - Modificación");
+		model.addAttribute("titulo", "Cruce de Ganado - Modificación Ganadería");
 		model.addAttribute("ganaderia",ganaderia);
 		return "/ganaderia/form";
 	}
 	
-	@GetMapping("/ganaderia/eliminar/{idGan}")
-	public String eliminar(@PathVariable Long idGan, RedirectAttributes flash) {
-		
-		if(idGan>0) { //validación id
-			//copia aux
-			Ganaderia ganaderia = ganaderiaService.findOne(idGan);
-			//elimino la ganadería
-			if(ganaderia!=null)
-				ganaderiaService.remove(idGan);
-			else {
-				flash.addFlashAttribute("error","Ganadería no existente");
-				return "redirect:/ganaderia/listado";
-			}
-			
-			//elimino la imagen gracias a la copia aux
-			if(ganaderia.getHierroGan()!=null)
-				uploadService.delete(ganaderia.getHierroGan());
-			flash.addFlashAttribute("success","Ganadería eliminada con éxito");
-		}
-		
-		return "redirect:/ganaderia/listado";
-	}
 	
 	@PostMapping("/ganaderia/form")
 	public String form(@Valid Ganaderia ganaderia,  BindingResult result, 
@@ -93,11 +71,10 @@ public class GanaderiaController {
 					   RedirectAttributes flash,
 					   SessionStatus status) {
 		
-		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
 		
 		//Si errores de validación, corto.
 		if(result.hasErrors()) {
-			model.addAttribute("titulo", "Cruce de Ganado".concat(ganaderia.getIdGan()==null ? " - Alta" : " - Modificación"));
+			model.addAttribute("titulo", "Cruce de Ganado".concat(ganaderia.getIdGan()==null ? " - Alta de Ganadería" : " - Modificación de Ganadería"));
 			return "/ganaderia/form";
 		}
 		
@@ -130,12 +107,35 @@ public class GanaderiaController {
 		
 		
 		//guardo la entidad
+		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
 		ganaderiaService.save(ganaderia);
 		status.setComplete();
 		flash.addFlashAttribute("success",mensaje);
 		return "redirect:/ganaderia/listado";
 	}
-	
+
+	@GetMapping("/ganaderia/eliminar/{idGan}")
+	public String eliminar(@PathVariable Long idGan, RedirectAttributes flash) {
+		
+		if(idGan>0) { //validación id
+			//copia aux
+			Ganaderia ganaderia = ganaderiaService.findOne(idGan);
+			//elimino la ganadería
+			if(ganaderia!=null)
+				ganaderiaService.remove(idGan);
+			else {
+				flash.addFlashAttribute("error","Ganadería no existente");
+				return "redirect:/ganaderia/listado";
+			}
+			
+			//elimino la imagen gracias a la copia aux
+			if(ganaderia.getHierroGan()!=null)
+				uploadService.delete(ganaderia.getHierroGan());
+			flash.addFlashAttribute("success","Ganadería eliminada con éxito");
+		}
+		
+		return "redirect:/ganaderia/listado";
+	}
 	
 	@GetMapping("/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {

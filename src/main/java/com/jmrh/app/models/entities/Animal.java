@@ -16,8 +16,6 @@ import javax.validation.constraints.Size;
 @Table(name="animales")
 public class Animal implements Serializable {
 
-	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_a")

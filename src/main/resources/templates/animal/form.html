@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+
+<a th:href="@{/animal/listado}">Volver al listado de Animales</a><br>
+
+<form th:object="${animal}" method="post" th:action="@{/animal/form}">
+<div>
+<label>Nombre</label>
+<input type="text" th:field="*{nombreA}">
+<div th:if="${#fields.hasErrors('nombreA')}" th:uerrors="*{nombreA}"></div>
+</div>
+<div>
+<label>Sexo</label>
+<input type="text" th:field="*{sexoA}">
+<div th:if="${#fields.hasErrors('sexoA')}" th:uerrors="*{sexoA}"></div>
+</div>
+<div>
+<label>Puntuación</label>
+<input type="text" th:field="*{puntuacionA}">
+<div th:if="${#fields.hasErrors('puntuacionA')}" th:uerrors="*{puntuacionA}"></div>
+</div>
+
+<input type="submit" value="Enviar">
+</div>
+</form>
+
+</body>
+</html>

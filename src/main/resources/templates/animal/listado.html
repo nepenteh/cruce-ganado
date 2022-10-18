@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+<div th:if="${success!=null}" th:text="${success}"></div>
+<div th:if="${error!=null}" th:text="${error}"></div>
+<div th:if="${warning!=null}" th:text="${warning}"></div>
+<div th:if="${info!=null}" th:text="${info}"></div>
+
+<h1 th:text="${titulo}"></h1>
+<a th:href="@{/}">Menú Principal</a><br>
+
+<a th:href="@{/animal/form}">Alta Animal</a>
+
+<p th:if="${animales.size()==0}">No hay animales que  mostrar</p>
+<p th:if="${animales.size()==1}" th:text="${'Listando '+numeroanimales+' animal'}"></p>
+<p th:if="${animales.size()>1}" th:text="${'Listando '+numeroanimales+' animales'}"></p>
+<table th:if="${animales.size()>0}">
+<thead>
+	<tr>
+	<th>Id</th>
+	<th>Nombre</th>
+	<th>Sexo</th>
+	<th>Puntuación</th>
+	<th>Opciones</th>
+	</tr>
+</thead>
+<tbody>
+<tr th:each="animal: ${animales}">
+	<td th:text="${animal.idA}"></td>
+	<td th:text="${animal.nombreA}"></td>
+	<td th:text="${animal.sexoA}"></td>
+	<td th:text="${animal.puntuacionA}"></td>
+	<td><a th:href="@{'/animal/form/'+${animal.idA}}">Modificar</a> 
+		<a th:href="@{'/animal/eliminar/'+${animal.idA}}">Eliminar</a>
+	</tr>
+</tbody>
+</table>
+
+</body>
+</html>
