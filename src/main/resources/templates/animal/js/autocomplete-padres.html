@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<body>
+	<script type="text/javascript" th:fragment="autocomplete-padres">
+		$(document).ready(function() {
+			$("#buscar-padre").autocomplete({
+				
+				source: function(request, response) {
+					$.ajax({
+						url:"/animal/cargar-padres/" + request.term,
+						dataType: "json",
+						data: {
+							cadena: request.term
+						},
+						success: function(data) {
+							response($.map(data,function(item){
+								return {
+									value: item.idA,
+									label: item.nombreA
+								}
+							}));
+						},
+					});
+				},
+				select: function(event, ui) {
+					$("#buscar-padre").val(ui.item.label);
+					$("#nombre_padre").val(ui.item.label);
+					$("#padre_id").val(ui.item.value);
+					return false;
+				}
+				
+			});
+		});
+	</script>
+</body>
+</html>

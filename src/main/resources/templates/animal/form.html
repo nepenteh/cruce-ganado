@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
 <h1 th:text="${titulo}"></h1>
 
 <a th:href="@{/animal/listado}">Volver al listado de Animales</a><br>
 
-<form th:object="${animal}" method="post" th:action="@{/animal/form}">
+<form th:object="${animal}" method="post" th:action="@{/animal/form}" enctype="multipart/form-data">
 <div>
 <label>Nombre</label>
 <input type="text" th:field="*{nombreA}">
@@ -17,7 +14,10 @@
 </div>
 <div>
 <label>Sexo</label>
-<input type="text" th:field="*{sexoA}">
+<select th:field="*{sexoA}">
+<option value="">-- Seleccionar sexo --</option>
+<option th:each="sexo: ${sexos.entrySet()}" th:text="${sexo.value}" th:value="${sexo.key}"></option>
+</select>
 <div th:if="${#fields.hasErrors('sexoA')}" th:uerrors="*{sexoA}"></div>
 </div>
 <div>
@@ -25,10 +25,46 @@
 <input type="text" th:field="*{puntuacionA}">
 <div th:if="${#fields.hasErrors('puntuacionA')}" th:uerrors="*{puntuacionA}"></div>
 </div>
+<div>
+<label>Fecha</label>
+<input type="date" th:field="*{fechaA}">
+<div th:if="${#fields.hasErrors('fechaA')}" th:uerrors="*{fechaA}"></div>
+</div>
+<div>
+<label>Ganadería</label>
+<input type="text" name="buscar-ganaderia" id="buscar-ganaderia" placeholder="Escribe la ganadería a buscar...">
+<input type="text" id="nombre_ganaderia" th:value="${(animal.ganaderiaA==null)?'':animal.ganaderiaA.nombreGan}">
+<input type="hidden" id="ganaderia_id" name="ganaderia_id" th:value="${(animal.ganaderiaA==null)?null:animal.ganaderiaA.idGan}">
+<!-- Por si quiero controlar validación en ganadería del animal  -->
+<!--  <div th:if="${errorGanaderia!=null}" th:text="${errorGanaderia}"></div> -->
+</div>
+<div>
+<label>Foto</label>
+<input type="file" name="fotoa">
+</div>
 
+<div>
+<label>Madre</label>
+<input type="text" name="buscar-madre" id="buscar-madre" placeholder="Escribe el nombre del animal a buscar...">
+<input type="text" id="nombre_madre" th:value="${(animal.madreA==null)?'':animal.madreA.nombreA}">
+<input type="hidden" id="madre_id" name="madre_id" th:value="${(animal.madreA==null)?null:animal.madreA.idA}">
+</div>
+
+<div>
+<label>Padre</label>
+<input type="text" name="buscar-padre" id="buscar-padre" placeholder="Escribe el nombre del animal a buscar...">
+<input type="text" id="nombre_padre" th:value="${(animal.padreA==null)?'':animal.padreA.nombreA}">
+<input type="hidden" id="padre_id" name="padre_id" th:value="${(animal.padreA==null)?null:animal.padreA.idA}">
+</div>
+
+<div>
 <input type="submit" value="Enviar">
 </div>
 </form>
 
+<div th:replace="layout/layout :: javascript"></div>
+<script th:replace="animal/js/autocomplete-ganaderias :: autocomplete-ganaderias"></script>
+<script th:replace="animal/js/autocomplete-madres :: autocomplete-madres"></script>
+<script th:replace="animal/js/autocomplete-padres :: autocomplete-padres"></script>
 </body>
 </html>

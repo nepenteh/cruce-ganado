@@ -13,27 +13,28 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "ganaderias")
 public class Ganaderia implements Serializable {
+
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_gan")
+	@Column(name = "id_gan")
 	public Long idGan;
-	
+
 	@NotEmpty
-	@Size(max=50)
-	@Column(name="codigo_gan")
+	@Size(max = 50)
+	@Column(name = "codigo_gan")
 	public String codigoGan;
-	
+
 	@NotEmpty
-	@Size(max=255)
-	@Column(name="nombre_gan")
+	@Size(max = 255)
+	@Column(name = "nombre_gan")
 	public String nombreGan;
-	
-	@Column(name="hierro_gan")
+
+	@Column(name = "hierro_gan")
 	public String hierroGan;
 
 	public Ganaderia() {
-
 	}
 
 	public Ganaderia(String codigoGan, String nombreGan) {
@@ -64,7 +65,7 @@ public class Ganaderia implements Serializable {
 	public void setNombreGan(String nombreGan) {
 		this.nombreGan = nombreGan;
 	}
-	
+
 	public String getHierroGan() {
 		return hierroGan;
 	}
@@ -72,8 +73,12 @@ public class Ganaderia implements Serializable {
 	public void setHierroGan(String hierroGan) {
 		this.hierroGan = hierroGan;
 	}
-
 	
+	@Override
+	public String toString() {
+		return "Ganaderia [nombreGan=" + nombreGan + "]";
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }

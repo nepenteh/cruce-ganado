@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
 <h1 th:text="${titulo}"></h1>
 
@@ -29,5 +26,6 @@
 </div>
 </form>
 
+<div th:replace="layout/layout :: javascript"></div>
 </body>
 </html>

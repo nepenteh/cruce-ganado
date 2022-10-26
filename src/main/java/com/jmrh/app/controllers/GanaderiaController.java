@@ -1,13 +1,9 @@
 package com.jmrh.app.controllers;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jmrh.app.models.entities.Ganaderia;
+import com.jmrh.app.models.services.IAnimalService;
 import com.jmrh.app.models.services.IGanaderiaService;
 import com.jmrh.app.models.services.IUploadService;
 
@@ -30,6 +27,9 @@ public class GanaderiaController {
 
 	@Autowired
 	private IGanaderiaService ganaderiaService;
+	
+	@Autowired
+	private IAnimalService animalService;
 	
 	@Autowired
 	private IUploadService uploadService;
@@ -121,9 +121,10 @@ public class GanaderiaController {
 			//copia aux
 			Ganaderia ganaderia = ganaderiaService.findOne(idGan);
 			//elimino la ganadería
-			if(ganaderia!=null)
+			if(ganaderia!=null) {
+				animalService.quitarGanaderia(idGan);
 				ganaderiaService.remove(idGan);
-			else {
+			} else {
 				flash.addFlashAttribute("error","Ganadería no existente");
 				return "redirect:/ganaderia/listado";
 			}
@@ -137,22 +138,7 @@ public class GanaderiaController {
 		return "redirect:/ganaderia/listado";
 	}
 	
-	@GetMapping("/uploads/{filename:.+}")
-	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
-		
-		Resource recurso = null;
-		
-		try {
-			recurso = uploadService.load(filename);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+recurso.getFilename()+"\"")
-				.body(recurso);
-		
-	}
+	
 	
 	
 		

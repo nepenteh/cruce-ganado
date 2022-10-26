@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
 
 <div th:if="${success!=null}" th:text="${success}"></div>
@@ -35,7 +32,7 @@
 	<td th:text="${ganaderia.codigoGan}"></td>
 	<td th:text="${ganaderia.nombreGan}"></td>
 	<td><img th:if="${ganaderia.hierroGan != null}" th:src="@{'/uploads/' + ${ganaderia.hierroGan}}" width="100px">
-		<span th:if="${ganaderia.hierroGan == null}" th:text="---"></span>
+		<img th:if="${ganaderia.hierroGan == null}" th:src="@{'/images/nohierro.png'}" width="100px"></img>
 	</td>
 	<td><a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}">Modificar</a> 
 		<a th:href="@{'/ganaderia/eliminar/'+${ganaderia.idGan}}">Eliminar</a>
@@ -43,5 +40,6 @@
 </tbody>
 </table>
 
+<div th:replace="layout/layout :: javascript"></div>
 </body>
 </html>

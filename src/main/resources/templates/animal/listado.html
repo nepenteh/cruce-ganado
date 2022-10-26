@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
 
 <div th:if="${success!=null}" th:text="${success}"></div>
@@ -26,6 +23,10 @@
 	<th>Nombre</th>
 	<th>Sexo</th>
 	<th>Puntuación</th>
+	<th>Fecha</th>
+	<th>Ganadería</th>
+	<th>Padre</th>
+	<th>Madre</th>
 	<th>Opciones</th>
 	</tr>
 </thead>
@@ -35,11 +36,23 @@
 	<td th:text="${animal.nombreA}"></td>
 	<td th:text="${animal.sexoA}"></td>
 	<td th:text="${animal.puntuacionA}"></td>
+	<td th:text="${#dates.format(animal.fechaA,'dd/MM/yyyy')}"></td>
+	<td th:if="${animal.ganaderiaA!=null}" th:text="${animal.ganaderiaA.nombreGan}"></td>
+	<td th:if="${animal.ganaderiaA==null}" th:text="---"></td>
+	<td th:if="${animal.padreA!=null}" th:text="${animal.padreA.nombreA}"></td>
+	<td th:if="${animal.padreA==null}" th:text="---"></td>
+	<td th:if="${animal.madreA!=null}" th:text="${animal.madreA.nombreA}"></td>
+	<td th:if="${animal.madreA==null}" th:text="---"></td>
+	<td><img th:if="${animal.fotoA != null}" th:src="@{'/uploads/' + ${animal.fotoA}}" width="100px">
+		<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.jpg'}" width="100px">
+		
+	</td>
 	<td><a th:href="@{'/animal/form/'+${animal.idA}}">Modificar</a> 
 		<a th:href="@{'/animal/eliminar/'+${animal.idA}}">Eliminar</a>
 	</tr>
 </tbody>
 </table>
 
+<div th:replace="layout/layout :: javascript"></div>
 </body>
 </html>
