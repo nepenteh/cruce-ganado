@@ -22,6 +22,13 @@ Rama v3imagenes
 - Se elimina import.sql y se mantiene la persistencia de datos en la base
 - Se añaden mensajes de redireccionamiento (flash)
 
+Rama v4ganado
+
+- Se crea la entidad animal
+- Se relacionan ganaderías y animales
+- Listado de animales
+- Creación de búsqueda de ganaderías y animales para la relación
+- Solución de problemas con integridad de la base de datos MySQL
 
 
 
