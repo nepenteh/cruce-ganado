@@ -3,7 +3,12 @@ package com.jmrh.app.controllers;
 import java.io.IOException;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +26,7 @@ import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
 import com.jmrh.app.models.services.IGanaderiaService;
 import com.jmrh.app.models.services.IUploadService;
+import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("ganaderia")
@@ -34,12 +41,29 @@ public class GanaderiaController {
 	@Autowired
 	private IUploadService uploadService;
 	
+	//depuración
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
 	
 	@GetMapping("/ganaderia/listado")
-	public String listado(Model model) {
+	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+		
+		//paginación de elementos de la página pagina, teniendo 5 elementos por página
+		Pageable pageRequest = PageRequest.of(pagina, 5);
+		//obtengo ese listado de elementos de la página
+		Page<Ganaderia> paginaGanaderias = ganaderiaService.findAll(pageRequest); 
+		//creo un paginador (de solo tres cuadros de página) para la vista
+		PageRender<Ganaderia> paginador = new PageRender("/ganaderia/listado",paginaGanaderias,3);
+		
+		log.info("elementos por pagina (getSize): "+paginaGanaderias.getSize());
+		log.info("total páginas (getTotalPages): "+paginaGanaderias.getTotalPages());
+		log.info("página actual (getNumber): "+paginaGanaderias.getNumber());
+		
 		model.addAttribute("titulo", "Cruce de Ganado - Listado Ganaderías");
 		model.addAttribute("numeroganaderias", ganaderiaService.count());
-		model.addAttribute("ganaderias", ganaderiaService.findAll());
+		model.addAttribute("ganaderias", paginaGanaderias); //listado solo de la página actual
+		model.addAttribute("paginador",paginador);
+		
 		return "/ganaderia/listado";
 	}
 	

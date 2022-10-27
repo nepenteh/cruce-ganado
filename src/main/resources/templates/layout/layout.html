@@ -10,6 +10,38 @@
 <body>
 
 
+<!-- paginador -->
+<nav th:fragment="paginador">
+<ul>
+<li>
+<span th:if="${paginador.first}">Primera</span>
+<a th:if="${not paginador.first}" th:href="@{${paginador.url}(pagina=0)}">Primera</a>
+</li>
+<li>
+<span th:if="${not paginador.hasPrevious}">Anterior</span>
+<a th:if="${paginador.hasPrevious}" th:href="@{${paginador.url}(pagina=${paginador.paginaActual-2})}">Anterior</a>
+</li>
+
+
+<li th:each="cuadro: ${paginador.paginaItems}">
+<span th:if="${cuadro.actual}" th:text="${cuadro.numero}"></span>
+<a th:if="${not cuadro.actual}" th:href="@{${paginador.url}(pagina=${cuadro.numero-1})}" th:text="${cuadro.numero}"></a>
+</li>
+
+<li>
+<span th:if="${not paginador.hasNext}">Siguiente</span>
+<a th:if="${paginador.hasNext}" th:href="@{${paginador.url}(pagina=${paginador.paginaActual})}">Siguiente</a>
+</li>
+
+<li>
+<span th:if="${paginador.last}">Última</span>
+<a th:if="${not paginador.last}" th:href="@{${paginador.url}(pagina=${paginador.totalPaginas-1})}">Última</a>
+</li>
+</ul>
+</nav>
+
+
+
 <div th:fragment="javascript">
 <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
 <script th:src="@{/js/jquery-ui.min.js}"></script>
