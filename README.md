@@ -31,6 +31,12 @@ Rama v4ganado
 - Solución de problemas con integridad de la base de datos MySQL
 
 
+Rama v5pag
+
+- Se crea la clase paginadora
+- Se modifica el CRUDrepository para que pagine
+- Se asigna paginación en los listados de animales y ganaderías
+- Se crea el esqueleto del paginador en las vistas de los listados de animales y ganaderías
 
 
 
