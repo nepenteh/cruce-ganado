@@ -48,12 +48,12 @@ public class GanaderiaController {
 	@GetMapping("/ganaderia/listado")
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 		
-		//paginación de elementos de la página pagina, teniendo 5 elementos por página
-		Pageable pageRequest = PageRequest.of(pagina, 5);
+		//paginación de elementos de la página pagina, teniendo 10 elementos por página
+		Pageable pageRequest = PageRequest.of(pagina, 10);
 		//obtengo ese listado de elementos de la página
 		Page<Ganaderia> paginaGanaderias = ganaderiaService.findAll(pageRequest); 
-		//creo un paginador (de solo tres cuadros de página) para la vista
-		PageRender<Ganaderia> paginador = new PageRender("/ganaderia/listado",paginaGanaderias,3);
+		//creo un paginador (de solo cinco cuadros de página) para la vista
+		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderia/listado",paginaGanaderias,5);
 		
 		log.info("elementos por pagina (getSize): "+paginaGanaderias.getSize());
 		log.info("total páginas (getTotalPages): "+paginaGanaderias.getTotalPages());

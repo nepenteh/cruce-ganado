@@ -13,10 +13,10 @@
 
 <a th:href="@{/animal/form}">Alta Animal</a>
 
-<p th:if="${animales.size()==0}">No hay animales que  mostrar</p>
-<p th:if="${animales.size()==1}" th:text="${'Listando '+numeroanimales+' animal'}"></p>
-<p th:if="${animales.size()>1}" th:text="${'Listando '+numeroanimales+' animales'}"></p>
-<table th:if="${animales.size()>0}">
+<p th:if="${numeroanimales==0}">No hay animales que  mostrar</p>
+<p th:if="${numeroanimales==1}" th:text="${'Listando '+numeroanimales+' animal'}"></p>
+<p th:if="${numeroanimales>1}" th:text="${'Listando '+numeroanimales+' animales'}"></p>
+<table th:if="${numeroanimales>0}">
 <thead>
 	<tr>
 	<th>Id</th>
@@ -43,8 +43,8 @@
 	<td th:if="${animal.padreA==null}" th:text="---"></td>
 	<td th:if="${animal.madreA!=null}" th:text="${animal.madreA.nombreA}"></td>
 	<td th:if="${animal.madreA==null}" th:text="---"></td>
-	<td><img th:if="${animal.fotoA != null}" th:src="@{'/uploads/' + ${animal.fotoA}}" width="100px">
-		<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.jpg'}" width="100px">
+	<td><img th:if="${animal.fotoA != null}" th:src="@{'/uploads/' + ${animal.fotoA}}" width="30px">
+		<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.jpg'}" width="30px">
 		
 	</td>
 	<td><a th:href="@{'/animal/form/'+${animal.idA}}">Modificar</a> 
@@ -52,6 +52,7 @@
 	</tr>
 </tbody>
 </table>
+<nav th:replace="layout/layout :: paginador"></nav>
 
 <div th:replace="layout/layout :: javascript"></div>
 </body>

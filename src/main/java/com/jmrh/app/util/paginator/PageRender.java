@@ -42,13 +42,13 @@ public class PageRender<T> {
 		} else { //número de páginas mayor al número de cuadros a mostrar
 			
 			desde = paginaActual - (numCuadros/2);
-			hasta = desde + numCuadros;
+			hasta = paginaActual + (numCuadros/2);
 			
 			if(desde<=0) {
 				desde = 1;
 				hasta = numCuadros;
 			} else if(hasta>totalPaginas) {
-				desde = totalPaginas - numCuadros;
+				desde = totalPaginas - numCuadros + 1;
 				hasta = totalPaginas;
 			}
 			

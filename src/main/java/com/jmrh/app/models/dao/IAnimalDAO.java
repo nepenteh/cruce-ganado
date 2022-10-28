@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.jmrh.app.models.entities.Animal;
 
-public interface IAnimalDAO extends CrudRepository<Animal, Long> {
+public interface IAnimalDAO extends PagingAndSortingRepository<Animal, Long> {
 
 	@Query("select a from Animal a where a.sexoA='H' and a.nombreA like %?1%")
 	public List<Animal> findHembraByNombre(String cadena);

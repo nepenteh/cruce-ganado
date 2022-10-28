@@ -8,6 +8,9 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,7 @@ import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
 import com.jmrh.app.models.services.IGanaderiaService;
 import com.jmrh.app.models.services.IUploadService;
+import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("animal")
@@ -43,11 +47,19 @@ public class AnimalController {
 	private IUploadService uploadService;
 	
 	@GetMapping("/animal/listado")
-	public String listado(Model model) {
+	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+		
+		//paginación de elementos de la página pagina, teniendo 10 elementos por página
+		Pageable pageRequest = PageRequest.of(pagina, 10);
+		//obtengo ese listado de elementos de la página
+		Page<Animal> paginaAnimales = animalService.findAll(pageRequest); 
+		//creo un paginador (de solo cinco cuadros de página) para la vista
+		PageRender<Animal> paginador = new PageRender<>("/animal/listado",paginaAnimales,5);
 		
 		model.addAttribute("titulo", "Cruce de Ganado - Listado de Animales");
 		model.addAttribute("numeroanimales", animalService.count());
-		model.addAttribute("animales",animalService.findAll());
+		model.addAttribute("animales",paginaAnimales);
+		model.addAttribute("paginador", paginador);
 				
 		return "/animal/listado";
 	}
