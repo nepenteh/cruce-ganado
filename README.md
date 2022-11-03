@@ -39,6 +39,12 @@ Rama v5pag
 - Se crea el esqueleto del paginador en las vistas de los listados de animales y ganaderías
 
 
+Rama v6pdf
+
+- Se añade una opción Ver que visualiza las características de cada animal y sus ascendientes
+- Se incluye una vista PDF que permite ver el arbol de ascendencia de un animal en un fichero PDF
+
+
 
 
 

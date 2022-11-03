@@ -1,23 +1,23 @@
-INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (1,'mi1','Miura');
-INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (2,'cg2','Cebada Gago');
-INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (3,'vi','Vitorino');
-INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (4,'mube','Muñoz Benito');
+INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan, hierro_gan) VALUES (1,'mi1','Miura','hierro1.png');
+INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan, hierro_gan) VALUES (2,'cg2','Cebada Gago','hierro2.jpg');
+INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan, hierro_gan) VALUES (3,'vi','Vitorino','hierro3.jpg');
+INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan, hierro_gan) VALUES (4,'mube','Muñoz Benito','hierro1.png');
 INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (5,'men','Mena');
 INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (6,'fon','Fonteseca');
 INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (7,'rib','Ribera Mateos');
-INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (8,'fun','Fundera');
-INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (9,'mart','Martelinas');
+INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan, hierro_gan) VALUES (8,'fun','Fundera','hierro1.png');
+INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan, hierro_gan) VALUES (9,'mart','Martelinas','hierro2.jpg');
 INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (10,'pics','Picos Segura');
 INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (11,'paul','Paulo');
 INSERT INTO ganaderias (id_gan, codigo_gan, nombre_gan) VALUES (12,'berca','Berto Caro');
 
 
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id) VALUES ('perezoso', 'M', 120, 1);
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id) VALUES ('avispada', 'H', 200, 2);
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('rambo', 'M', 80, 1, 2, 1);
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('ramba', 'H', 80, 1, 2, 1)
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('perito', 'M', 80, 1, 4, 3);
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('perita', 'H', 80, 2, 4, 3);
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, foto_a) VALUES ('perezoso', 'M', 120, 1, 'imagenprueba1.jpeg');
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, foto_a) VALUES ('avispada', 'H', 200, 2, 'imagenprueba2.jpg');
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id, foto_a) VALUES ('rambo', 'M', 80, 1, 2, 1, 'imagenprueba3.jpg');
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id, foto_a) VALUES ('ramba', 'H', 80, 1, 2, 1, 'imagenprueba4.jpeg')
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id, foto_a) VALUES ('perito', 'M', 80, 1, 4, 3, 'imagenprueba5.jpeg');
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id, foto_a) VALUES ('perita', 'H', 80, 2, 4, 3, 'imagenprueba1.jpeg');
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('ratito', 'M', 80, 1, 4, 3);
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('ratita', 'H', 80, 1, 4, 3);
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('benito', 'M', 80, 4, 4, 3);
@@ -39,7 +39,7 @@ INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, pa
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('meda', 'H', 80, 2, 6, 5);
 
 
-INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('uno', 'M', 80, 1, 8, 7);
+INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, madre_id, padre_id) VALUES ('uno', 'M', 80, 8, 7);
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('una', 'H', 80, 2, 8, 7);
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('tomate', 'M', 80, 1, 8, 7);
 INSERT INTO animales (nombre_a, sexo_a, puntuacion_a, ganaderia_id, madre_id, padre_id) VALUES ('tomata', 'H', 80, 2, 8, 7);

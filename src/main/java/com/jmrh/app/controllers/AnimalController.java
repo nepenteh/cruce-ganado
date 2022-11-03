@@ -26,6 +26,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jmrh.app.controllers.services.IArbolAnimales;
 import com.jmrh.app.models.entities.Animal;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
@@ -45,6 +46,9 @@ public class AnimalController {
 	
 	@Autowired
 	private IUploadService uploadService;
+	
+	@Autowired
+	private IArbolAnimales arbolAnimales;
 	
 	@GetMapping("/animal/listado")
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
@@ -164,6 +168,22 @@ public class AnimalController {
 		
 		return "redirect:/animal/listado";
 	}
+	
+	@GetMapping("animal/ver/{idA}")
+	public String ver(@PathVariable Long idA, Model model) {
+		
+		Animal animal = animalService.findOne(idA);
+		
+		List<Animal> arbol = arbolAnimales.generarArbol(animal);
+		
+		model.addAttribute("arbol",arbol);
+		
+
+		return "animal/ver";
+	}
+	
+	
+	
 	
 	
 	
