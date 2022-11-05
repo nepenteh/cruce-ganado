@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -24,7 +25,8 @@ public class HttpBasicSecurityConfig {
  	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
  		http
  			.authorizeRequests(request -> {
- 				request.antMatchers("/login").permitAll();
+ 				request
+ 				.antMatchers("/login").permitAll();
  			})
  			.authorizeRequests()
  			.anyRequest().authenticated()
@@ -37,15 +39,17 @@ public class HttpBasicSecurityConfig {
 
  	@Bean
  	public UserDetailsService userDetailsService() {
- 		 		 		
+ 		
+ 		PasswordEncoder encoder = passwordEncoder();
+ 		
  		UserDetails user = User.builder()
- 			.passwordEncoder(entrada -> passwordEncoder().encode(entrada))
+ 			.passwordEncoder(encoder::encode)
  			.username("mame")
  			.password("toro")
  			.roles("USER")
  			.build();
  		UserDetails admin = User.builder()
-			.passwordEncoder(entrada -> passwordEncoder().encode(entrada))
+			.passwordEncoder(encoder::encode)
  			.username("admin")
  			.password("1234")
  			.roles("USER", "ADMIN")
