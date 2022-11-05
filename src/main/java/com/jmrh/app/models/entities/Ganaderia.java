@@ -14,25 +14,24 @@ import javax.validation.constraints.Size;
 @Table(name = "ganaderias")
 public class Ganaderia implements Serializable {
 
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_gan")
-	public Long idGan;
+	private Long idGan;
 
 	@NotEmpty
 	@Size(max = 50)
 	@Column(name = "codigo_gan")
-	public String codigoGan;
+	private String codigoGan;
 
 	@NotEmpty
 	@Size(max = 255)
 	@Column(name = "nombre_gan")
-	public String nombreGan;
+	private String nombreGan;
 
 	@Column(name = "hierro_gan")
-	public String hierroGan;
+	private String hierroGan;
 
 	public Ganaderia() {
 	}
