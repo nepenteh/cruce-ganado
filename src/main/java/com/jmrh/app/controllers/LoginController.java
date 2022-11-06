@@ -33,7 +33,7 @@ public class LoginController {
 			model.addAttribute("error","Nombre de usuario o password incorrectos");
 			
 		model.addAttribute("titulo", "Cruce de Ganado - Login");
-		return "login";
+		return "/login/login";
 	}
 	
 }
