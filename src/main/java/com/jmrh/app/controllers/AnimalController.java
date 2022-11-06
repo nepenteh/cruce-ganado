@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -89,6 +90,7 @@ public class AnimalController {
 		return "/animal/form";
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/animal/form")
 	public String form(@Valid Animal animal, BindingResult result,
 					   @RequestParam(name="ganaderia_id", required=false) Long ganaderia_id,
@@ -145,6 +147,7 @@ public class AnimalController {
 		
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/animal/eliminar/{idA}")
 	public String eliminar(@PathVariable Long idA, Model model, RedirectAttributes flash) {
 		
@@ -181,9 +184,6 @@ public class AnimalController {
 
 		return "animal/ver";
 	}
-	
-	
-	
 	
 	
 	

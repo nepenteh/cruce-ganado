@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org">
+<html xmlns:th="http://www.tymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
 </head>
 <body>
+<div th:if="${info!=null}" th:text="${info}"></div>
+
 <a th:href="@{ganaderia/listado}">Listado de Ganaderías</a><br>
 <a th:href="@{animal/listado}">Listado de Animales</a><br>
+
+<form method="post" th:action="@{/logout}">
+<input type="submit" value="Desconectar">
+</form>
 
 </body>
 </html>

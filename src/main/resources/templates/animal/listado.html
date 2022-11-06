@@ -50,7 +50,9 @@
 	<td>
 		<a th:href="@{'/animal/ver/'+${animal.idA}}">Ver</a>
 		<a th:href="@{'/animal/form/'+${animal.idA}}">Modificar</a> 
-		<a th:href="@{'/animal/eliminar/'+${animal.idA}}">Eliminar</a>
+		
+		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/animal/eliminar/'+${animal.idA}}">Eliminar</a>
+		<span sec:authorize="!hasRole('ROLE_ADMIN')">Eliminar</span>
 	</tr>
 </tbody>
 </table>

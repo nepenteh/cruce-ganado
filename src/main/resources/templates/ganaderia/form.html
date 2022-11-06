@@ -22,7 +22,8 @@
 <input type="file" name="hierrogan">
 </div>
 <div>
-<input type="submit" value="Enviar">
+<input sec:authorize="hasRole('ROLE_ADMIN')" type="submit" value="Enviar">
+<input sec:authorize="!hasRole('ROLE_ADMIN')" type="submit" value="Enviar" disabled>
 </div>
 </form>
 

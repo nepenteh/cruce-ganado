@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -89,6 +90,7 @@ public class GanaderiaController {
 	
 	
 	@PostMapping("/ganaderia/form")
+	@Secured("ROLE_ADMIN")
 	public String form(@Valid Ganaderia ganaderia,  BindingResult result, 
 					   Model model,
 					   @RequestAttribute("file") MultipartFile hierrogan,
@@ -138,6 +140,7 @@ public class GanaderiaController {
 		return "redirect:/ganaderia/listado";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/ganaderia/eliminar/{idGan}")
 	public String eliminar(@PathVariable Long idGan, RedirectAttributes flash) {
 		
