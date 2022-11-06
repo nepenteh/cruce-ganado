@@ -45,6 +45,12 @@ Rama v6pdf
 - Se incluye una vista PDF que permite ver el arbol de ascendencia de un animal en un fichero PDF
 
 
+Rama v7seguridad
+
+- Se implementa spring security desde memoria.
+- UN ERROR INDETERMINADO HACE QUE EL PROYECTO QUEDE INSERVIBLE. NO RECONOCE EL ARCHIVO PROPERTIES
+- AL NO HABER IDENTIFICADO EL ERROR SE PROCEDE A VOLVER A LA RAMA v6pdf Y BIFURCAR A OTRA RAMA
+  v7seguridad2 DESDE DONDE SE CONTINUARÁ EL PROYECTO, Y DONDE QUIZÁS SE ENCUENTRE UNA EXPLICACIÓN AL ERROR.
 
 
 
