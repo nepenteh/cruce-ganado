@@ -49,6 +49,19 @@ Rama v7seguridad  (DESCARTADA!!! ERROR EN EL PROPERTIES)
 
 Rama v7seguridad2
 
-- Rama de continuación del proyecto. 
+- (Rama de continuación del proyecto)
+- Se implementa seguridad al proyecto con spring security
+- Se crean en memoria dos usuarios:
+	- Un usuario USER
+	- Un usuario ADMIN
+- La aplicación no tiene acceso público. Es necesario autenticación para usarla.
+- El usuario autenticado ADMIN tiene acceso a todas las características de la aplicación.
+- El usuario autenticado USER tiene acceso a todas las opciones de la aplicación excepto:
+	- Eliminación
+	- Efectuar altas y modificaciones
+- Se restringe el acceso desde Thymeleaf a las opciones anteriores al USER.
+- Se restringe el acceso a los handler correspondientes de las opciones anteriores al USER.
+- Se crean pantallas de login, y error de acceso personalizadas, así como un botón de logout.
+
 
 

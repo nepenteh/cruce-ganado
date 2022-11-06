@@ -30,8 +30,8 @@ public class SecurityConfig {
 		PasswordEncoder encoder = passwordEncoder();
 		
  		UserDetails user = User.builder().passwordEncoder(encoder::encode)
- 			.username("mame")
- 			.password("toros")
+ 			.username("user")
+ 			.password("1234")
  			.roles("USER")
  			.build();
  		UserDetails admin = User.builder().passwordEncoder(encoder::encode)
