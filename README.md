@@ -45,6 +45,10 @@ Rama v6pdf
 - Se incluye una vista PDF que permite ver el arbol de ascendencia de un animal en un fichero PDF
 
 
+Rama v7seguridad  (DESCARTADA!!! ERROR EN EL PROPERTIES)
 
+Rama v7seguridad2
+
+- Rama de continuación del proyecto. 
 
 
