@@ -4,22 +4,25 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <body>
+
 <div th:if="${error!=null}" th:text="${error}"></div>
 <div th:if="${info!=null}" th:text="${info}"></div>
 
-<form method="post" th:action="@{/login}">
-<div>
-<input type="text" name="username" id="username" placeholder="Username" autofocus required>
-</div>
-<div>
 
-<input type="password" name="password" id="password" placeholder="Password" required>
-</div>
-<div>
-<input type="submit" value="Acceder">
-</div>
+
+<form method="post" th:action="@{/login}">
+  <div class="mb-3">
+    <input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus required>
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+<div th:replace="layout/layout :: jquery"></div>
+<!-- <div th:replace="layout/layout :: bootstrap"></div> -->
 </body>
 </html>
