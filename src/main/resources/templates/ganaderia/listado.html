@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
 <body>
+<nav th:replace="layout/layout :: menu(2)"></nav>
+<div th:replace="layout/layout :: titulo-pantalla"></div>
+<div th:replace="layout/layout :: zona-mensajes"></div>
 
-<div th:if="${success!=null}" th:text="${success}"></div>
-<div th:if="${error!=null}" th:text="${error}"></div>
-<div th:if="${warning!=null}" th:text="${warning}"></div>
-<div th:if="${info!=null}" th:text="${info}"></div>
-
-<h1 th:text="${titulo}"></h1>
-<a th:href="@{/}">Menú Principal</a><br>
 
 <a th:href="@{/ganaderia/form}">Alta Ganaderia</a>
 
@@ -44,6 +42,7 @@
 </table>
 <nav th:replace="layout/layout :: paginador"></nav>
 
-<div th:replace="layout/layout :: javascript"></div>
+<div th:insert="layout/layout :: jquery-js"></div>
+<div th:insert="layout/layout :: bootstrap-js"></div>
 </body>
 </html>

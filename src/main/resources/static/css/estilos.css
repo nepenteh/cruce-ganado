@@ -1,0 +1,39 @@
+:root {
+	--bgcolor-titulos-pantalla: #4d4033;
+	--bgcolor-boton-normal: #4d4033;
+	--color-boton-normal: white;
+	--bgcolor-boton-normal-hover: #826b55;
+	--color-boton-normal-hover: white;
+	--color-enlace-claro: white;
+	--color-enlace-claro-hover: lightgray;
+	
+}
+
+.titulo-pantalla {
+	background-color: var(--bgcolor-titulos-pantalla);
+}
+
+.titulo-pantalla h1 {
+	font-size: 20px;
+	color: white;
+	margin-top:3px;
+}
+
+.boton-normal {
+	background-color: var(--bgcolor-boton-normal);
+	color: var(--color-boton-normal);
+}
+
+.boton-normal:hover {
+	background-color: var(--bgcolor-boton-normal-hover);
+	color: var(--color-boton-normal-hover);
+}
+
+.enlace-claro {
+	color: var(--color-enlace-claro);
+	text-decoration: none;
+}
+
+.enlace-claro:hover {
+	color: var(--color-enlace-claro-hover);
+}

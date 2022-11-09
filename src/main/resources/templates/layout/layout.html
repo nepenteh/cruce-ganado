@@ -2,13 +2,75 @@
 <html xmlns:th="http://www.tymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:fragment="head">
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+<head>
+
+<!-- Elementos básicos del head -->
+<th:block th:fragment="head-basico">
+	<meta charset="UTF-8">
+	<title th:text="${titulo}"></title>
+</th:block>
+
+<!-- CSS Bootstrap -->
+<th:block th:fragment="bootstrap-css">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</th:block>
+
+<!-- CSS jquery ui -->
+<th:block th:fragment="jquery-ui-css">
+	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+</th:block>
+
+<!-- CSS Generales -->
+<th:block th:fragment="general-css">
+	<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</th:block>
+
 </head>
 
 <body>
+
+	<nav th:fragment="menu(opcion)" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+  	<span class="navbar-brand">CRUCE DE GANADO</span>
+    <img th:src="@{/images/logo.png}" width="80px">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" th:classappend="${opcion==1 ? 'active' : ''}" th:href="@{/animal/listado}">Animales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:classappend="${opcion==2 ? 'active' : ''}" th:href="@{/ganaderia/listado}">Ganaderías</a>
+        </li>
+      </ul>
+      <div class="navbar-text ">
+        <span sec:authentication="name" class="d-inline-block me-2" ></span>
+        <form method="post" th:action="@{/logout}" class="d-inline-block">
+			<input type="submit" value="Salir" class="btn btn-secondary py-1 px-2">
+		</form>
+       </div>
+    </div>
+  </div>
+</nav>
+
+	<!-- Título de la pantalla -->
+	<div th:fragment="titulo-pantalla" class="titulo-pantalla py-1 text-center">
+		<h1 th:text="${titulopantalla}"></h1>
+	</div>
+
+	<!-- Zona de mensajes superior (flash mensajes) -->
+	<div th:fragment="zona-mensajes">
+		<div th:if="${error!=null}" th:text="${error}"
+			class="bg-danger py-2 text-center text-white"></div>
+		<div th:if="${info!=null}" th:text="${info}"
+			class="py-2 text-center text-info border-bottom border-info"></div>
+		<div th:if="${warning!=null}" th:text="${warning}"
+			class="bg-warning py-2 text-center text-white"></div>
+		<div th:if="${success!=null}" th:text="${success}"
+			class=" py-2 text-center text-success border-bottom border-success"></div>
+	</div>
 
 
 	<!-- paginador -->
@@ -75,11 +137,13 @@
 	</div>
 
 
-	<div th:fragment="jquery">
+	<div th:fragment="jquery-js">
 		<script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+	</div>
+	<div th:fragment="jquery-ui-js">
 		<script th:src="@{/js/jquery-ui.min.js}"></script>
 	</div>
-	<div th:fragment="bootstrap">
+	<div th:fragment="bootstrap-js">
 		<script th:src="@{/js/popper.min.js}"></script>
 		<script th:src="@{/js/bootstrap.min.js}"></script>
 	</div>

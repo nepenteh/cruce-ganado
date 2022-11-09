@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jmrh.app.DatosApp;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
 import com.jmrh.app.models.services.IGanaderiaService;
@@ -31,8 +33,12 @@ import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("ganaderia")
+@RequestMapping("/ganaderia")
 public class GanaderiaController {
 
+	@Autowired
+	private DatosApp datosAplicacion;
+	
 	@Autowired
 	private IGanaderiaService ganaderiaService;
 	
@@ -46,8 +52,12 @@ public class GanaderiaController {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	
-	@GetMapping("/ganaderia/listado")
+	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+	
+		String titulopantalla = "Listado de Ganaderias";
+		model.addAttribute("titulo", datosAplicacion.getNombre()+" - "+titulopantalla);
+		model.addAttribute("titulopantalla", titulopantalla);
 		
 		//paginación de elementos de la página pagina, teniendo 10 elementos por página
 		Pageable pageRequest = PageRequest.of(pagina, 10);
@@ -59,8 +69,7 @@ public class GanaderiaController {
 		log.info("elementos por pagina (getSize): "+paginaGanaderias.getSize());
 		log.info("total páginas (getTotalPages): "+paginaGanaderias.getTotalPages());
 		log.info("página actual (getNumber): "+paginaGanaderias.getNumber());
-		
-		model.addAttribute("titulo", "Cruce de Ganado - Listado Ganaderías");
+
 		model.addAttribute("numeroganaderias", ganaderiaService.count());
 		model.addAttribute("ganaderias", paginaGanaderias); //listado solo de la página actual
 		model.addAttribute("paginador",paginador);
@@ -68,7 +77,7 @@ public class GanaderiaController {
 		return "/ganaderia/listado";
 	}
 	
-	@GetMapping("/ganaderia/form")
+	@GetMapping("/form")
 	public String form(Model model) {
 		Ganaderia ganaderia = new Ganaderia();
 		model.addAttribute("titulo", "Cruce de Ganado - Alta Ganadería");
@@ -76,7 +85,7 @@ public class GanaderiaController {
 		return "/ganaderia/form";
 	}
 	
-	@GetMapping("/ganaderia/form/{idGan}")
+	@GetMapping("/form/{idGan}")
 	public String form(@PathVariable Long idGan, Model model, RedirectAttributes flash) {
 		Ganaderia ganaderia = ganaderiaService.findOne(idGan);
 		if(ganaderia==null) {
@@ -89,7 +98,7 @@ public class GanaderiaController {
 	}
 	
 	
-	@PostMapping("/ganaderia/form")
+	@PostMapping("/form")
 	@Secured("ROLE_ADMIN")
 	public String form(@Valid Ganaderia ganaderia,  BindingResult result, 
 					   Model model,
@@ -141,7 +150,7 @@ public class GanaderiaController {
 	}
 
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/ganaderia/eliminar/{idGan}")
+	@GetMapping("/eliminar/{idGan}")
 	public String eliminar(@PathVariable Long idGan, RedirectAttributes flash) {
 		
 		if(idGan>0) { //validación id
@@ -164,9 +173,6 @@ public class GanaderiaController {
 		
 		return "redirect:/ganaderia/listado";
 	}
-	
-	
-	
 	
 		
 }

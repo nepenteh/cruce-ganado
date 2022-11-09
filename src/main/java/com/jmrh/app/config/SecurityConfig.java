@@ -47,7 +47,7 @@ public class SecurityConfig {
  		http
  		.authorizeRequests()
  		//elementos que no necesitan autenticación
- 		//.antMatchers("/public/**").permitAll()
+ 		.antMatchers("/css/**","/js/**","/images/**").permitAll()
  		//elementos que necesitan autorización
  		.anyRequest().hasRole("USER")
  		.and()

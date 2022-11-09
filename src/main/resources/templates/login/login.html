@@ -1,28 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.tymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+		
+<link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+
 <body>
 
-<div th:if="${error!=null}" th:text="${error}"></div>
-<div th:if="${info!=null}" th:text="${info}"></div>
+<section class="vh-100">
+	<div
+		class="d-flex justify-content-between flex-column flex-md-row text-center text-white text-md-start  py-3 px-4 px-xl-5 bg-dark">
+		<div th:text="${nombreaplicacion}"></div>
+		<div class="float-end"><a class="enlace-claro" th:href="${enlaceweb}" th:text="${autoria}" target="_blank"></a></div>
+	</div>
 
+	<div th:replace="layout/layout :: zona-mensajes"></div>
+		
+		
+	<div class="container-fluid h-custom">
+		<div
+			class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-md-5 col-sm-6">
+				<img th:src="@{/images/notoro.jpg}" class="img-fluid"
+					alt="App Cruce de Ganado">
+			</div>
+			<div class="col-md-4 col-sm-5 ">
+				<form method="post" th:action="@{/login}">
 
+					<div class="divider d-flex align-items-center my-4">
+						<p class="text-center fw-bold mx-3 mb-0">LOGIN</p>
+					</div>
 
-<form method="post" th:action="@{/login}">
-  <div class="mb-3">
-    <input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus required>
-  </div>
-  <div class="mb-3">
-    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+					<!-- Username input -->
+					<div class="form-outline mb-4">
+						<input type="text" id="username" name="username"
+							class="form-control form-control-lg" placeholder="Username" />
+					</div>
 
-<div th:replace="layout/layout :: jquery"></div>
-<!-- <div th:replace="layout/layout :: bootstrap"></div> -->
+					<!-- Password input -->
+					<div class="form-outline mb-3">
+						<input type="password" id="password" name="password"
+							class="form-control form-control-lg" placeholder="Password" />
+					</div>
+
+					<div class="text-center text-lg-start mt-4 pt-2 mb-5">
+						<button type="submit" class="btn btn-lg boton-normal"
+							style="padding-left: 2.5rem; padding-right: 2.5rem;">Acceder</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+<div th:insert="layout/layout :: jquery-js"></div>
+<div th:insert="layout/layout :: bootstrap-js"></div>
 </body>
 </html>

@@ -20,9 +20,8 @@ public class PrincipalController {
 	private IUploadService uploadService;
 	
 	@GetMapping({"","/","/index"})
-	public String index(Model model) {
-		model.addAttribute("titulo", "Cruce de Ganado");
-		return "index";
+	public String index() {
+		return "redirect:/animal";
 	}
 	
 	@GetMapping("/uploads/{filename:.+}")

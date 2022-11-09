@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jmrh.app.DatosApp;
 import com.jmrh.app.controllers.services.IArbolAnimales;
 import com.jmrh.app.models.entities.Animal;
 import com.jmrh.app.models.entities.Ganaderia;
@@ -37,8 +39,12 @@ import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("animal")
+@RequestMapping("/animal")
 public class AnimalController {
 
+	@Autowired
+	private DatosApp datosAplicacion;
+	
 	@Autowired
 	private IAnimalService animalService;
 	
@@ -51,8 +57,12 @@ public class AnimalController {
 	@Autowired
 	private IArbolAnimales arbolAnimales;
 	
-	@GetMapping("/animal/listado")
+	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+		
+		String titulopantalla = "Listado de Animales";
+		model.addAttribute("titulo", datosAplicacion.getNombre()+" - "+titulopantalla);
+		model.addAttribute("titulopantalla", titulopantalla);
 		
 		//paginación de elementos de la página pagina, teniendo 10 elementos por página
 		Pageable pageRequest = PageRequest.of(pagina, 10);
@@ -61,7 +71,6 @@ public class AnimalController {
 		//creo un paginador (de solo cinco cuadros de página) para la vista
 		PageRender<Animal> paginador = new PageRender<>("/animal/listado",paginaAnimales,5);
 		
-		model.addAttribute("titulo", "Cruce de Ganado - Listado de Animales");
 		model.addAttribute("numeroanimales", animalService.count());
 		model.addAttribute("animales",paginaAnimales);
 		model.addAttribute("paginador", paginador);
@@ -69,7 +78,7 @@ public class AnimalController {
 		return "/animal/listado";
 	}
 	
-	@GetMapping("/animal/form")
+	@GetMapping("/form")
 	public String form(Model model) {
 		Animal animal = new Animal();
 		model.addAttribute("animal", animal);
@@ -78,7 +87,7 @@ public class AnimalController {
 		return "/animal/form";
 	}
 	
-	@GetMapping("/animal/form/{idA}")
+	@GetMapping("/form/{idA}")
 	public String form(@PathVariable Long idA, Model model, RedirectAttributes flash) {
 		Animal animal = animalService.findOne(idA);
 		if(animal==null) {
@@ -91,7 +100,7 @@ public class AnimalController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@PostMapping("/animal/form")
+	@PostMapping("/form")
 	public String form(@Valid Animal animal, BindingResult result,
 					   @RequestParam(name="ganaderia_id", required=false) Long ganaderia_id,
 					   @RequestParam(name="madre_id", required=false) Long madre_id,
@@ -148,7 +157,7 @@ public class AnimalController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/animal/eliminar/{idA}")
+	@GetMapping("/eliminar/{idA}")
 	public String eliminar(@PathVariable Long idA, Model model, RedirectAttributes flash) {
 		
 		if(idA>0) {
@@ -172,7 +181,7 @@ public class AnimalController {
 		return "redirect:/animal/listado";
 	}
 	
-	@GetMapping("animal/ver/{idA}")
+	@GetMapping("/ver/{idA}")
 	public String ver(@PathVariable Long idA, Model model) {
 		
 		Animal animal = animalService.findOne(idA);
@@ -195,17 +204,17 @@ public class AnimalController {
 		return sexos;
 	}
 	
-	@GetMapping(value="/animal/cargar-ganaderias/{cadena}",produces= {"application/json"})
+	@GetMapping(value="/cargar-ganaderias/{cadena}",produces= {"application/json"})
 	public @ResponseBody List<Ganaderia> cargarGanaderias(@PathVariable String cadena) {
 		return animalService.findByNombre(cadena);
 	}
 	
-	@GetMapping(value="/animal/cargar-madres/{cadena}",produces= {"application/json"})
+	@GetMapping(value="/cargar-madres/{cadena}",produces= {"application/json"})
 	public @ResponseBody List<Animal> cargarMadres(@PathVariable String cadena) {
 		return animalService.findHembraByNombre(cadena);
 	}
 	
-	@GetMapping(value="/animal/cargar-padres/{cadena}",produces= {"application/json"})
+	@GetMapping(value="/cargar-padres/{cadena}",produces= {"application/json"})
 	public @ResponseBody List<Animal> cargarPadres(@PathVariable String cadena) {
 		return animalService.findMachoByNombre(cadena);
 	}
