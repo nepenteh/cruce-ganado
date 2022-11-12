@@ -6,6 +6,7 @@
 	--color-boton-normal-hover: white;
 	--color-enlace-claro: white;
 	--color-enlace-claro-hover: lightgray;
+	--color-fondo-formulario: lightgray;
 	
 }
 
@@ -37,3 +38,57 @@
 .enlace-claro:hover {
 	color: var(--color-enlace-claro-hover);
 }
+
+.pagination li a {
+	color: var(--bgcolor-boton-normal);
+}
+
+.pagination li.active a {
+	background-color: var(--bgcolor-boton-normal)!important;
+	border-color: var(--bgcolor-boton-normal)!important;
+	color: var(--color-boton-normal);
+}
+
+.pagination li.disabled a {
+	color: lightgray!important;
+}
+
+.pagination li a:hover {
+	background-color: var(--bgcolor-boton-normal-hover)!important;
+	border-color: var(--bgcolor-boton-normal-hover)!important;
+	color: var(--color-boton-normal-hover);
+}
+
+.svg-opcion {
+	fill: var(--bgcolor-boton-normal)!important;
+	margin-left:3px;
+	margin-right:3px;
+}
+
+.svg-opcion:hover {
+	fill: var(--bgcolor-boton-normal-hover)!important;
+}
+
+.formulario {
+	background-color: var(--color-fondo-formulario);
+	border: solid 1px var(--bgcolor-boton-normal-hover);
+}
+
+
+.form-control:focus {
+    border-color: var(--bgcolor-boton-normal-hover)!important;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px var(--bgcolor-boton-normal-hover);
+    outline: 0 none;
+}
+
+input::file-selector-button {
+	background-color: var(--bgcolor-boton-normal)!important;
+	color: var(--color-boton-normal)!important;
+}
+
+
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+	background-color: var(--bgcolor-boton-normal-hover)!important;
+	color: var(--color-boton-normal-hover)!important;
+}
+

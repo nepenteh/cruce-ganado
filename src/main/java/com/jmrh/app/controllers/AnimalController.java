@@ -82,7 +82,10 @@ public class AnimalController {
 	public String form(Model model) {
 		Animal animal = new Animal();
 		model.addAttribute("animal", animal);
-		model.addAttribute("titulo", "Cruce de Ganado - Alta de Animal");
+		
+		String titulopantalla = "Alta de Animal";
+		model.addAttribute("titulo", datosAplicacion.getNombre()+" - "+titulopantalla);
+		model.addAttribute("titulopantalla", titulopantalla);
 				
 		return "/animal/form";
 	}

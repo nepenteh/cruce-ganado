@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org">
+<html xmlns:th="http://www.tymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
 <th:block th:replace="layout/layout :: head-basico"></th:block>
 <th:block th:replace="layout/layout :: bootstrap-css"></th:block>
 <th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
 <body>
 <nav th:replace="layout/layout :: menu(2)"></nav>
 <div th:replace="layout/layout :: titulo-pantalla"></div>
 <div th:replace="layout/layout :: zona-mensajes"></div>
 
 
-<a th:href="@{/ganaderia/form}">Alta Ganaderia</a>
+<div class="container py-1">
 
-<p th:if="${numeroganaderias==0}">No hay ganaderías que  mostrar</p>
-<p th:if="${numeroganaderias==1}" th:text="${'Listando '+numeroganaderias+' ganaderia'}"></p>
-<p th:if="${numeroganaderias>1}" th:text="${'Listando '+numeroganaderias+' ganaderias'}"></p>
-<table th:if="${numeroganaderias>0}">
+	<div class="row mt-3 opciones-generales">
+		<div class="col-2">
+			<a class="btn boton-normal" th:href="@{/ganaderia/form}">Alta Ganadería</a>
+		</div>
+		<div class="col-10">
+		<nav th:replace="layout/layout :: paginador"></nav>
+		</div>
+	</div>
+
+
+<table th:if="${numeroganaderias>0}" class="table table-striped">
 <thead>
 	<tr>
-	<th>IdGan</th>
-	<th>CodigoGan</th>
-	<th>NombreGan</th>
-	<th>Hierro</th>
-	<th>Opciones</th>
+		<th scope="col">Id</th>
+		<th scope="col">Código</th>
+		<th scope="col">Nombre</th>
+		<th scope="col">Hierro</th>
+		<th scope="col">Opciones</th>
 	</tr>
 </thead>
 <tbody>
@@ -29,18 +39,21 @@
 	<td th:text="${ganaderia.idGan}"></td>
 	<td th:text="${ganaderia.codigoGan}"></td>
 	<td th:text="${ganaderia.nombreGan}"></td>
-	<td><img th:if="${ganaderia.hierroGan != null}" th:src="@{'/uploads/' + ${ganaderia.hierroGan}}" width="100px">
-		<img th:if="${ganaderia.hierroGan == null}" th:src="@{'/images/nohierro.png'}" width="20px"></img>
+	<td><img th:if="${ganaderia.hierroGan != null}" 
+			th:src="@{'/uploads/' + ${ganaderia.hierroGan}}" width="30px" 
+			class="border border-white shadow">
+		<img th:if="${ganaderia.hierroGan == null}" th:src="@{'/images/nohierro.png'}" width="30px"></img>
 	</td>
-	<td><a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}">Modificar</a> 
-	
-		
-		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/ganaderia/eliminar/'+${ganaderia.idGan}}">Eliminar</a>
-		<span sec:authorize="!hasRole('ROLE_ADMIN')">Eliminar</span>
+	<td>
+		<a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/ganaderia/eliminar/'+${ganaderia.idGan}}" title="Eliminar"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a>
+		<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 	</tr>
 </tbody>
 </table>
 <nav th:replace="layout/layout :: paginador"></nav>
+
+</div>
 
 <div th:insert="layout/layout :: jquery-js"></div>
 <div th:insert="layout/layout :: bootstrap-js"></div>

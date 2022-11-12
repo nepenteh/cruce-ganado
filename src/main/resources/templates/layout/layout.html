@@ -74,31 +74,34 @@
 
 
 	<!-- paginador -->
-	<nav th:fragment="paginador">
-		<ul>
-			<li><span th:if="${paginador.first}">Primera</span> <a
-				th:if="${not paginador.first}"
-				th:href="@{${paginador.url}(pagina=0)}">Primera</a></li>
-			<li><span th:if="${not paginador.hasPrevious}">Anterior</span> <a
-				th:if="${paginador.hasPrevious}"
-				th:href="@{${paginador.url}(pagina=${paginador.paginaActual-2})}">Anterior</a>
+	
+	<nav aria-label="..." th:fragment="paginador">
+		<ul class="pagination pagination-sm justify-content-end">
+			<li class="page-item" th:classappend="${paginador.first ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=0)}">|&lt;</a>
 			</li>
-
-
-			<li th:each="cuadro: ${paginador.paginaItems}"><span
-				th:if="${cuadro.actual}" th:text="${cuadro.numero}"></span> <a
-				th:if="${not cuadro.actual}"
-				th:href="@{${paginador.url}(pagina=${cuadro.numero-1})}"
-				th:text="${cuadro.numero}"></a></li>
-
-			<li><span th:if="${not paginador.hasNext}">Siguiente</span> <a
-				th:if="${paginador.hasNext}"
-				th:href="@{${paginador.url}(pagina=${paginador.paginaActual})}">Siguiente</a>
+			<li class="page-item" th:classappend="${not paginador.hasPrevious ? 'disabled' : ''}">
+			  <a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=${paginador.paginaActual-2})}">&lt;&lt;</a>
 			</li>
-
-			<li><span th:if="${paginador.last}">Última</span> <a
-				th:if="${not paginador.last}"
-				th:href="@{${paginador.url}(pagina=${paginador.totalPaginas-1})}">Última</a>
+			<th:block th:each="cuadro: ${paginador.paginaItems}">
+			<li class="page-item" th:classappend="${cuadro.actual ? 'active' : ''}">
+				<a class="page-link" 
+					th:if="${cuadro.actual}"
+					href="#"
+					th:text="${cuadro.numero}">
+				</a>
+				<a class="page-link" 
+					th:if="${not cuadro.actual}"
+					th:href="@{${paginador.url}(pagina=${cuadro.numero-1})}"
+					th:text="${cuadro.numero}">
+				</a>
+			</li>
+			</th:block>
+			<li class="page-item" th:classappend="${not paginador.hasNext ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=${paginador.paginaActual})}">&gt;&gt;</a>
+			</li>
+			<li class="page-item" th:classappend="${paginador.last ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=${paginador.totalPaginas-1})}">&gt;|</a>
 			</li>
 		</ul>
 	</nav>
@@ -107,7 +110,7 @@
 	<!-- Toro en Árbol -->
 	<div th:fragment="toro (ntoro)">
 		<div th:if="${arbol.get(ntoro)==null}">
-			<img th:src="@{'/images/notoro.jpg'}" width="100px"><br> <span>???</span>
+			<img th:src="@{'/images/notoro.png'}" width="100px"><br> <span>???</span>
 			<div>
 				<img th:src="@{'/images/nohierro.png'}" width="30px"> <span>???</span>
 			</div>

@@ -1,9 +1,5 @@
 package com.jmrh.app;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 @Component

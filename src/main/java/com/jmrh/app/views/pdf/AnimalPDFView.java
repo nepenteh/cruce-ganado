@@ -32,7 +32,7 @@ public class AnimalPDFView extends AbstractPdfView {
 
 	// carpeta de imagenes subidas del proyecto
 	final static String UPLOAD_FOLDER = "uploads";
-	final static String NOTORO_RESOURCE = "static/images/notoro.jpg";
+	final static String NOTORO_RESOURCE = "static/images/notoro.png";
 	final static String NOHIERRO_RESOURCE = "static/images/nohierro.png";
 
 	@SuppressWarnings("unchecked")

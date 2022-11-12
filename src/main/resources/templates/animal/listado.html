@@ -1,64 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org">
+<html xmlns:th="http://www.tymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <th:block th:replace="layout/layout :: head-basico"></th:block>
 <th:block th:replace="layout/layout :: bootstrap-css"></th:block>
 <th:block th:replace="layout/layout :: general-css"></th:block>
 </head>
 <body>
-<nav th:replace="layout/layout :: menu(1)"></nav>
-<div th:replace="layout/layout :: titulo-pantalla"></div>
-<div th:replace="layout/layout :: zona-mensajes"></div>
+	<nav th:replace="layout/layout :: menu(1)"></nav>
+	<div th:replace="layout/layout :: titulo-pantalla"></div>
+	<div th:replace="layout/layout :: zona-mensajes"></div>
 
+<div class="container py-1">
 
-<a th:href="@{/animal/form}">Alta Animal</a>
-
-<p th:if="${numeroanimales==0}">No hay animales que  mostrar</p>
-<p th:if="${numeroanimales==1}" th:text="${'Listando '+numeroanimales+' animal'}"></p>
-<p th:if="${numeroanimales>1}" th:text="${'Listando '+numeroanimales+' animales'}"></p>
-<table th:if="${numeroanimales>0}">
-<thead>
-	<tr>
-	<th>Id</th>
-	<th>Nombre</th>
-	<th>Sexo</th>
-	<th>Puntuación</th>
-	<th>Fecha</th>
-	<th>Ganadería</th>
-	<th>Padre</th>
-	<th>Madre</th>
-	<th>Opciones</th>
-	</tr>
-</thead>
-<tbody>
-<tr th:each="animal: ${animales}">
-	<td th:text="${animal.idA}"></td>
-	<td th:text="${animal.nombreA}"></td>
-	<td th:text="${animal.sexoA}"></td>
-	<td th:text="${animal.puntuacionA}"></td>
-	<td th:text="${#dates.format(animal.fechaA,'dd/MM/yyyy')}"></td>
-	<td th:if="${animal.ganaderiaA!=null}" th:text="${animal.ganaderiaA.nombreGan}"></td>
-	<td th:if="${animal.ganaderiaA==null}" th:text="---"></td>
-	<td th:if="${animal.padreA!=null}" th:text="${animal.padreA.nombreA}"></td>
-	<td th:if="${animal.padreA==null}" th:text="---"></td>
-	<td th:if="${animal.madreA!=null}" th:text="${animal.madreA.nombreA}"></td>
-	<td th:if="${animal.madreA==null}" th:text="---"></td>
-	<td><img th:if="${animal.fotoA != null}" th:src="@{'/uploads/' + ${animal.fotoA}}" width="30px">
-		<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.jpg'}" width="30px">
+	<div class="row mt-3 opciones-generales">
+		<div class="col-2">
+			<a class="btn boton-normal" th:href="@{/animal/form}">Alta Animal</a>
+		</div>
+		<div class="col-10">
+		<nav th:replace="layout/layout :: paginador"></nav>
+		</div>
+	</div>
 		
-	</td>
-	<td>
-		<a th:href="@{'/animal/ver/'+${animal.idA}}">Ver</a>
-		<a th:href="@{'/animal/form/'+${animal.idA}}">Modificar</a> 
-		
-		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/animal/eliminar/'+${animal.idA}}">Eliminar</a>
-		<span sec:authorize="!hasRole('ROLE_ADMIN')">Eliminar</span>
-	</tr>
-</tbody>
-</table>
-<nav th:replace="layout/layout :: paginador"></nav>
+	<table th:if="${numeroanimales>0}" class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Sexo</th>
+				<th scope="col">Puntuación</th>
+				<th scope="col">Fecha</th>
+				<th scope="col">Ganadería</th>
+				<th scope="col">Padre</th>
+				<th scope="col">Madre</th>
+				<th scope="col">Imagen</th>
+				<th scope="col">Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="animal: ${animales}">
+				<td th:text="${animal.idA}"></td>
+				<td th:text="${animal.nombreA}"></td>
+				<td th:text="${animal.sexoA}"></td>
+				<td th:text="${animal.puntuacionA}"></td>
+				<td th:text="${#dates.format(animal.fechaA,'dd/MM/yyyy')}"></td>
+				<td th:if="${animal.ganaderiaA!=null}"
+					th:text="${animal.ganaderiaA.nombreGan}"></td>
+				<td th:if="${animal.ganaderiaA==null}" th:text="---"></td>
+				<td th:if="${animal.padreA!=null}"
+					th:text="${animal.padreA.nombreA}"></td>
+				<td th:if="${animal.padreA==null}" th:text="---"></td>
+				<td th:if="${animal.madreA!=null}"
+					th:text="${animal.madreA.nombreA}"></td>
+				<td th:if="${animal.madreA==null}" th:text="---"></td>
+				<td><img th:if="${animal.fotoA != null}"
+					th:src="@{'/uploads/' + ${animal.fotoA}}" width="65px"
+					class="border border-white shadow"> 
+					<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.png'}"
+					width="65px"></td>
+				<td>
+				<a th:href="@{'/animal/ver/'+${animal.idA}}" title="Ver"><svg th:replace="/layout/iconos_svg :: svg-ver"></svg></a> 
+				<a th:href="@{'/animal/form/'+${animal.idA}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/animal/eliminar/'+${animal.idA}}" title="Eliminar"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
+				<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
-<div th:insert="layout/layout :: jquery-js"></div>
-<div th:insert="layout/layout :: bootstrap-js"></div>
+	<nav th:replace="layout/layout :: paginador"></nav>
+
+</div>
+
+	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: bootstrap-js"></div>
 </body>
 </html>
