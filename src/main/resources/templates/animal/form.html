@@ -4,10 +4,11 @@
 <head>
 <th:block th:replace="layout/layout :: head-basico"></th:block>
 <th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: jquery-ui-css"></th:block>
 <th:block th:replace="layout/layout :: general-css"></th:block>
 </head>
 <body>
-	<nav th:replace="layout/layout :: menu(1)"></nav>
+	<nav th:replace="layout/layout :: menu"></nav>
 	<div th:replace="layout/layout :: titulo-pantalla"></div>
 	<div th:replace="layout/layout :: zona-mensajes"></div>
 
@@ -26,9 +27,11 @@
 							<input type="text" class="form-control form-control-sm" id="nombre"
 								th:field="*{nombreA}">
 						</div>
-						<div class="text-danger" th:if="${#fields.hasErrors('nombreA')}"
-							th:uerrors="*{nombreA}"></div>
+						<span class="text-danger" th:if="${#fields.hasErrors('nombreA')}" th:uerrors="*{nombreA}"></span>
 					</div>
+					
+	
+							
 
 					<div class="row g-3 align-items-center mb-3">
 						<div class="col-md-2">
@@ -41,8 +44,7 @@
 									th:text="${sexo.value}" th:value="${sexo.key}"></option>
 							</select>
 						</div>
-						<div class="text-danger" th:if="${#fields.hasErrors('sexoA')}"
-							th:uerrors="*{sexoA}"></div>
+						<span class="text-danger" th:if="${#fields.hasErrors('sexoA')}" th:uerrors="*{sexoA}"></span>
 					</div>
 
 					<div class="row g-3 align-items-center mb-3">
@@ -53,8 +55,7 @@
 							<input type="text" class="form-control form-control-sm" id="puntuacion"
 								th:field="*{puntuacionA}">
 						</div>
-						<div th:if="${#fields.hasErrors('puntuacionA')}"
-							th:uerrors="*{puntuacionA}"></div>
+						<span class="text-danger" th:if="${#fields.hasErrors('puntuacionA')}" th:uerrors="*{puntuacionA}"></span>
 					</div>
 
 					<div class="row g-3 align-items-center mb-3">
@@ -65,7 +66,7 @@
 							<input type="date" class="form-control form-control-sm" id="fecha"
 								th:field="*{fechaA}">
 						</div>
-						<div th:if="${#fields.hasErrors('fechaA')}" th:uerrors="*{fechaA}"></div>
+						<span class="text-danger" th:if="${#fields.hasErrors('fechaA')}" th:uerrors="*{fechaA}"></span>
 					</div>
 
 					<div class="row g-3 align-items-center mb-3">
@@ -149,6 +150,7 @@
 
 
 	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: jquery-ui-js"></div>
 	<div th:insert="layout/layout :: bootstrap-js"></div>
 	<script
 		th:replace="animal/js/autocomplete-ganaderias :: autocomplete-ganaderias"></script>

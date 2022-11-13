@@ -7,15 +7,17 @@
 <th:block th:replace="layout/layout :: general-css"></th:block>
 </head>
 <body>
-	<nav th:replace="layout/layout :: menu(1)"></nav>
+	<nav th:replace="layout/layout :: menu"></nav>
 	<div th:replace="layout/layout :: titulo-pantalla"></div>
 	<div th:replace="layout/layout :: zona-mensajes"></div>
+
+<div th:replace="layout/layout :: confirmacion"></div>
 
 <div class="container py-1">
 
 	<div class="row mt-3 opciones-generales">
 		<div class="col-2">
-			<a class="btn boton-normal" th:href="@{/animal/form}">Alta Animal</a>
+			<a class="btn boton-normal" th:href="@{/animal/form}" th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,'ALTA')}"></a>
 		</div>
 		<div class="col-10">
 		<nav th:replace="layout/layout :: paginador"></nav>
@@ -61,7 +63,7 @@
 				<td>
 				<a th:href="@{'/animal/ver/'+${animal.idA}}" title="Ver"><svg th:replace="/layout/iconos_svg :: svg-ver"></svg></a> 
 				<a th:href="@{'/animal/form/'+${animal.idA}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
-				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/animal/eliminar/'+${animal.idA}}" title="Eliminar"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/animal/eliminar/'+${animal.idA}}" title="Eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal" ><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
 				<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 				</td>
 			</tr>
