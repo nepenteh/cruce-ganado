@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
+<body>
+	<nav th:replace="layout/layout :: menu"></nav>
+	<div th:replace="layout/layout :: titulo-pantalla"></div>
+	<div th:replace="layout/layout :: zona-mensajes"></div>
+
+<div th:replace="layout/layout :: confirmar"></div>
+
+<div class="container py-1">
+
+	<div class="row mt-3 opciones-generales">
+		<div class="col-2">
+			<a class="btn boton-normal" th:href="@{/animal/form}" th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,'ALTA')}"></a>
+		</div>
+		<div class="col-10">
+		
+		<th:block th:if="${numeroanimales>0}">
+			<nav th:replace="layout/layout :: paginador"></nav>
+		</th:block>
+		</div>
+	</div>
+	
+	<h5 class="text-center my-5 mx-5" th:if="${numeroanimales==0}" th:text="${datosAplicacion.getMensajeVacio(codigoOpcion)}"></h5>
+		
+	<table th:if="${numeroanimales>0}" class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Sexo</th>
+				<th scope="col">Puntuación</th>
+				<th scope="col">Fecha</th>
+				<th scope="col">Ganadería</th>
+				<th scope="col">Padre</th>
+				<th scope="col">Madre</th>
+				<th scope="col">Imagen</th>
+				<th scope="col">Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="animal: ${animales}">
+				<td th:text="${animal.idA}"></td>
+				<td th:text="${animal.nombreA}"></td>
+				<td th:text="${animal.sexoA}"></td>
+				<td th:text="${animal.puntuacionA}"></td>
+				<td th:text="${#dates.format(animal.fechaA,'dd/MM/yyyy')}"></td>
+				<td th:if="${animal.ganaderiaA!=null}"
+					th:text="${animal.ganaderiaA.nombreGan}"></td>
+				<td th:if="${animal.ganaderiaA==null}" th:text="---"></td>
+				<td th:if="${animal.padreA!=null}"
+					th:text="${animal.padreA.nombreA}"></td>
+				<td th:if="${animal.padreA==null}" th:text="---"></td>
+				<td th:if="${animal.madreA!=null}"
+					th:text="${animal.madreA.nombreA}"></td>
+				<td th:if="${animal.madreA==null}" th:text="---"></td>
+				<td><img th:if="${animal.fotoA != null}"
+					th:src="@{'/uploads/' + ${animal.fotoA}}" width="65px"
+					class="border border-white shadow"> 
+					<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.png'}"
+					width="65px"></td>
+				<td>
+				<a th:href="@{'/animal/ver/'+${animal.idA}}" title="Ver"><svg th:replace="/layout/iconos_svg :: svg-ver"></svg></a> 
+				<a th:href="@{'/animal/form/'+${animal.idA}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${animal.idA}','${animal.nombreA}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
+				<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<th:block th:if="${numeroanimales>0}">
+		<nav th:replace="layout/layout :: paginador"></nav>
+	</th:block>
+
+</div>
+
+	<div th:replace="layout/layout :: autoria"></div>
+	
+	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: bootstrap-js"></div>
+	
+	<script
+		th:replace="animal/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
+	
+</body>
+</html>

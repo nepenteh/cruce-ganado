@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
+<body>
+	<nav th:replace="layout/layout :: menu"></nav>
+	<div th:replace="layout/layout :: titulo-pantalla"></div>
+	<div th:replace="layout/layout :: zona-mensajes"></div>
+
+<div class="container-fluid py-1">
+
+<div class="row mt-3 opciones-generales">
+		<div class="col-2">
+			<a class="btn boton-normal" th:href="@{'/animal/ver/' + ${arbol.get(0).idA}(format=pdf)}" target="_blank">Descargar PDF</a>
+		</div>
+</div>
+
+<div class="ascendencia mb-5">
+
+	<table  style="border-collapse: collapse; width: 100%">
+		<tr>
+			<td colspan="16" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='0')"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="8">&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="4">&nbsp;</td>
+			<td colspan="4"
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td colspan="4"
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='1')"></div>
+			</td>
+			<td colspan="8" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='2')"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="4" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="4">&nbsp;</td>
+			<td colspan="4" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">&nbsp;</td>
+			<td colspan="2"
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td colspan="2"
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+			<td colspan="2"
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td colspan="2"
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+
+
+		<tr>
+			<td colspan="4" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='3')"></div>
+			</td>
+			<td colspan="4" style="text-align: center">
+
+				<div th:replace="layout/layout :: toro(ntoro='4')"></div>
+			</td>
+			<td colspan="4" style="text-align: center">
+
+				<div th:replace="layout/layout :: toro(ntoro='5')"></div>
+			</td>
+			<td colspan="4" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='6')"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+			<td colspan="2" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+			<td colspan="2" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+			<td colspan="2" style="border-right: 2px solid black;">&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td>&nbsp;</td>
+			<td
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td
+				style="border-left: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td
+				style="border-right: 2px solid black; border-top: 2px solid black;">&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='7')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='8')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='9')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='10')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='11')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='12')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='13')"></div>
+			</td>
+			<td colspan="2" style="text-align: center">
+				<div th:replace="layout/layout :: toro(ntoro='14')"></div>
+			</td>
+		</tr>
+
+	</table>
+	
+</div>
+</div>
+
+	<div th:replace="layout/layout :: autoria"></div>
+
+	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: bootstrap-js"></div>
+</body>
+</html>

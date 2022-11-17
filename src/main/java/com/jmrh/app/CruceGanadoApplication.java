@@ -1,3 +1,7 @@
+/**
+ * VERSIÓN 2. USANDO SERVICIOS Y CRUD DE JPA
+ */
+
 package com.jmrh.app;
 
 import org.springframework.boot.SpringApplication;

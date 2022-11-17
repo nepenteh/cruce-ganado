@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<body>
+<script type="text/javascript" th:fragment="confirmacion-eliminar">
+function mostrarConfirmacionEliminar(id,nombre) {
+	var myModal = new bootstrap.Modal(document.getElementById('modalConfirmacion'));
+	var titulo = document.getElementById('modalConfirmacionTitulo');
+	titulo.innerHTML = "Eliminar Ganadería";
+	var texto = document.getElementById('modalConfirmacionCuerpo');
+	texto.innerHTML = "¿Eliminar la ganadería <strong>"+nombre.toUpperCase()+"</strong>?";
+	var botonOk = document.getElementById('modalOk');
+	botonOk.innerHTML = "Eliminar";
+	botonOk.href="/ganaderia/eliminar/"+id;
+	
+	myModal.show();
+}
+</script>
+
+</body>
+</html>

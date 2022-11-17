@@ -1,0 +1,145 @@
+:root {
+	--bgcolor-titulos-pantalla: #4d4033;
+	--bgcolor-boton-normal: #4d4033;
+	--color-boton-normal: white;
+	--bgcolor-boton-normal-hover: #826b55;
+	--color-boton-normal-hover: white;
+	--color-enlace-claro: white;
+	--color-enlace-claro-hover: lightgray;
+	--color-fondo-formulario: lightgray;
+	--color-sutil: gray;
+	
+	
+}
+
+.titulo-pantalla {
+	background-color: var(--bgcolor-titulos-pantalla);
+}
+
+.titulo-pantalla h1 {
+	font-size: 20px;
+	color:var(--color-boton-normal);
+	margin-top:3px;
+}
+
+.titulo-pantalla a {
+	color: var(--color-boton-normal);
+	text-decoration: none;
+}
+
+.titulo-pantalla a:hover {
+	color: var(--color-enlace-claro-hover);
+}
+
+
+.boton-normal {
+	background-color: var(--bgcolor-boton-normal);
+	color: var(--color-boton-normal);
+}
+
+.boton-normal:hover {
+	background-color: var(--bgcolor-boton-normal-hover);
+	color: var(--color-boton-normal-hover);
+}
+
+.enlace-claro {
+	color: var(--color-enlace-claro);
+	text-decoration: none;
+}
+
+.enlace-claro:hover {
+	color: var(--color-enlace-claro-hover);
+}
+
+.pagination li a {
+	color: var(--bgcolor-boton-normal);
+}
+
+.pagination li.active a {
+	background-color: var(--bgcolor-boton-normal)!important;
+	border-color: var(--bgcolor-boton-normal)!important;
+	color: var(--color-boton-normal);
+}
+
+.pagination li.disabled a {
+	color: lightgray!important;
+}
+
+.pagination li a:hover {
+	background-color: var(--bgcolor-boton-normal-hover)!important;
+	border-color: var(--bgcolor-boton-normal-hover)!important;
+	color: var(--color-boton-normal-hover);
+}
+
+svg {
+	fill: lightgray!important;
+}
+
+a .svg-opcion {
+	fill: var(--bgcolor-boton-normal)!important;
+	margin-left:3px;
+	margin-right:3px;
+}
+
+a .svg-opcion:hover {
+	fill: var(--bgcolor-boton-normal-hover)!important;
+}
+
+.formulario {
+	background-color: var(--color-fondo-formulario);
+	border: solid 1px var(--bgcolor-boton-normal-hover);
+}
+
+
+.form-control:focus, .boton-normal:focus, .page-item a:focus {
+    border-color: var(--bgcolor-boton-normal-hover)!important;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px var(--bgcolor-boton-normal-hover);
+    outline: 0 none;
+}
+
+.page-item a:focus {
+	color: var(--bgcolor-boton-normal)!important;
+}
+
+.page-item.active a:focus {
+	color: var(--color-boton-normal)!important;
+}
+
+input::file-selector-button {
+	background-color: var(--bgcolor-boton-normal)!important;
+	color: var(--color-boton-normal)!important;
+}
+
+
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+	background-color: var(--bgcolor-boton-normal-hover)!important;
+	color: var(--color-boton-normal-hover)!important;
+}
+
+.autoria {
+	border-top: solid 1px var(--color-sutil);
+}
+
+.autoria a {
+	color: var(--color-sutil);
+	text-decoration: none;
+}
+
+.autoria a:hover {
+	color: var(--bgcolor-boton-normal);
+}
+
+
+.modal-header {
+	background-color: var(--bgcolor-boton-normal);
+	color: var(--color-boton-normal);
+}
+
+.modal-header .btn-close {
+	background-color: var(--color-boton-normal)!important;
+}
+
+.acceso-denegado {
+		background-color: var(--bgcolor-boton-normal);
+		color: var(--color-boton-normal);
+}

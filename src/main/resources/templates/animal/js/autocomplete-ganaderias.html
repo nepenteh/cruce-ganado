@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<body>
+	<script type="text/javascript" th:fragment="autocomplete-ganaderias">
+		$(document).ready(function() {
+			$("#buscar-ganaderia").autocomplete({
+				
+				source: function(request, response) {
+					$.ajax({
+						url:"/animal/cargar-ganaderias/" + request.term,
+						dataType: "json",
+						data: {
+							cadena: request.term
+						},
+						success: function(data) {
+							response($.map(data,function(item){
+								return {
+									value: item.idGan,
+									label: item.nombreGan
+								}
+							}));
+						},
+					});
+				},
+				select: function(event, ui) {
+					$("#buscar-ganaderia").val(ui.item.label);
+					$("#nombre_ganaderia").val(ui.item.label);
+					$("#ganaderia_id").val(ui.item.value);
+					return false;
+				}
+				
+			});
+		});
+	</script>
+</body>
+</html>

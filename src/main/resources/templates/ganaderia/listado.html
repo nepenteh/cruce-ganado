@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org">
+<html xmlns:th="http://www.tymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
 </head>
 <body>
-<h1 th:text="${titulo}"></h1>
+<nav th:replace="layout/layout :: menu"></nav>
+<div th:replace="layout/layout :: titulo-pantalla"></div>
+<div th:replace="layout/layout :: zona-mensajes"></div>
 
-<a th:href="@{/ganaderia/form}">Alta Ganaderia</a>
+<div th:replace="layout/layout :: confirmar"></div>
 
-<table>
+<div class="container py-1">
+
+	<div class="row mt-3 opciones-generales">
+		<div class="col-2">
+			<a class="btn boton-normal" th:href="@{/ganaderia/form}" th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,'ALTA')}"></a>
+		</div>
+		<div class="col-10">
+		
+		<th:block th:if="${numeroganaderias>0}">
+		  <nav th:if="${numeroganaderias>0}" th:replace="layout/layout :: paginador"></nav>
+		</th:block> 
+		</div>
+	</div>
+
+<h5 class="text-center my-5 mx-5" th:if="${numeroganaderias==0}" th:text="${datosAplicacion.getMensajeVacio(codigoOpcion)}"></h5>
+
+<table th:if="${numeroganaderias>0}" class="table table-striped">
 <thead>
 	<tr>
-	<th>IdGan</th>
-	<th>CodigoGan</th>
-	<th>NombreGan</th>
-	<th>Opciones</th>
+		<th scope="col">Id</th>
+		<th scope="col">Código</th>
+		<th scope="col">Nombre</th>
+		<th scope="col">Hierro</th>
+		<th scope="col">Opciones</th>
 	</tr>
 </thead>
 <tbody>
@@ -23,11 +44,32 @@
 	<td th:text="${ganaderia.idGan}"></td>
 	<td th:text="${ganaderia.codigoGan}"></td>
 	<td th:text="${ganaderia.nombreGan}"></td>
-	<td><a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}">Modificar</a> 
-		<a th:href="@{'/ganaderia/eliminar/'+${ganaderia.idGan}}">Eliminar</a>
+	<td><img th:if="${ganaderia.hierroGan != null}" 
+			th:src="@{'/uploads/' + ${ganaderia.hierroGan}}" width="30px" 
+			class="border border-white shadow">
+		<img th:if="${ganaderia.hierroGan == null}" th:src="@{'/images/nohierro.png'}" width="30px"></img>
+	</td>
+	<td>
+		<a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${ganaderia.idGan}','${ganaderia.nombreGan}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a>
+		<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 	</tr>
 </tbody>
 </table>
 
+<th:block th:if="${numeroganaderias>0}">
+	<nav th:replace="layout/layout :: paginador"></nav>
+</th:block>
+
+</div>
+
+<div th:replace="layout/layout :: autoria"></div>
+
+<div th:insert="layout/layout :: jquery-js"></div>
+<div th:insert="layout/layout :: bootstrap-js"></div>
+
+<script
+		th:replace="ganaderia/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
+	
 </body>
 </html>

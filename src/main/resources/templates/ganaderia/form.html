@@ -1,28 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org">
+<html xmlns:th="http://www.tymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
 </head>
 <body>
-<h1 th:text="${titulo}"></h1>
+	<nav th:replace="layout/layout :: menu"></nav>
+	<div th:replace="layout/layout :: titulo-pantalla"></div>
+	<div th:replace="layout/layout :: zona-mensajes"></div>
 
-<a th:href="@{/ganaderia/listado}">Volver al listado</a><br>
 
-<form th:object="${ganaderia}" method="post" th:action="@{/ganaderia/form}">
-<div>
-<label>Código</label>
-<input type="text" th:field="*{codigoGan}">
-</div>
-<div>
-<label>Nombre</label>
-<input type="text" th:field="*{nombreGan}">
-</div>
-<div>
-<input type="hidden" th:field="*{idGan}">
-<input type="submit" value="Enviar">
-</div>
-</form>
+	<div class="container py-1">
+	<div class="row justify-content-center mt-3 ms-1 me-1">
+			<div class="col-12 formulario formulario-alta shadow">
 
+	<form class="mt-3" th:object="${ganaderia}" method="post"
+		th:action="@{/ganaderia/form}" enctype="multipart/form-data">
+		
+		<div class="row g-3 align-items-center mb-3">
+		<div class="col-md-2">
+			<label for="codigoGan" class="form-label mb-0">Código: </label>
+			</div>
+		<div class="col-md-4 mt-1 mt-md-3">
+		 <input type="text" class="form-control form-control-sm" id="codigoGan" th:field="*{codigoGan}">
+		 </div>
+		 
+			<div class="text-danger" th:if="${#fields.hasErrors('codigoGan')}"
+				th:uerrors="*{codigoGan}"></div>
+		</div>
+		
+		
+		<div class="row g-3 align-items-center mb-3">
+		<div class="col-md-2">
+			<label for="nombre" class="form-label mb-0">Nombre: </label>
+		</div>	
+		<div class="col-md-4 mt-1 mt-md-3">
+		 <input type="text" class="form-control form-control-sm" id="nombre" th:field="*{nombreGan}">
+		 </div>
+			<div th:if="${#fields.hasErrors('nombreGan')}"
+				th:uerrors="*{nombreGan}"></div>
+		</div>
+		
+		
+		<div class="row g-3 align-items-center mb-3">
+		<div class="col-md-2">
+			<label for="foto" class="form-label mb-0">Hierro: </label>
+			</div>
+			<div class="col-md-4 mt-1 mt-md-3">
+			 <input type="file" class="form-control form-control-sm fichero" id="foto" name="hierrogan">
+			 </div>
+		</div>
+		
+		
+		
+		<div class="row g-3 align-items-center mb-3">
+		<div class="col-md-2 mt-4">
+			<input class="btn boton-normal"
+				sec:authorize="hasRole('ROLE_ADMIN')" type="submit"
+				value="Enviar"> <input
+				sec:authorize="!hasRole('ROLE_ADMIN')" type="submit" value="Enviar"
+				disabled>
+				</div>
+		</div>
+	</form>
+	
+	</div>
+	</div>
+	
+	</div>
+	
+	<div th:replace="layout/layout :: autoria"></div>
+
+	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: bootstrap-js"></div>
 </body>
 </html>

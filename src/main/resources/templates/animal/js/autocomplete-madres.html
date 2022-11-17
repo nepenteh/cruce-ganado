@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<body>
+	<script type="text/javascript" th:fragment="autocomplete-madres">
+		$(document).ready(function() {
+			$("#buscar-madre").autocomplete({
+				
+				source: function(request, response) {
+					$.ajax({
+						url:"/animal/cargar-madres/" + request.term,
+						dataType: "json",
+						data: {
+							cadena: request.term
+						},
+						success: function(data) {
+							response($.map(data,function(item){
+								return {
+									value: item.idA,
+									label: item.nombreA
+								}
+							}));
+						},
+					});
+				},
+				select: function(event, ui) {
+					$("#buscar-madre").val(ui.item.label);
+					$("#nombre_madre").val(ui.item.label);
+					$("#madre_id").val(ui.item.value);
+					return false;
+				}
+				
+			});
+		});
+	</script>
+</body>
+</html>

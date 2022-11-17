@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: jquery-ui-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
+<body>
+	<nav th:replace="layout/layout :: menu"></nav>
+	<div th:replace="layout/layout :: titulo-pantalla"></div>
+	<div th:replace="layout/layout :: zona-mensajes"></div>
+
+	<div class="container py-1">
+
+		<div class="row justify-content-center mt-3 ms-1 me-1">
+			<div class="col-12 formulario formulario-alta shadow">
+				<form class="mt-3" th:object="${animal}" method="post"
+					th:action="@{/animal/form}" enctype="multipart/form-data">
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="nombre" class="form-label mb-0">Nombre: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input type="text" class="form-control form-control-sm" id="nombre"
+								th:field="*{nombreA}">
+						</div>
+						<span class="text-danger" th:if="${#fields.hasErrors('nombreA')}" th:uerrors="*{nombreA}"></span>
+					</div>
+					
+	
+							
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="sexo" class="form-label mb-0">Sexo: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<select class="form-control form-control-sm" id="sexo" th:field="*{sexoA}">
+								<option value="">-- Seleccionar sexo --</option>
+								<option th:each="sexo: ${sexos.entrySet()}"
+									th:text="${sexo.value}" th:value="${sexo.key}"></option>
+							</select>
+						</div>
+						<span class="text-danger" th:if="${#fields.hasErrors('sexoA')}" th:uerrors="*{sexoA}"></span>
+					</div>
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="puntuacion" class="form-label mb-0">Puntuación: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input type="text" class="form-control form-control-sm" id="puntuacion"
+								th:field="*{puntuacionA}">
+						</div>
+						<span class="text-danger" th:if="${#fields.hasErrors('puntuacionA')}" th:uerrors="*{puntuacionA}"></span>
+					</div>
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="fecha" class="form-label mb-0">Fecha: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input type="date" class="form-control form-control-sm" id="fecha"
+								th:field="*{fechaA}">
+						</div>
+						<span class="text-danger" th:if="${#fields.hasErrors('fechaA')}" th:uerrors="*{fechaA}"></span>
+					</div>
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="buscar-ganaderia" class="form-label mb-0">Ganadería:
+							</label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input type="text" class="form-control form-control-sm" name="buscar-ganaderia"
+								id="buscar-ganaderia"
+								placeholder="Escribe la ganadería a buscar...">
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control form-control-sm" id="nombre_ganaderia"
+								th:value="${(animal.ganaderiaA==null)?'':animal.ganaderiaA.nombreGan}" readonly>
+						</div>
+						<input type="hidden" id="ganaderia_id" name="ganaderia_id"
+							th:value="${(animal.ganaderiaA==null)?null:animal.ganaderiaA.idGan}">
+					</div>
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="buscar-madre" class="form-label mb-0">Madre: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input type="text" class="form-control form-control-sm" name="buscar-madre"
+								id="buscar-madre"
+								placeholder="Escribe el nombre del animal a buscar...">
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control form-control-sm" id="nombre_madre"
+								th:value="${(animal.madreA==null)?'':animal.madreA.nombreA}" readonly>
+						</div>
+						<input type="hidden" id="madre_id" name="madre_id"
+							th:value="${(animal.madreA==null)?null:animal.madreA.idA}">
+					</div>
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="buscar-padre" class="form-label mb-0">Padre: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input type="text" class="form-control form-control-sm" name="buscar-padre"
+								id="buscar-padre"
+								placeholder="Escribe el nombre del animal a buscar...">
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control form-control-sm" id="nombre_padre"
+								th:value="${(animal.padreA==null)?'':animal.padreA.nombreA}" readonly>
+						</div>
+						<input type="hidden" id="padre_id" name="padre_id"
+							th:value="${(animal.padreA==null)?null:animal.padreA.idA}">
+					</div>
+
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2">
+							<label for="foto" class="form-label mb-0">Foto: </label>
+						</div>
+						<div class="col-md-4 mt-1 mt-md-3">
+							<input class="form-control form-control-sm fichero" type="file" id="foto" name="fotoa">
+						</div>
+					</div>
+
+
+					<div class="row g-3 align-items-center mb-3">
+						<div class="col-md-2 mt-4">
+							<input class="btn boton-normal"
+								sec:authorize="hasRole('ROLE_ADMIN')" type="submit"
+								value="Enviar"> <input
+								sec:authorize="!hasRole('ROLE_ADMIN')" type="submit"
+								value="Enviar" disabled>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<div th:replace="layout/layout :: autoria"></div>
+
+	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: jquery-ui-js"></div>
+	<div th:insert="layout/layout :: bootstrap-js"></div>
+	<script
+		th:replace="animal/js/autocomplete-ganaderias :: autocomplete-ganaderias"></script>
+	<script
+		th:replace="animal/js/autocomplete-madres :: autocomplete-madres"></script>
+	<script
+		th:replace="animal/js/autocomplete-padres :: autocomplete-padres"></script>
+</body>
+</html>
