@@ -7,22 +7,27 @@
 <th:block th:replace="layout/layout :: general-css"></th:block>
 </head>
 <body>
-<nav th:replace="layout/layout :: menu(2)"></nav>
+<nav th:replace="layout/layout :: menu"></nav>
 <div th:replace="layout/layout :: titulo-pantalla"></div>
 <div th:replace="layout/layout :: zona-mensajes"></div>
 
+<div th:replace="layout/layout :: confirmar"></div>
 
 <div class="container py-1">
 
 	<div class="row mt-3 opciones-generales">
 		<div class="col-2">
-			<a class="btn boton-normal" th:href="@{/ganaderia/form}">Alta Ganadería</a>
+			<a class="btn boton-normal" th:href="@{/ganaderia/form}" th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,'ALTA')}"></a>
 		</div>
 		<div class="col-10">
-		<nav th:replace="layout/layout :: paginador"></nav>
+		
+		<th:block th:if="${numeroganaderias>0}">
+		  <nav th:if="${numeroganaderias>0}" th:replace="layout/layout :: paginador"></nav>
+		</th:block> 
 		</div>
 	</div>
 
+<h5 class="text-center my-5 mx-5" th:if="${numeroganaderias==0}" th:text="${datosAplicacion.getMensajeVacio(codigoOpcion)}"></h5>
 
 <table th:if="${numeroganaderias>0}" class="table table-striped">
 <thead>
@@ -46,16 +51,25 @@
 	</td>
 	<td>
 		<a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
-		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/ganaderia/eliminar/'+${ganaderia.idGan}}" title="Eliminar"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${ganaderia.idGan}','${ganaderia.nombreGan}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a>
 		<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 	</tr>
 </tbody>
 </table>
-<nav th:replace="layout/layout :: paginador"></nav>
+
+<th:block th:if="${numeroganaderias>0}">
+	<nav th:replace="layout/layout :: paginador"></nav>
+</th:block>
 
 </div>
 
+<div th:replace="layout/layout :: autoria"></div>
+
 <div th:insert="layout/layout :: jquery-js"></div>
 <div th:insert="layout/layout :: bootstrap-js"></div>
+
+<script
+		th:replace="ganaderia/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
+	
 </body>
 </html>

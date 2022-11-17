@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.DatosApp;
+import com.jmrh.app.appdata.DatosApp;
 
 @Controller
 public class LoginController {
@@ -38,11 +38,8 @@ public class LoginController {
 		if(error != null) 
 			model.addAttribute("error","Nombre de usuario o password incorrectos");
 		
-		model.addAttribute("titulo", datosAplicacion.getNombre()+" - Login");
-		model.addAttribute("nombreaplicacion",datosAplicacion.getNombre().toUpperCase());
-		model.addAttribute("autoria", datosAplicacion.getAutoria());
-		model.addAttribute("enlaceweb",datosAplicacion.getEnlace());
-		
+		model.addAttribute("datosAplicacion", datosAplicacion);
+			
 		return "/login/login";
 	}
 	

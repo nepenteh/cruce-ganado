@@ -1,5 +1,6 @@
 package com.jmrh.app.views.pdf;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,10 +15,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
+import com.jmrh.app.appdata.DatosApp;
 import com.jmrh.app.models.entities.Animal;
+import com.lowagie.text.Anchor;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
+import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -50,18 +54,62 @@ public class AnimalPDFView extends AbstractPdfView {
 		//filename define el título del documento descargado.
 		response.setHeader("Content-Disposition", "inline; filename=\"" + titulo.replaceAll(" ", "").toUpperCase() + ".pdf\"");
 
-		anadirGeneracion(arbol, 1, 0, document);
-		lineas(1, document);
-		anadirGeneracion(arbol, 2, 1, document);
-		lineas(2, document);
-		anadirGeneracion(arbol, 4, 3, document);
-		lineas(4, document);
-		anadirGeneracion(arbol, 8, 7, document);
+		aniadirDatosAplicacion((DatosApp) model.get("datosAplicacion"), document);
+		
+		anadirGeneracion(arbol, 1, 0, document);	//generación 1 (animal que se investiga)
+		lineas(1, document);						//líneas a la siguiente generación
+		anadirGeneracion(arbol, 2, 1, document);	//ascendientes 2 (padres)
+		lineas(2, document);						//líneas de unión...
+		anadirGeneracion(arbol, 4, 3, document);	//ascendientes 3 (abuelos)
+		lineas(4, document);						//líneas de unión...
+		anadirGeneracion(arbol, 8, 7, document);	//ascendientes 4 (bisabuelos)
 
 	}
+	
+	private void aniadirDatosAplicacion(DatosApp datosAplicacion, Document document) {
+		PdfPTable tablaDatosApp = new PdfPTable(2);
+		tablaDatosApp.setWidthPercentage(100);
+		
+		
+		PdfPCell celdaNombreApp = new PdfPCell();
+		celdaNombreApp.addElement(new Paragraph(datosAplicacion.getNombre().toUpperCase()));
+		celdaNombreApp.setVerticalAlignment(Element.ALIGN_TOP);
+		celdaNombreApp.setBorder(Rectangle.NO_BORDER);
+		celdaNombreApp.setFixedHeight(50);
+		PdfPCell celdaAutoriaApp = new PdfPCell();
+		Paragraph p = new Paragraph();
+		Anchor enlace = new Anchor(datosAplicacion.getAutoria());
+		enlace.setReference(datosAplicacion.getEnlaceWeb());
+		Font f = FontFactory.getFont(FontFactory.COURIER, 5f);
+		p.add(enlace);
+		p.setFont(f);
+		p.setAlignment(Element.ALIGN_RIGHT);
+		celdaAutoriaApp.addElement(p);
+		celdaAutoriaApp.setVerticalAlignment(Element.ALIGN_TOP);
+		celdaAutoriaApp.setBorder(Rectangle.NO_BORDER);
+		
+		
+		tablaDatosApp.addCell(celdaNombreApp);
+		tablaDatosApp.addCell(celdaAutoriaApp);
 
+		
+		document.add(tablaDatosApp);
+	}
+
+	/**
+	 * Añade los datos de una generación
+	 * @param arbol - árbol con información de los animales a mostrar
+	 * @param nanimales - número de animales que se muestran en la generación
+	 * @param ini - animal inicial que se toma para representar del árbol
+	 * @param document
+	 * @throws BadElementException
+	 * @throws IOException
+	 */
 	private void anadirGeneracion(List<Animal> arbol, int nanimales, int ini, Document document)
 			throws BadElementException, IOException {
+		
+		//Muestra la foto del animal
+		
 		PdfPTable tablaFoto = new PdfPTable(nanimales);
 		tablaFoto.setWidthPercentage(100);
 		for (int i = 0; i < nanimales; i++) {
@@ -69,6 +117,8 @@ public class AnimalPDFView extends AbstractPdfView {
 		}
 		document.add(tablaFoto);
 
+		//Muestra el nombre del animal
+		
 		PdfPTable tablaNombre = new PdfPTable(nanimales);
 		tablaNombre.setWidthPercentage(100);
 		for (int i = 0; i < nanimales; i++) {
@@ -76,6 +126,8 @@ public class AnimalPDFView extends AbstractPdfView {
 		}
 		document.add(tablaNombre);
 
+		//Muestra la ganadería (hierro y nombre)
+		
 		PdfPTable tablaHierro = new PdfPTable(nanimales);
 		tablaHierro.setWidthPercentage(100);
 		for (int i = 0; i < nanimales; i++) {
@@ -84,6 +136,15 @@ public class AnimalPDFView extends AbstractPdfView {
 		document.add(tablaHierro);
 	}
 	
+	/**
+	 * Añadir los datos de la ganadería
+	 * 
+	 * @param animal - animal que se está mostrando
+	 * @param tabla - tabla donde se muestra
+	 * @param nanimales - número de animales de la generación (para ajustar la posición de la imagen y nombre de la ganadería)
+	 * @throws BadElementException
+	 * @throws IOException
+	 */
 	private void anadirHierroAnimal(Animal animal, PdfPTable tabla, int nanimales) throws BadElementException, IOException {
 
 		String ganaderia = "???";
@@ -95,7 +156,9 @@ public class AnimalPDFView extends AbstractPdfView {
 		Resource resource = new ClassPathResource(NOHIERRO_RESOURCE);
 		String pathNohierro = resource.getURI().toString();
 
-		if (animal == null || (animal != null && animal.getGanaderiaA().getHierroGan() == null))
+		if (animal == null || 
+			(animal != null && animal.getGanaderiaA()==null) || 
+			(animal != null && animal.getGanaderiaA()!=null && animal.getGanaderiaA().getHierroGan() == null))
 			pathImagen = pathNohierro;
 		else
 			pathImagen = getPath(animal.getGanaderiaA().getHierroGan()).toString();
@@ -133,7 +196,14 @@ public class AnimalPDFView extends AbstractPdfView {
 
 	}
 
-	
+	/**
+	 * Añade la foto del animal.
+	 * 
+	 * @param animal - animal que se está mostrando
+	 * @param tabla - tabla donde se muestra
+	 * @throws BadElementException
+	 * @throws IOException
+	 */
 	private void anadirFotoAnimal(Animal animal, PdfPTable tabla) throws BadElementException, IOException {
 
 		String pathImagen;
@@ -158,6 +228,12 @@ public class AnimalPDFView extends AbstractPdfView {
 
 	}
 
+	/**
+	 * Añade el nombre del animal
+	 * 
+	 * @param animal - el animal que se está mostrando
+	 * @param tabla - la tabla donde se muestra
+	 */
 	private void anadirNombreAnimal(Animal animal, PdfPTable tabla) {
 
 		String nombreAnimal = (animal != null) ? animal.getNombreA() + " (" + animal.getSexoA() + ")" : "???";
@@ -174,6 +250,12 @@ public class AnimalPDFView extends AbstractPdfView {
 
 	}
 
+	/**
+	 * Dibujo de líneas entre generaciones
+	 * 
+	 * @param nanimales - número de animales de la generación
+	 * @param document
+	 */
 	private void lineas(int nanimales, Document document) {
 
 		int nceldas = nanimales * 2;

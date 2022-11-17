@@ -28,11 +28,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.DatosApp;
-import com.jmrh.app.controllers.services.IArbolAnimales;
+import com.jmrh.app.appdata.IDatosApp;
 import com.jmrh.app.models.entities.Animal;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
+import com.jmrh.app.models.services.IArbolAnimales;
 import com.jmrh.app.models.services.IGanaderiaService;
 import com.jmrh.app.models.services.IUploadService;
 import com.jmrh.app.util.paginator.PageRender;
@@ -43,7 +43,9 @@ import com.jmrh.app.util.paginator.PageRender;
 public class AnimalController {
 
 	@Autowired
-	private DatosApp datosAplicacion;
+	private IDatosApp datosAplicacion;
+	
+	public static final String OPGEN = "ANIMALES";
 	
 	@Autowired
 	private IAnimalService animalService;
@@ -60,9 +62,7 @@ public class AnimalController {
 	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 		
-		String titulopantalla = "Listado de Animales";
-		model.addAttribute("titulo", datosAplicacion.getNombre()+" - "+titulopantalla);
-		model.addAttribute("titulopantalla", titulopantalla);
+		rellenarDatosAplicacion(model,"LISTAR");
 		
 		//paginación de elementos de la página pagina, teniendo 10 elementos por página
 		Pageable pageRequest = PageRequest.of(pagina, 10);
@@ -83,10 +83,8 @@ public class AnimalController {
 		Animal animal = new Animal();
 		model.addAttribute("animal", animal);
 		
-		String titulopantalla = "Alta de Animal";
-		model.addAttribute("titulo", datosAplicacion.getNombre()+" - "+titulopantalla);
-		model.addAttribute("titulopantalla", titulopantalla);
-				
+		rellenarDatosAplicacion(model,"ALTA");
+						
 		return "/animal/form";
 	}
 	
@@ -97,8 +95,11 @@ public class AnimalController {
 			flash.addFlashAttribute("error", "Animal no existente");
 			return "redirect:/animal/listado";
 		}
-		model.addAttribute("titulo", "Cruce de Ganado - Modificación de Animal");
+		
 		model.addAttribute("animal", animal);
+		
+		rellenarDatosAplicacion(model,"EDITAR");
+		
 		return "/animal/form";
 	}
 	
@@ -113,7 +114,13 @@ public class AnimalController {
 					   RedirectAttributes flash,
 					   SessionStatus status) {
 		
-		model.addAttribute("titulo", "Cruce de Ganado".concat(animal.getIdA()==null ? " - Alta de Animal" : " - Modificación de Animal"));
+		
+		if(animal.getIdA()==null)
+			rellenarDatosAplicacion(model,"ALTA");
+		else
+			rellenarDatosAplicacion(model,"EDITAR");
+			
+		String mensaje = (animal.getIdA()==null) ? "Animal creado con éxito" : "Animal modificado con éxito";
 		
 		/* en caso de ganadería obligatoria y validarla */
 		/*
@@ -151,7 +158,7 @@ public class AnimalController {
 		if(padre_id!=null) animal.setPadreA(animalService.findOne(padre_id));
 		animalService.save(animal);
 		
-		String mensaje = (animal.getIdA()==null) ? "Animal creado con éxito" : "Animal modificado con éxito";
+		
 		flash.addFlashAttribute("success", mensaje);
 		status.setComplete();
 		
@@ -193,6 +200,8 @@ public class AnimalController {
 		
 		model.addAttribute("arbol",arbol);
 		
+		rellenarDatosAplicacion(model,"ASCENDENTES");
+		
 
 		return "animal/ver";
 	}
@@ -220,6 +229,12 @@ public class AnimalController {
 	@GetMapping(value="/cargar-padres/{cadena}",produces= {"application/json"})
 	public @ResponseBody List<Animal> cargarPadres(@PathVariable String cadena) {
 		return animalService.findMachoByNombre(cadena);
+	}
+	
+	private void rellenarDatosAplicacion(Model model, String pantalla) {
+		model.addAttribute("datosAplicacion",datosAplicacion);
+		model.addAttribute("codigoOpcion",OPGEN);
+		model.addAttribute("pantalla",pantalla);
 	}
 	
 }

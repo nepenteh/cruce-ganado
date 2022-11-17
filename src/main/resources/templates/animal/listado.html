@@ -11,7 +11,7 @@
 	<div th:replace="layout/layout :: titulo-pantalla"></div>
 	<div th:replace="layout/layout :: zona-mensajes"></div>
 
-<div th:replace="layout/layout :: confirmacion"></div>
+<div th:replace="layout/layout :: confirmar"></div>
 
 <div class="container py-1">
 
@@ -20,9 +20,14 @@
 			<a class="btn boton-normal" th:href="@{/animal/form}" th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,'ALTA')}"></a>
 		</div>
 		<div class="col-10">
-		<nav th:replace="layout/layout :: paginador"></nav>
+		
+		<th:block th:if="${numeroanimales>0}">
+			<nav th:replace="layout/layout :: paginador"></nav>
+		</th:block>
 		</div>
 	</div>
+	
+	<h5 class="text-center my-5 mx-5" th:if="${numeroanimales==0}" th:text="${datosAplicacion.getMensajeVacio(codigoOpcion)}"></h5>
 		
 	<table th:if="${numeroanimales>0}" class="table table-striped">
 		<thead>
@@ -63,18 +68,26 @@
 				<td>
 				<a th:href="@{'/animal/ver/'+${animal.idA}}" title="Ver"><svg th:replace="/layout/iconos_svg :: svg-ver"></svg></a> 
 				<a th:href="@{'/animal/form/'+${animal.idA}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
-				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/animal/eliminar/'+${animal.idA}}" title="Eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal" ><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
+				<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${animal.idA}','${animal.nombreA}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
 				<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<nav th:replace="layout/layout :: paginador"></nav>
+	<th:block th:if="${numeroanimales>0}">
+		<nav th:replace="layout/layout :: paginador"></nav>
+	</th:block>
 
 </div>
 
+	<div th:replace="layout/layout :: autoria"></div>
+	
 	<div th:insert="layout/layout :: jquery-js"></div>
 	<div th:insert="layout/layout :: bootstrap-js"></div>
+	
+	<script
+		th:replace="animal/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
+	
 </body>
 </html>

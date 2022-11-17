@@ -29,21 +29,19 @@
 
 <body>
 
-	<nav th:fragment="menu(opcion)" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-  	<span class="navbar-brand">CRUCE DE GANADO</span>
+  	<span class="navbar-brand" th:text="${datosAplicacion.nombre}"></span>
     <img th:src="@{/images/logo.png}" width="80px">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" th:classappend="${opcion==1 ? 'active' : ''}" th:href="@{/animal/listado}">Animales</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:classappend="${opcion==2 ? 'active' : ''}" th:href="@{/ganaderia/listado}">Ganaderías</a>
-        </li>
+      	<li th:each="opcionGeneral : ${datosAplicacion.opcionesGenerales}">
+      		<a class="nav-link" th:classappend="${#strings.equals(opcionGeneral.key,codigoOpcion) ? 'active' : ''}" th:href="@{${opcionGeneral.value.enlace}}"
+      			th:text="${opcionGeneral.value.nombre}"></a>
+      	</li>
       </ul>
       <div class="navbar-text ">
         <span sec:authentication="name" class="d-inline-block me-2" ></span>
@@ -56,8 +54,11 @@
 </nav>
 
 	<!-- Título de la pantalla -->
-	<div th:fragment="titulo-pantalla" class="titulo-pantalla py-1 text-center">
-		<h1 th:text="${titulopantalla}"></h1>
+	<div th:fragment="titulo-pantalla" class="titulo-pantalla py-1 text-center position-relative">
+		<div th:if="${!datosAplicacion.esPantallaPrincipal(codigoOpcion,pantalla)}" class="position-absolute mt-1 ms-3 d-none d-md-block">
+		   <a class="fst-italic fw-light" th:href="@{${datosAplicacion.getEnlacePantallaPrincipal(codigoOpcion)}}" th:text="${'Volver a '+datosAplicacion.getNombrePantallaPrincipal(codigoOpcion)}"></a>
+		</div>
+		<h1 th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,pantalla)}"></h1>
 	</div>
 
 	<!-- Zona de mensajes superior (flash mensajes) -->
@@ -110,28 +111,34 @@
 	<!-- Toro en Árbol -->
 	<div th:fragment="toro (ntoro)">
 		<div th:if="${arbol.get(ntoro)==null}">
-			<img th:src="@{'/images/notoro.png'}" width="100px"><br> <span>???</span>
+			<img class="shadow" th:src="@{'/images/notoro.png'}" width="100px"><br> <span>???</span>
 			<div>
 				<img th:src="@{'/images/nohierro.png'}" width="30px"> <span>???</span>
 			</div>
 		</div>
 
 		<div th:if="${arbol.get(ntoro)!=null}">
-			<img th:if="${arbol.get(ntoro).fotoA != null}"
-				th:src="@{'/uploads/' + ${arbol.get(ntoro).fotoA}}" width="100px">
-			<img th:if="${arbol.get(ntoro).fotoA == null}"
-				th:src="@{'/images/notoro.jpg'}" width="100px"> <br> <span
+			<a th:href="@{'/animal/ver/' + ${arbol.get(ntoro).idA}}" th:if="${arbol.get(ntoro).fotoA != null}">
+			<img class="shadow" 
+				th:src="@{'/uploads/' + ${arbol.get(ntoro).fotoA}}" width="100px"></a>
+			
+			<a th:href="@{'/animal/ver/' + ${arbol.get(ntoro).idA}}" th:if="${arbol.get(ntoro).fotoA == null}">
+			<img class="shadow" 
+				th:src="@{'/images/notoro.png'}" width="100px"></a>
+			
+			 <br> <span
 				th:text="${#strings.toUpperCase(arbol.get(ntoro).nombreA)} + ' (' + ${arbol.get(ntoro).sexoA} +')'"></span><br>
 
 
 			<div th:if="${arbol.get(ntoro).ganaderiaA == null}">
-				<img th:src="@{'/images/nohierro.png'}" width="30px"> <span>???</span>
+				<img class="shadow" th:src="@{'/images/nohierro.png'}" width="30px"> <span>???</span>
 			</div>
 
 			<div th:if="${arbol.get(ntoro).ganaderiaA != null}">
-				<img th:if="${arbol.get(ntoro).ganaderiaA.hierroGan != null}"
+				<img class="shadow" th:if="${arbol.get(ntoro).ganaderiaA.hierroGan != null}"
 					th:src="@{'/uploads/' + ${arbol.get(ntoro).ganaderiaA.hierroGan}}"
-					width="30px"> <img
+					width="30px"> 
+					<img 
 					th:if="${arbol.get(ntoro).ganaderiaA.hierroGan == null}"
 					th:src="@{'/images/nohierro.png'}" width="30px"> <span
 					th:text="${arbol.get(ntoro).ganaderiaA.nombreGan}"></span>
@@ -139,6 +146,27 @@
 		</div>
 	</div>
 
+<!-- Cuadro de Confirmación  -->
+<div th:fragment="confirmar" class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionTitulo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalConfirmacionTitulo"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalConfirmacionCuerpo"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cancelar" data-bs-dismiss="modal">Cancelar</button>
+        <a href="#" type="button" class="btn boton-normal" id="modalOk">Ok</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COPYRIGHT INFERIOR -->
+<div class="autoria py-2 mt-5 small text-center" th:fragment="autoria">
+	<a th:href="@{${datosAplicacion.enlaceWeb}}" th:text="${datosAplicacion.autoria}" target="_blank"></a>
+</div>
 
 	<div th:fragment="jquery-js">
 		<script th:src="@{/js/jquery-3.6.1.min.js}"></script>

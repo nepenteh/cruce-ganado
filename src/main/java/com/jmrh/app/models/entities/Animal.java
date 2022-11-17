@@ -28,21 +28,20 @@ public class Animal implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_a")
-	Long idA;
+	private Long idA;
 	
-	@NotEmpty
 	@NotBlank
 	@Size(max=50)
 	@Column(name = "nombre_a")
-	String nombreA;
+	private String nombreA;
 	
 	@NotEmpty
 	@Size(max=1)
 	@Column(name = "sexo_a")
-	String sexoA;
+	private String sexoA;
 	
 	@Column(name = "puntuacion_a")
-	Long puntuacionA;
+	private Long puntuacionA;
 	
 	@Column(name = "fecha_a")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

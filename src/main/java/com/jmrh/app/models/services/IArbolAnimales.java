@@ -1,4 +1,4 @@
-package com.jmrh.app.controllers.services;
+package com.jmrh.app.models.services;
 
 import java.util.List;
 

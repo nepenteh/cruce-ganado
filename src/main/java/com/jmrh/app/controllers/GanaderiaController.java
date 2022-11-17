@@ -24,7 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.DatosApp;
+import com.jmrh.app.appdata.IDatosApp;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
 import com.jmrh.app.models.services.IGanaderiaService;
@@ -37,7 +37,9 @@ import com.jmrh.app.util.paginator.PageRender;
 public class GanaderiaController {
 
 	@Autowired
-	private DatosApp datosAplicacion;
+	private IDatosApp datosAplicacion;
+	
+	public static final String OPGEN = "GANADERIAS"; 
 	
 	@Autowired
 	private IGanaderiaService ganaderiaService;
@@ -55,9 +57,7 @@ public class GanaderiaController {
 	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 	
-		String titulopantalla = "Listado de Ganaderias";
-		model.addAttribute("titulo", datosAplicacion.getNombre()+" - "+titulopantalla);
-		model.addAttribute("titulopantalla", titulopantalla);
+		rellenarDatosAplicacion(model,"LISTAR");
 		
 		//paginación de elementos de la página pagina, teniendo 10 elementos por página
 		Pageable pageRequest = PageRequest.of(pagina, 10);
@@ -79,9 +79,11 @@ public class GanaderiaController {
 	
 	@GetMapping("/form")
 	public String form(Model model) {
-		Ganaderia ganaderia = new Ganaderia();
-		model.addAttribute("titulo", "Cruce de Ganado - Alta Ganadería");
+		Ganaderia ganaderia = new Ganaderia();		
 		model.addAttribute("ganaderia",ganaderia);
+		
+		rellenarDatosAplicacion(model,"ALTA");
+		
 		return "/ganaderia/form";
 	}
 	
@@ -92,8 +94,11 @@ public class GanaderiaController {
 			flash.addFlashAttribute("error","Ganadería no existente");
 			return "redirect:/ganaderia/listado";
 		}
-		model.addAttribute("titulo", "Cruce de Ganado - Modificación Ganadería");
-		model.addAttribute("ganaderia",ganaderia);
+		
+		model.addAttribute("ganaderia", ganaderia);
+		
+		rellenarDatosAplicacion(model,"EDITAR");
+		
 		return "/ganaderia/form";
 	}
 	
@@ -106,6 +111,12 @@ public class GanaderiaController {
 					   RedirectAttributes flash,
 					   SessionStatus status) {
 		
+		if(ganaderia.getIdGan()==null)
+			rellenarDatosAplicacion(model,"ALTA");
+		else
+			rellenarDatosAplicacion(model,"EDITAR");
+		
+		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
 		
 		//Si errores de validación, corto.
 		if(result.hasErrors()) {
@@ -142,7 +153,7 @@ public class GanaderiaController {
 		
 		
 		//guardo la entidad
-		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
+		
 		ganaderiaService.save(ganaderia);
 		status.setComplete();
 		flash.addFlashAttribute("success",mensaje);
@@ -172,6 +183,12 @@ public class GanaderiaController {
 		}
 		
 		return "redirect:/ganaderia/listado";
+	}
+	
+	private void rellenarDatosAplicacion(Model model, String pantalla) {
+		model.addAttribute("datosAplicacion",datosAplicacion);
+		model.addAttribute("codigoOpcion",OPGEN);
+		model.addAttribute("pantalla",pantalla);
 	}
 	
 		

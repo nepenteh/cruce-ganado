@@ -16,8 +16,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <section class="vh-100">
 	<div
 		class="d-flex justify-content-between flex-column flex-md-row text-center text-white text-md-start  py-3 px-4 px-xl-5 bg-dark">
-		<div th:text="${nombreaplicacion}"></div>
-		<div class="float-end"><a class="enlace-claro" th:href="${enlaceweb}" th:text="${autoria}" target="_blank"></a></div>
+		<div th:text="${#strings.toUpperCase(datosAplicacion.nombre)}"></div>
+		<div class="float-end"><a class="enlace-claro" th:href="${datosAplicacion.enlaceWeb}" th:text="${datosAplicacion.autoria}" target="_blank"></a></div>
 	</div>
 
 	<div th:replace="layout/layout :: zona-mensajes"></div>
@@ -28,7 +28,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col-md-5 col-sm-6">
 				<img th:src="@{/images/notoro.png}" class="img-fluid"
-					alt="App Cruce de Ganado">
+					th:alt="${datosAplicacion.nombre}">
 			</div>
 			<div class="col-md-4 col-sm-5 ">
 				<form method="post" th:action="@{/login}">

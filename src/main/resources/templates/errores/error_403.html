@@ -2,11 +2,22 @@
 <html xmlns:th="http://www.tymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title>Acceso Denegado</title>
+<th:block th:replace="layout/layout :: head-basico"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
 <body>
-<p>ACCESO DENEGADO</p>
-<p>Lo sentimos <span sec:authentication="name"></span>, no tiene permiso para acceder a este recurso.</p>
-<a th:href="@{/}">Volver al Menú Principal</a><br>
+<div class="container">
+	<div class="row my-5">
+		<div class="col-12 text-center pt-4 pb-5 acceso-denegado">
+			<p class="py-2"><img th:src="@{/images/logo.png}" width="200px" class="img-fluid" alt="Error de acceso"></p>
+			<h2>ACCESO DENEGADO</h2>
+			<h5>Lo sentimos <span sec:authentication="name"></span>, no tiene permiso para acceder a este recurso.</h5>
+		</div>
+	</div>
+</div>
+
+<div th:insert="layout/layout :: jquery-js"></div>
+<div th:insert="layout/layout :: bootstrap-js"></div>
 </body>
 </html>
