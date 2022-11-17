@@ -164,7 +164,7 @@ public class AnimalPDFView extends AbstractPdfView {
 			pathImagen = getPath(animal.getGanaderiaA().getHierroGan()).toString();
 
 		Image imagen = Image.getInstance(pathImagen);
-		imagen.scaleAbsolute(15, 15);
+		imagen.scaleToFit(20, 20);
 		imagen.setAlignment(Element.ALIGN_RIGHT);
 
 		PdfPCell celdaHierroGan = new PdfPCell();
@@ -217,7 +217,7 @@ public class AnimalPDFView extends AbstractPdfView {
 			pathImagen = getPath(animal.getFotoA()).toString();
 
 		Image imagen = Image.getInstance(pathImagen);
-		imagen.scaleAbsolute(80, 14);
+		imagen.scaleToFit(110, 40);
 		imagen.setAlignment(Element.ALIGN_CENTER);
 
 		PdfPCell imageCell = new PdfPCell();
