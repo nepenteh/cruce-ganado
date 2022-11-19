@@ -1,6 +1,6 @@
 # CRUCE DE GANADO
-# por José Manuel Rosado
-# ejerciciosmesa.com
+### por José Manuel Rosado
+#### ejerciciosmesa.com
 
 
 Prueba
