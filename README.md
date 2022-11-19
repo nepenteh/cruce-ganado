@@ -24,7 +24,7 @@ Dos tipos de usuarios: ADMIN y USER. USER puede acceder a todas las opciones per
 
 Listado con los distintos animales dados de alta. Posibilidad de modificación y eliminación.
 
-![Cruce de Ganado: Listado de animales](https://ejerciciosmesa.com/images/cruce-ganado/listado_animales.png)
+
 
 ### Alta de animales
 
