@@ -61,6 +61,11 @@ Listado con las ganaderías almacenadas en la base de datos.
 
 Formulario de alta. Permite añadir el logotipo correspondiente al hierro de la ganadería.
 
-![Cruce de Ganado: Formulario de alta de animales](https://ejerciciosmesa.com/images/cruce-ganado/alta_ganaderia.png)
+![Cruce de Ganado: Formulario de alta de animales](https://ejerciciosmesa.com/images/cruce-ganado/alta_ganaderias.png)
+
+## Desarrollador
+
+Programado por José Manuel Rosado
+Más aplicaciones, recursos formativos, ejercicios y otros contenidos en [ejerciciosmesa.com](https://ejerciciosmesa.com)
 
 
