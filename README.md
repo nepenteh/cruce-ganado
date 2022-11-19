@@ -18,7 +18,7 @@ Aplicación web para el control de cruce de toros. Permite administrar el listad
 
 Dos tipos de usuarios: ADMIN y USER. USER puede acceder a todas las opciones pero no puede dar de alta, modificar o eliminar.
 
-![Cruce de Ganado: Pantalla de Login](https://ejerciciosmesa.com/images/cruce-ganado/login.png)
+
 
 
 
