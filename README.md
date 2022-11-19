@@ -31,7 +31,7 @@ Listado con los distintos animales dados de alta. Posibilidad de modificación y
 
 ### Alta de animales
 
-Formulario para el alta de animales. Incluye validación y búsqueda rápida de la ganadería a la que pertenece el animal.
+Formulario para el alta de animales. Incluye validación y búsqueda rápida de la ganadería a la que pertenece el animal. Es posible añadir una foto del animal.
 
 
 ![Cruce de Ganado: Formulario de alta de animales](https://ejerciciosmesa.com/images/cruce-ganado/alta_animal.png)
@@ -47,10 +47,20 @@ Es posible hacer clic en esta pantalla sobre la foto de un animal para ver la as
 ![Cruce de Ganado: Ascendencia animal](https://ejerciciosmesa.com/images/cruce-ganado/ascendencia.png)
 
 
-A través del botón 
+A través del botón Descargar PDF es posible obtener la información de la pantalla anterior en formato PDF, visualizándose directamente en el navegador.
 
 ![Cruce de Ganado: Ascendencia animal en PDF](https://ejerciciosmesa.com/images/cruce-ganado/ascendencia_pdf.png)
 
-Prueba
+### Listado de Ganaderías
+
+Listado con las ganaderías almacenadas en la base de datos.
+
+![Cruce de Ganado: Listado de animales](https://ejerciciosmesa.com/images/cruce-ganado/listado_ganaderias.png)
+
+### Alta de ganaderías
+
+Formulario de alta. Permite añadir el logotipo correspondiente al hierro de la ganadería.
+
+![Cruce de Ganado: Formulario de alta de animales](https://ejerciciosmesa.com/images/cruce-ganado/alta_ganaderia.png)
 
 
