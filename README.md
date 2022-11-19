@@ -65,7 +65,7 @@ Formulario de alta. Permite añadir el logotipo correspondiente al hierro de la 
 
 ## Desarrollador
 
-Programado por José Manuel Rosado
+Programado por José Manuel Rosado. 
 Más aplicaciones, recursos formativos, ejercicios y otros contenidos en [ejerciciosmesa.com](https://ejerciciosmesa.com)
 
 
