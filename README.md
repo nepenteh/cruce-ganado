@@ -10,6 +10,7 @@ Aplicación web para el control de cruce de toros. Permite administrar el listad
 - Spring Security con dos tipos de usuarios en memoria: ADMIN y USER.
 - Persistencia con MySQL
 - Vistas PDF usando OpenPDF
+- La aplicación está configurada para ejecutarse en el puerto 9000
 
 ## Pantallas
 
