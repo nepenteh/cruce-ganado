@@ -2,7 +2,6 @@ package com.jmrh.app.controllers;
 
 import java.net.MalformedURLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +14,12 @@ import com.jmrh.app.models.services.IUploadService;
 @Controller
 public class PrincipalController {
 
-	@Autowired
-	private IUploadService uploadService;
+	private final IUploadService uploadService;
 	
+	public PrincipalController(IUploadService uploadService) {
+		this.uploadService = uploadService;
+	}
+
 	@GetMapping({"","/","/index"})
 	public String index() {
 		return "redirect:/animal";

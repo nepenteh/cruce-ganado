@@ -2,7 +2,6 @@ package com.jmrh.app.models.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,11 @@ import com.jmrh.app.models.entities.Ganaderia;
 @Service
 public class GanaderiaService implements IGanaderiaService {
 
-	@Autowired
-	private IGanaderiaDAO ganaderiaDAO;
+	private final IGanaderiaDAO ganaderiaDAO;
+	
+	public GanaderiaService(IGanaderiaDAO ganaderiaDAO) {
+		this.ganaderiaDAO = ganaderiaDAO;
+	}
 
 	@Transactional(readOnly=true)
 	@Override

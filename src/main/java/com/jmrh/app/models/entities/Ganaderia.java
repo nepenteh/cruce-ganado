@@ -1,6 +1,8 @@
 package com.jmrh.app.models.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -78,6 +80,25 @@ public class Ganaderia implements Serializable {
 	public String toString() {
 		return "Ganaderia [nombreGan=" + nombreGan + "]";
 	}
+		
+	@Override
+	public int hashCode() {
+		return Objects.hash(idGan);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ganaderia other = (Ganaderia) obj;
+		return Objects.equals(idGan, other.idGan);
+	}
+
+
 
 	private static final long serialVersionUID = 1L;
 

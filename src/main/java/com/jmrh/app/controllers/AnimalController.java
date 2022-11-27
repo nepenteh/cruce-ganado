@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +31,7 @@ import com.jmrh.app.appdata.IDatosApp;
 import com.jmrh.app.models.entities.Animal;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.IAnimalService;
-import com.jmrh.app.models.services.IArbolAnimales;
+import com.jmrh.app.models.services.IArbolAnimalesService;
 import com.jmrh.app.models.services.IGanaderiaService;
 import com.jmrh.app.models.services.IUploadService;
 import com.jmrh.app.util.paginator.PageRender;
@@ -42,22 +41,23 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/animal")
 public class AnimalController {
 
-	@Autowired
-	private IDatosApp datosAplicacion;
-	
+	private final IDatosApp datosAplicacion;
+	private final IAnimalService animalService;
+	private final IGanaderiaService ganaderiaService;
+	private final IUploadService uploadService;
+	private final IArbolAnimalesService arbolAnimales;
+
 	public static final String OPGEN = "ANIMALES";
 	
-	@Autowired
-	private IAnimalService animalService;
-	
-	@Autowired
-	private IGanaderiaService ganaderiaService;
-	
-	@Autowired
-	private IUploadService uploadService;
-	
-	@Autowired
-	private IArbolAnimales arbolAnimales;
+	public AnimalController(IDatosApp datosAplicacion, IAnimalService animalService, IGanaderiaService ganaderiaService,
+			IUploadService uploadService, IArbolAnimalesService arbolAnimales) {
+		this.datosAplicacion = datosAplicacion;
+		this.animalService = animalService;
+		this.ganaderiaService = ganaderiaService;
+		this.uploadService = uploadService;
+		this.arbolAnimales = arbolAnimales;
+	}
+
 	
 	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {

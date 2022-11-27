@@ -3,6 +3,7 @@ package com.jmrh.app.models.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -68,7 +69,6 @@ public class Animal implements Serializable {
 
 	
 	public Animal(@NotEmpty @Size(max = 50) String nombreA, @NotEmpty @Size(max = 1) String sexoA, Long puntuacionA) {
-		super();
 		this.nombreA = nombreA;
 		this.sexoA = sexoA;
 		this.puntuacionA = puntuacionA;
@@ -144,8 +144,24 @@ public class Animal implements Serializable {
 		return ganaderiaA;
 	}
 	
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idA);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Animal other = (Animal) obj;
+		return Objects.equals(idA, other.idA);
+	}
 
 
 	public Animal getPadreA() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jmrh.app.models.entities.Animal;
 
 @Service
-public class ArbolAnimales implements IArbolAnimales {
+public class ArbolAnimalesService implements IArbolAnimalesService {
 
 	public List<Animal> generarArbol(Animal animal) {
 

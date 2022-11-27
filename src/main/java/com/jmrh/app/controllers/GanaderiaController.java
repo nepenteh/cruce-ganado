@@ -5,7 +5,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,20 +35,21 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/ganaderia")
 public class GanaderiaController {
 
-	@Autowired
-	private IDatosApp datosAplicacion;
+	private final IDatosApp datosAplicacion;
+	private final IGanaderiaService ganaderiaService;
+	private final IAnimalService animalService;
+	private final IUploadService uploadService;
 	
 	public static final String OPGEN = "GANADERIAS"; 
 	
-	@Autowired
-	private IGanaderiaService ganaderiaService;
-	
-	@Autowired
-	private IAnimalService animalService;
-	
-	@Autowired
-	private IUploadService uploadService;
-	
+	public GanaderiaController(IDatosApp datosAplicacion, IGanaderiaService ganaderiaService,
+			IAnimalService animalService, IUploadService uploadService) {
+		this.datosAplicacion = datosAplicacion;
+		this.ganaderiaService = ganaderiaService;
+		this.animalService = animalService;
+		this.uploadService = uploadService;
+	}
+
 	//depuración
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
