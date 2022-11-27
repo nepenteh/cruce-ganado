@@ -2,7 +2,7 @@ package com.jmrh.app.appdata;
 
 import java.util.HashMap;
 
-public interface IDatosApp {
+public interface DatosApp {
 
 	public String getNombre();
 	public String getAutor();

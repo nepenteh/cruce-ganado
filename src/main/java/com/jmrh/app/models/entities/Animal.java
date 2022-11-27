@@ -27,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Animal implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_a")
 	private Long idA;
 	

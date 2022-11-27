@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.appdata.DatosApp;
+import com.jmrh.app.appdata.DatosAppImpl;
 
 @Controller
 public class LoginController {
 	
-	private final DatosApp datosAplicacion;
+	private final DatosAppImpl datosAplicacion;
 	
-	public LoginController(DatosApp datosAplicacion) {
+	public LoginController(DatosAppImpl datosAplicacion) {
 		this.datosAplicacion = datosAplicacion;
 	}
 

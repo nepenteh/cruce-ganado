@@ -27,13 +27,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.appdata.IDatosApp;
+import com.jmrh.app.appdata.DatosApp;
 import com.jmrh.app.models.entities.Animal;
 import com.jmrh.app.models.entities.Ganaderia;
-import com.jmrh.app.models.services.IAnimalService;
-import com.jmrh.app.models.services.IArbolAnimalesService;
-import com.jmrh.app.models.services.IGanaderiaService;
-import com.jmrh.app.models.services.IUploadService;
+import com.jmrh.app.models.services.AnimalService;
+import com.jmrh.app.models.services.ArbolAnimalesService;
+import com.jmrh.app.models.services.GanaderiaService;
+import com.jmrh.app.models.services.UploadService;
 import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
@@ -41,16 +41,16 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/animal")
 public class AnimalController {
 
-	private final IDatosApp datosAplicacion;
-	private final IAnimalService animalService;
-	private final IGanaderiaService ganaderiaService;
-	private final IUploadService uploadService;
-	private final IArbolAnimalesService arbolAnimales;
+	private final DatosApp datosAplicacion;
+	private final AnimalService animalService;
+	private final GanaderiaService ganaderiaService;
+	private final UploadService uploadService;
+	private final ArbolAnimalesService arbolAnimales;
 
 	public static final String OPGEN = "ANIMALES";
 	
-	public AnimalController(IDatosApp datosAplicacion, IAnimalService animalService, IGanaderiaService ganaderiaService,
-			IUploadService uploadService, IArbolAnimalesService arbolAnimales) {
+	public AnimalController(DatosApp datosAplicacion, AnimalService animalService, GanaderiaService ganaderiaService,
+			UploadService uploadService, ArbolAnimalesService arbolAnimales) {
 		this.datosAplicacion = datosAplicacion;
 		this.animalService = animalService;
 		this.ganaderiaService = ganaderiaService;

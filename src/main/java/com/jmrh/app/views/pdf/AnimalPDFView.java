@@ -14,7 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
-import com.jmrh.app.appdata.DatosApp;
+import com.jmrh.app.appdata.DatosAppImpl;
 import com.jmrh.app.models.entities.Animal;
 import com.lowagie.text.Anchor;
 import com.lowagie.text.BadElementException;
@@ -53,7 +53,7 @@ public class AnimalPDFView extends AbstractPdfView {
 		//filename define el título del documento descargado.
 		response.setHeader("Content-Disposition", "inline; filename=\"" + titulo.replaceAll(" ", "").toUpperCase() + ".pdf\"");
 
-		aniadirDatosAplicacion((DatosApp) model.get("datosAplicacion"), document);
+		aniadirDatosAplicacion((DatosAppImpl) model.get("datosAplicacion"), document);
 		
 		anadirGeneracion(arbol, 1, 0, document);	//generación 1 (animal que se investiga)
 		lineas(1, document);						//líneas a la siguiente generación
@@ -65,7 +65,7 @@ public class AnimalPDFView extends AbstractPdfView {
 
 	}
 	
-	private void aniadirDatosAplicacion(DatosApp datosAplicacion, Document document) {
+	private void aniadirDatosAplicacion(DatosAppImpl datosAplicacion, Document document) {
 		PdfPTable tablaDatosApp = new PdfPTable(2);
 		tablaDatosApp.setWidthPercentage(100);
 		

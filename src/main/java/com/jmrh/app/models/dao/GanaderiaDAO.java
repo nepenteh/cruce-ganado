@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.jmrh.app.models.entities.Ganaderia;
 
-public interface IGanaderiaDAO extends PagingAndSortingRepository<Ganaderia, Long> {
+public interface GanaderiaDAO extends PagingAndSortingRepository<Ganaderia, Long> {
 	
 	@Query("select g from Ganaderia g where g.nombreGan like %?1%")
 	public List<Ganaderia> findByNombre(String cadena);

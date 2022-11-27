@@ -47,7 +47,7 @@ public class SecurityConfig {
  		http
  		.authorizeRequests()
  		//elementos que no necesitan autenticación
- 		.antMatchers("/css/**","/js/**","/images/**").permitAll()
+ 		.antMatchers("/css/**","/js/**","/images/**","/h2-console/**").permitAll()
  		//elementos que necesitan autorización
  		.anyRequest().hasRole("USER")
  		.and()
@@ -57,6 +57,12 @@ public class SecurityConfig {
  		.logout().permitAll() //todos pueden acceder al logout
  		.and()
  		.exceptionHandling().accessDeniedPage("/error_403"); //página de error personalizada
+ 		
+ 		//************* USADO PARA EL ACCESO A LA CONSOLA DE H2 CON SPRING SECURITY
+ 		//************* ELIMINAR EN PRODUCCIÓN!!!!
+ 		http.csrf().disable();
+ 		http.headers().frameOptions().disable();
+ 		//*************
  		
  		return http.build();
  	}

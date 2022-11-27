@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.jmrh.app.models.entities.Animal;
 
-public interface IAnimalDAO extends PagingAndSortingRepository<Animal, Long> {
+public interface AnimalDAO extends PagingAndSortingRepository<Animal, Long> {
 
 	@Query("select a from Animal a where a.sexoA='H' and a.nombreA like %?1%")
 	public List<Animal> findHembraByNombre(String cadena);

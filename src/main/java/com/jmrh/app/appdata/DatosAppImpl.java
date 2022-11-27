@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DatosApp  implements IDatosApp {
+public class DatosAppImpl  implements DatosApp {
 
 	private String nombre; //nombre aplicación
 	private String autor; //autor de la aplicación
@@ -14,7 +14,7 @@ public class DatosApp  implements IDatosApp {
 	private String enlaceWeb; //enlace de la web
 	private HashMap<String,OpcionGeneral> opcionesGenerales; //opciones de la aplicación
 			
-	public DatosApp() {
+	public DatosAppImpl() {
 		nombre = "Cruce de Ganado";
 		autor = "José Manuel Rosado";
 		year = 2022;

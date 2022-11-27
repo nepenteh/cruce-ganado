@@ -9,14 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.jmrh.app.models.services.IUploadService;
+import com.jmrh.app.models.services.UploadService;
 
 @Controller
 public class PrincipalController {
 
-	private final IUploadService uploadService;
+	private final UploadService uploadService;
 	
-	public PrincipalController(IUploadService uploadService) {
+	public PrincipalController(UploadService uploadService) {
 		this.uploadService = uploadService;
 	}
 

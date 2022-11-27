@@ -23,11 +23,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.appdata.IDatosApp;
+import com.jmrh.app.appdata.DatosApp;
 import com.jmrh.app.models.entities.Ganaderia;
-import com.jmrh.app.models.services.IAnimalService;
-import com.jmrh.app.models.services.IGanaderiaService;
-import com.jmrh.app.models.services.IUploadService;
+import com.jmrh.app.models.services.AnimalService;
+import com.jmrh.app.models.services.GanaderiaService;
+import com.jmrh.app.models.services.UploadService;
 import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
@@ -35,15 +35,15 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/ganaderia")
 public class GanaderiaController {
 
-	private final IDatosApp datosAplicacion;
-	private final IGanaderiaService ganaderiaService;
-	private final IAnimalService animalService;
-	private final IUploadService uploadService;
+	private final DatosApp datosAplicacion;
+	private final GanaderiaService ganaderiaService;
+	private final AnimalService animalService;
+	private final UploadService uploadService;
 	
 	public static final String OPGEN = "GANADERIAS"; 
 	
-	public GanaderiaController(IDatosApp datosAplicacion, IGanaderiaService ganaderiaService,
-			IAnimalService animalService, IUploadService uploadService) {
+	public GanaderiaController(DatosApp datosAplicacion, GanaderiaService ganaderiaService,
+			AnimalService animalService, UploadService uploadService) {
 		this.datosAplicacion = datosAplicacion;
 		this.ganaderiaService = ganaderiaService;
 		this.animalService = animalService;
