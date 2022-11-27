@@ -67,9 +67,9 @@ Formulario de alta. Permite añadir el logotipo correspondiente al hierro de la 
 
 ![Cruce de Ganado: Formulario de alta de animales](https://ejerciciosmesa.com/images/cruce-ganado/alta_ganaderias.png)
 
-### Configuración Base de Datos
+## Configuración Base de Datos
 
-## Configuración Hibernate H2
+### Configuración Hibernate H2
 
 El proyecto está preparado inicialmente para trabajar con persistencia en memoria con Hibernate. La base de datos se carga con una serie
 de datos iniciales de prueba a través de un archivo import.sql dentro de la carpeta resources.
@@ -101,7 +101,7 @@ Es necesario igualmente permitir el acceso a la url de la consola, añadiendo "/
 
 Este código debería ser anulado antes de pasar a producción, y solo debe ser usado durante la fase de desarrollo con Hibernate.
 
-## Configuración MySQL
+### Configuración MySQL
 
 Se incluye también la configuración para MySQL. Para ello, se añade (comentadas) en el application.properties las siguientes líneas
 de configuración:
