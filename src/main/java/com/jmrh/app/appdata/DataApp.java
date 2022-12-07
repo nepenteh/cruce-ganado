@@ -2,7 +2,7 @@ package com.jmrh.app.appdata;
 
 import java.util.HashMap;
 
-public interface DatosApp {
+public interface DataApp {
 
 	public String getNombre();
 	public String getAutor();
@@ -10,7 +10,7 @@ public interface DatosApp {
 	public String getWeb();
 	public String getEnlaceWeb();
 	public String getAutoria();
-	public HashMap<String, OpcionGeneral> getOpcionesGenerales();
+	public HashMap<String, GeneralOption> getOpcionesGenerales();
 	public boolean esPantallaPrincipal(String codigoOpcion, String codigoPantalla);
 	public String getNombrePantallaPrincipal(String codigoOpcion);
 	public String getEnlacePantallaPrincipal(String codigoOpcion);

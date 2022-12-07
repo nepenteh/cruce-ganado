@@ -27,7 +27,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.appdata.DatosApp;
+import com.jmrh.app.appdata.DataApp;
 import com.jmrh.app.models.entities.Animal;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.AnimalService;
@@ -41,7 +41,7 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/animal")
 public class AnimalController {
 
-	private final DatosApp datosAplicacion;
+	private final DataApp datosAplicacion;
 	private final AnimalService animalService;
 	private final GanaderiaService ganaderiaService;
 	private final UploadService uploadService;
@@ -49,7 +49,7 @@ public class AnimalController {
 
 	public static final String OPGEN = "ANIMALES";
 	
-	public AnimalController(DatosApp datosAplicacion, AnimalService animalService, GanaderiaService ganaderiaService,
+	public AnimalController(DataApp datosAplicacion, AnimalService animalService, GanaderiaService ganaderiaService,
 			UploadService uploadService, ArbolAnimalesService arbolAnimales) {
 		this.datosAplicacion = datosAplicacion;
 		this.animalService = animalService;

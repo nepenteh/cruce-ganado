@@ -23,7 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jmrh.app.appdata.DatosApp;
+import com.jmrh.app.appdata.DataApp;
 import com.jmrh.app.models.entities.Ganaderia;
 import com.jmrh.app.models.services.AnimalService;
 import com.jmrh.app.models.services.GanaderiaService;
@@ -35,14 +35,14 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/ganaderia")
 public class GanaderiaController {
 
-	private final DatosApp datosAplicacion;
+	private final DataApp datosAplicacion;
 	private final GanaderiaService ganaderiaService;
 	private final AnimalService animalService;
 	private final UploadService uploadService;
 	
 	public static final String OPGEN = "GANADERIAS"; 
 	
-	public GanaderiaController(DatosApp datosAplicacion, GanaderiaService ganaderiaService,
+	public GanaderiaController(DataApp datosAplicacion, GanaderiaService ganaderiaService,
 			AnimalService animalService, UploadService uploadService) {
 		this.datosAplicacion = datosAplicacion;
 		this.ganaderiaService = ganaderiaService;

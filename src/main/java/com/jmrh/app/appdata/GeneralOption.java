@@ -2,7 +2,7 @@ package com.jmrh.app.appdata;
 
 import java.util.HashMap;
 
-public class OpcionGeneral {
+public class GeneralOption {
 
 	private String nombre; //nombre de la opción
 	private String enlace; //enlace de la opción general
@@ -13,7 +13,7 @@ public class OpcionGeneral {
 	private String mensajeVacio; //mensaje si no hay registros
 	
 
-	public OpcionGeneral(String nombre, String enlace, String codigoPantallaPrincipal) {
+	public GeneralOption(String nombre, String enlace, String codigoPantallaPrincipal) {
 		this.nombre = nombre;
 		this.enlace = enlace;
 		this.codigoPantallaPrincipal = codigoPantallaPrincipal;

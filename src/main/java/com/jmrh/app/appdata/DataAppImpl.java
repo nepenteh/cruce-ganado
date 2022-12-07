@@ -5,16 +5,16 @@ import java.util.HashMap;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DatosAppImpl  implements DatosApp {
+public class DataAppImpl  implements DataApp {
 
 	private String nombre; //nombre aplicación
 	private String autor; //autor de la aplicación
 	private int year; //año de la aplicación
 	private String web; //web de la aplicación
 	private String enlaceWeb; //enlace de la web
-	private HashMap<String,OpcionGeneral> opcionesGenerales; //opciones de la aplicación
+	private HashMap<String,GeneralOption> opcionesGenerales; //opciones de la aplicación
 			
-	public DatosAppImpl() {
+	public DataAppImpl() {
 		nombre = "Cruce de Ganado";
 		autor = "José Manuel Rosado";
 		year = 2022;
@@ -24,7 +24,7 @@ public class DatosAppImpl  implements DatosApp {
 		opcionesGenerales = new HashMap<>();
 		
 		//Animales
-		OpcionGeneral opAnimales = new OpcionGeneral("Animales","/animal/listado","LISTAR");
+		GeneralOption opAnimales = new GeneralOption("Animales","/animal/listado","LISTAR");
 
 		opAnimales.addPantalla("LISTAR","Listado de Animales");
 		opAnimales.addPantalla("ALTA","Alta de Animal");
@@ -37,7 +37,7 @@ public class DatosAppImpl  implements DatosApp {
 		
 		
 		//Ganaderías
-		OpcionGeneral opGanaderias = new OpcionGeneral("Ganaderías","/ganaderia/listado","LISTAR");
+		GeneralOption opGanaderias = new GeneralOption("Ganaderías","/ganaderia/listado","LISTAR");
 
 		opGanaderias.addPantalla("LISTAR","Listado de Ganaderías");
 		opGanaderias.addPantalla("ALTA","Alta de Ganadería");
@@ -107,7 +107,7 @@ public class DatosAppImpl  implements DatosApp {
 	 * @return
 	 */
 	@Override
-	public HashMap<String, OpcionGeneral> getOpcionesGenerales() {
+	public HashMap<String, GeneralOption> getOpcionesGenerales() {
 		return opcionesGenerales;
 	}
 	
