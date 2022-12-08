@@ -17,7 +17,7 @@
 
 	<div class="row mt-3 opciones-generales">
 		<div class="col-2">
-			<a class="btn boton-normal" th:href="@{/ganaderia/form}" th:text="${datosAplicacion.getScreenName(optionCode,'CREATE')}"></a>
+			<a class="btn boton-normal" th:href="@{/ganaderias/form}" th:text="${datosAplicacion.getScreenName(optionCode,'CREATE')}"></a>
 		</div>
 		<div class="col-10">
 		
@@ -50,7 +50,7 @@
 		<img th:if="${ganaderia.hierroGan == null}" th:src="@{'/images/nohierro.png'}" width="30px"></img>
 	</td>
 	<td>
-		<a th:href="@{'/ganaderia/form/'+${ganaderia.idGan}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
+		<a th:href="@{'/ganaderias/form/'+${ganaderia.idGan}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
 		<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${ganaderia.idGan}','${ganaderia.nombreGan}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a>
 		<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 	</tr>
@@ -69,7 +69,7 @@
 <div th:insert="layout/layout :: bootstrap-js"></div>
 
 <script
-		th:replace="ganaderia/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
+		th:replace="ganaderias/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
 	
 </body>
 </html>

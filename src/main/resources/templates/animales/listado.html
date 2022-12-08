@@ -17,7 +17,7 @@
 
 	<div class="row mt-3 opciones-generales">
 		<div class="col-2">
-			<a class="btn boton-normal" th:href="@{/animal/form}" th:text="${datosAplicacion.getScreenName(optionCode,'CREATE')}"></a>
+			<a class="btn boton-normal" th:href="@{/animales/form}" th:text="${datosAplicacion.getScreenName(optionCode,'CREATE')}"></a>
 		</div>
 		<div class="col-10">
 		
@@ -66,8 +66,8 @@
 					<img th:if="${animal.fotoA == null}" th:src="@{'/images/notoro.png'}"
 					width="65px"></td>
 				<td>
-				<a th:href="@{'/animal/ver/'+${animal.idA}}" title="Ver"><svg th:replace="/layout/iconos_svg :: svg-ver"></svg></a> 
-				<a th:href="@{'/animal/form/'+${animal.idA}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
+				<a th:href="@{'/animales/ver/'+${animal.idA}}" title="Ver"><svg th:replace="/layout/iconos_svg :: svg-ver"></svg></a> 
+				<a th:href="@{'/animales/form/'+${animal.idA}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
 				<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${animal.idA}','${animal.nombreA}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a> 
 				<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
 				</td>
@@ -87,7 +87,7 @@
 	<div th:insert="layout/layout :: bootstrap-js"></div>
 	
 	<script
-		th:replace="animal/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
+		th:replace="animales/js/confirmacion-eliminar :: confirmacion-eliminar"></script>
 	
 </body>
 </html>

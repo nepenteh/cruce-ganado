@@ -38,7 +38,7 @@ import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("animal")
-@RequestMapping("/animal")
+@RequestMapping("/animales")
 public class AnimalController {
 
 	private final AppData datosAplicacion;
@@ -69,13 +69,13 @@ public class AnimalController {
 		//obtengo ese listado de elementos de la página
 		Page<Animal> paginaAnimales = animalService.findAll(pageRequest); 
 		//creo un paginador (de solo cinco cuadros de página) para la vista
-		PageRender<Animal> paginador = new PageRender<>("/animal/listado",paginaAnimales,5);
+		PageRender<Animal> paginador = new PageRender<>("/animales/listado",paginaAnimales,5);
 		
 		model.addAttribute("numeroanimales", animalService.count());
 		model.addAttribute("animales",paginaAnimales);
 		model.addAttribute("paginador", paginador);
 				
-		return "/animal/listado";
+		return "/animales/listado";
 	}
 	
 	@GetMapping("/form")
@@ -85,7 +85,7 @@ public class AnimalController {
 		
 		rellenarDatosAplicacion(model,"CREATE");
 						
-		return "/animal/form";
+		return "/animales/form";
 	}
 	
 	@GetMapping("/form/{idA}")
@@ -93,14 +93,14 @@ public class AnimalController {
 		Animal animal = animalService.findOne(idA);
 		if(animal==null) {
 			flash.addFlashAttribute("error", "Animal no existente");
-			return "redirect:/animal/listado";
+			return "redirect:/animales/listado";
 		}
 		
 		model.addAttribute("animal", animal);
 		
 		rellenarDatosAplicacion(model,"UPDATE");
 		
-		return "/animal/form";
+		return "/animales/form";
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -131,7 +131,7 @@ public class AnimalController {
 		} */
 		
 		if(result.hasErrors() /*|| errorGanaderia*/)
-			return "/animal/form";
+			return "/animales/form";
 		
 		if(!fotoa.isEmpty()) {
 			if(animal.getIdA()!=null && 
@@ -162,7 +162,7 @@ public class AnimalController {
 		flash.addFlashAttribute("success", mensaje);
 		status.setComplete();
 		
-		return "redirect:/animal/listado";
+		return "redirect:/animales/listado";
 		
 	}
 	
@@ -180,7 +180,7 @@ public class AnimalController {
 				flash.addFlashAttribute("success","Animal eliminado con éxito");
 			} else {
 				flash.addFlashAttribute("error","Animal  no existente");
-				return "redirect:/animal/listado";
+				return "redirect:/animales/listado";
 			}
 			
 			if(animal.getFotoA()!=null)
@@ -188,7 +188,7 @@ public class AnimalController {
 			flash.addFlashAttribute("success","Animal eliminado con éxito");
 		}
 		
-		return "redirect:/animal/listado";
+		return "redirect:/animales/listado";
 	}
 	
 	@GetMapping("/ver/{idA}")
@@ -203,7 +203,7 @@ public class AnimalController {
 		rellenarDatosAplicacion(model,"ASCENDENTES");
 		
 
-		return "animal/ver";
+		return "animales/ver";
 	}
 	
 	

@@ -30,7 +30,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("animal/ver")
+@Component("animales/ver")
 public class AnimalPDFView extends AbstractPdfView {
 
 	// carpeta de imagenes subidas del proyecto

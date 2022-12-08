@@ -32,7 +32,7 @@ import com.jmrh.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("ganaderia")
-@RequestMapping("/ganaderia")
+@RequestMapping("/ganaderias")
 public class GanaderiaController {
 
 	private final AppData datosAplicacion;
@@ -64,7 +64,7 @@ public class GanaderiaController {
 		//obtengo ese listado de elementos de la página
 		Page<Ganaderia> paginaGanaderias = ganaderiaService.findAll(pageRequest); 
 		//creo un paginador (de solo cinco cuadros de página) para la vista
-		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderia/listado",paginaGanaderias,5);
+		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderias/listado",paginaGanaderias,5);
 		
 		log.info("elementos por pagina (getSize): "+paginaGanaderias.getSize());
 		log.info("total páginas (getTotalPages): "+paginaGanaderias.getTotalPages());
@@ -74,7 +74,7 @@ public class GanaderiaController {
 		model.addAttribute("ganaderias", paginaGanaderias); //listado solo de la página actual
 		model.addAttribute("paginador",paginador);
 		
-		return "/ganaderia/listado";
+		return "/ganaderias/listado";
 	}
 	
 	@GetMapping("/form")
@@ -84,7 +84,7 @@ public class GanaderiaController {
 		
 		rellenarDatosAplicacion(model,"CREATE");
 		
-		return "/ganaderia/form";
+		return "/ganaderias/form";
 	}
 	
 	@GetMapping("/form/{idGan}")
@@ -92,14 +92,14 @@ public class GanaderiaController {
 		Ganaderia ganaderia = ganaderiaService.findOne(idGan);
 		if(ganaderia==null) {
 			flash.addFlashAttribute("error","Ganadería no existente");
-			return "redirect:/ganaderia/listado";
+			return "redirect:/ganaderias/listado";
 		}
 		
 		model.addAttribute("ganaderia", ganaderia);
 		
 		rellenarDatosAplicacion(model,"UPDATE");
 		
-		return "/ganaderia/form";
+		return "/ganaderias/form";
 	}
 	
 	
@@ -121,7 +121,7 @@ public class GanaderiaController {
 		//Si errores de validación, corto.
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Cruce de Ganado".concat(ganaderia.getIdGan()==null ? " - Alta de Ganadería" : " - Modificación de Ganadería"));
-			return "/ganaderia/form";
+			return "/ganaderias/form";
 		}
 		
 		//si hay foto en el formulario...
@@ -157,7 +157,7 @@ public class GanaderiaController {
 		ganaderiaService.save(ganaderia);
 		status.setComplete();
 		flash.addFlashAttribute("success",mensaje);
-		return "redirect:/ganaderia/listado";
+		return "redirect:/ganaderias/listado";
 	}
 
 	@Secured("ROLE_ADMIN")
@@ -173,7 +173,7 @@ public class GanaderiaController {
 				ganaderiaService.remove(idGan);
 			} else {
 				flash.addFlashAttribute("error","Ganadería no existente");
-				return "redirect:/ganaderia/listado";
+				return "redirect:/ganaderias/listado";
 			}
 			
 			//elimino la imagen gracias a la copia aux
@@ -182,7 +182,7 @@ public class GanaderiaController {
 			flash.addFlashAttribute("success","Ganadería eliminada con éxito");
 		}
 		
-		return "redirect:/ganaderia/listado";
+		return "redirect:/ganaderias/listado";
 	}
 	
 	private void rellenarDatosAplicacion(Model model, String pantalla) {

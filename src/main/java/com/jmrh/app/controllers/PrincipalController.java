@@ -22,7 +22,7 @@ public class PrincipalController {
 
 	@GetMapping({"","/","/index"})
 	public String index() {
-		return "redirect:/animal";
+		return "redirect:/animales";
 	}
 	
 	@GetMapping("/uploads/{filename:.+}")
