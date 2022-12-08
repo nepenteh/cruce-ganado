@@ -62,7 +62,7 @@ public class AnimalController {
 	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 		
-		rellenarDatosAplicacion(model,"LISTAR");
+		rellenarDatosAplicacion(model,"LIST");
 		
 		//paginación de elementos de la página pagina, teniendo 10 elementos por página
 		Pageable pageRequest = PageRequest.of(pagina, 10);
@@ -83,7 +83,7 @@ public class AnimalController {
 		Animal animal = new Animal();
 		model.addAttribute("animal", animal);
 		
-		rellenarDatosAplicacion(model,"ALTA");
+		rellenarDatosAplicacion(model,"CREATE");
 						
 		return "/animal/form";
 	}
@@ -98,7 +98,7 @@ public class AnimalController {
 		
 		model.addAttribute("animal", animal);
 		
-		rellenarDatosAplicacion(model,"EDITAR");
+		rellenarDatosAplicacion(model,"UPDATE");
 		
 		return "/animal/form";
 	}
@@ -116,9 +116,9 @@ public class AnimalController {
 		
 		
 		if(animal.getIdA()==null)
-			rellenarDatosAplicacion(model,"ALTA");
+			rellenarDatosAplicacion(model,"CREATE");
 		else
-			rellenarDatosAplicacion(model,"EDITAR");
+			rellenarDatosAplicacion(model,"UPDATE");
 			
 		String mensaje = (animal.getIdA()==null) ? "Animal creado con éxito" : "Animal modificado con éxito";
 		

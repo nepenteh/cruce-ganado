@@ -57,7 +57,7 @@ public class GanaderiaController {
 	@GetMapping({"","/","/listado"})
 	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 	
-		rellenarDatosAplicacion(model,"LISTAR");
+		rellenarDatosAplicacion(model,"LIST");
 		
 		//paginación de elementos de la página pagina, teniendo 10 elementos por página
 		Pageable pageRequest = PageRequest.of(pagina, 10);
@@ -82,7 +82,7 @@ public class GanaderiaController {
 		Ganaderia ganaderia = new Ganaderia();		
 		model.addAttribute("ganaderia",ganaderia);
 		
-		rellenarDatosAplicacion(model,"ALTA");
+		rellenarDatosAplicacion(model,"CREATE");
 		
 		return "/ganaderia/form";
 	}
@@ -97,7 +97,7 @@ public class GanaderiaController {
 		
 		model.addAttribute("ganaderia", ganaderia);
 		
-		rellenarDatosAplicacion(model,"EDITAR");
+		rellenarDatosAplicacion(model,"UPDATE");
 		
 		return "/ganaderia/form";
 	}
@@ -112,9 +112,9 @@ public class GanaderiaController {
 					   SessionStatus status) {
 		
 		if(ganaderia.getIdGan()==null)
-			rellenarDatosAplicacion(model,"ALTA");
+			rellenarDatosAplicacion(model,"CREATE");
 		else
-			rellenarDatosAplicacion(model,"EDITAR");
+			rellenarDatosAplicacion(model,"UPDATE");
 		
 		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
 		
