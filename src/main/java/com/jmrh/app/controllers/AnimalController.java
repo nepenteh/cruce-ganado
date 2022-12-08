@@ -233,8 +233,8 @@ public class AnimalController {
 	
 	private void rellenarDatosAplicacion(Model model, String pantalla) {
 		model.addAttribute("datosAplicacion",datosAplicacion);
-		model.addAttribute("codigoOpcion",OPGEN);
-		model.addAttribute("pantalla",pantalla);
+		model.addAttribute("optionCode",OPGEN);
+		model.addAttribute("screen",pantalla);
 	}
 	
 }

@@ -7,45 +7,45 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppDataImpl  implements AppData {
 
-	private String nombre; //nombre aplicación
-	private String autor; //autor de la aplicación
+	private String name; //nombre aplicación
+	private String author; //autor de la aplicación
 	private int year; //año de la aplicación
 	private String web; //web de la aplicación
-	private String enlaceWeb; //enlace de la web
-	private HashMap<String,GeneralOption> opcionesGenerales; //opciones de la aplicación
+	private String webURL; //enlace de la web
+	private HashMap<String,GeneralOption> generalOptions; //opciones de la aplicación
 			
 	public AppDataImpl() {
-		nombre = "Cruce de Ganado";
-		autor = "José Manuel Rosado";
+		name = "Cruce de Ganado";
+		author = "José Manuel Rosado";
 		year = 2022;
 		web = "ejerciciosmesa.com";
-		enlaceWeb = "https://ejerciciosmesa.com";
+		webURL = "https://ejerciciosmesa.com";
 		
-		opcionesGenerales = new HashMap<>();
+		generalOptions = new HashMap<>();
 		
 		//Animales
 		GeneralOption opAnimales = new GeneralOption("Animales","/animal/listado","LISTAR");
 
-		opAnimales.addPantalla("LISTAR","Listado de Animales");
-		opAnimales.addPantalla("ALTA","Alta de Animal");
-		opAnimales.addPantalla("EDITAR","Modificar Animal");
-		opAnimales.addPantalla("ASCENDENTES", "Ascendencia");
+		opAnimales.addScreen("LISTAR","Listado de Animales");
+		opAnimales.addScreen("ALTA","Alta de Animal");
+		opAnimales.addScreen("EDITAR","Modificar Animal");
+		opAnimales.addScreen("ASCENDENTES", "Ascendencia");
 		
-		opAnimales.setMensajeVacio("No hay animales que mostrar. Use el botón de Alta para introducir nuevos animales.");
+		opAnimales.setEmptyMessage("No hay animales que mostrar. Use el botón de Alta para introducir nuevos animales.");
 		
-		opcionesGenerales.put("ANIMALES",opAnimales);
+		generalOptions.put("ANIMALES",opAnimales);
 		
 		
 		//Ganaderías
 		GeneralOption opGanaderias = new GeneralOption("Ganaderías","/ganaderia/listado","LISTAR");
 
-		opGanaderias.addPantalla("LISTAR","Listado de Ganaderías");
-		opGanaderias.addPantalla("ALTA","Alta de Ganadería");
-		opGanaderias.addPantalla("EDITAR","Modificar Ganadería");
+		opGanaderias.addScreen("LISTAR","Listado de Ganaderías");
+		opGanaderias.addScreen("ALTA","Alta de Ganadería");
+		opGanaderias.addScreen("EDITAR","Modificar Ganadería");
 		
-		opGanaderias.setMensajeVacio("No hay ganaderías que mostrar. Use el botón de Alta para introducir nuevas ganaderías.");
+		opGanaderias.setEmptyMessage("No hay ganaderías que mostrar. Use el botón de Alta para introducir nuevas ganaderías.");
 		
-		opcionesGenerales.put("GANADERIAS",opGanaderias);
+		generalOptions.put("GANADERIAS",opGanaderias);
 	}
 	
 	/**
@@ -53,8 +53,8 @@ public class AppDataImpl  implements AppData {
 	 * @return
 	 */
 	@Override
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 	
 	/**
@@ -62,8 +62,8 @@ public class AppDataImpl  implements AppData {
 	 * @return
 	 */
 	@Override
-	public String getAutor() {
-		return autor;
+	public String getAuthor() {
+		return author;
 	}
 
 	/**
@@ -89,8 +89,8 @@ public class AppDataImpl  implements AppData {
 	 * @return
 	 */
 	@Override
-	public String getEnlaceWeb() {
-		return enlaceWeb;
+	public String getWebUrl() {
+		return webURL;
 	}
 
 	/**
@@ -98,8 +98,8 @@ public class AppDataImpl  implements AppData {
 	 * @return
 	 */
 	@Override
-	public String getAutoria() {
-		return autor+" "+year+" - "+web;
+	public String getAuthorship() {
+		return author+" "+year+" - "+web;
 	}
 	
 	/**
@@ -107,33 +107,33 @@ public class AppDataImpl  implements AppData {
 	 * @return
 	 */
 	@Override
-	public HashMap<String, GeneralOption> getOpcionesGenerales() {
-		return opcionesGenerales;
+	public HashMap<String, GeneralOption> getGeneralOptions() {
+		return generalOptions;
 	}
 	
 	@Override
-	public boolean esPantallaPrincipal(String codigoOpcion, String codigoPantalla) {
-		return opcionesGenerales.get(codigoOpcion).getCodigoPantallaPrincipal().equals(codigoPantalla);
+	public boolean isMainScreen(String optionCode, String screenCode) {
+		return generalOptions.get(optionCode).getMainScreenCode().equals(screenCode);
 	}
 	
 	@Override
-	public String getNombrePantallaPrincipal(String codigoOpcion) {
-		return opcionesGenerales.get(codigoOpcion).getNombrePantallaPrincipal();
+	public String getMainScreenName(String optionCode) {
+		return generalOptions.get(optionCode).getMainScreenName();
 	}
 	
 	@Override
-	public String getEnlacePantallaPrincipal(String codigoOpcion) {
-		return opcionesGenerales.get(codigoOpcion).getEnlace();
+	public String getMainScreenLink(String optionCode) {
+		return generalOptions.get(optionCode).getLink();
 	}
 	
 	@Override
-	public String getNombrePantalla(String codigoOpcion, String codigoPantalla) {
-		return opcionesGenerales.get(codigoOpcion).getPantalla(codigoPantalla);
+	public String getScreenName(String optionCode, String screenCode) {
+		return generalOptions.get(optionCode).getScreen(screenCode);
 	}
 
 	@Override
-	public String getMensajeVacio(String codigoOpcion) {
-		return opcionesGenerales.get(codigoOpcion).getMensajeVacio();
+	public String getEmptyMessage(String optionCode) {
+		return generalOptions.get(optionCode).getEmptyMessage();
 	}
 		
 }

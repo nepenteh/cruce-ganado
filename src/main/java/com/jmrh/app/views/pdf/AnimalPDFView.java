@@ -71,14 +71,14 @@ public class AnimalPDFView extends AbstractPdfView {
 		
 		
 		PdfPCell celdaNombreApp = new PdfPCell();
-		celdaNombreApp.addElement(new Paragraph(datosAplicacion.getNombre().toUpperCase()));
+		celdaNombreApp.addElement(new Paragraph(datosAplicacion.getName().toUpperCase()));
 		celdaNombreApp.setVerticalAlignment(Element.ALIGN_TOP);
 		celdaNombreApp.setBorder(Rectangle.NO_BORDER);
 		celdaNombreApp.setFixedHeight(50);
 		PdfPCell celdaAutoriaApp = new PdfPCell();
 		Paragraph p = new Paragraph();
-		Anchor enlace = new Anchor(datosAplicacion.getAutoria());
-		enlace.setReference(datosAplicacion.getEnlaceWeb());
+		Anchor enlace = new Anchor(datosAplicacion.getAuthorship());
+		enlace.setReference(datosAplicacion.getWebUrl());
 		Font f = FontFactory.getFont(FontFactory.COURIER, 5f);
 		p.add(enlace);
 		p.setFont(f);

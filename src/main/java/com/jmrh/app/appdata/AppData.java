@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 public interface AppData {
 
-	public String getNombre();
-	public String getAutor();
+	public String getName();
+	public String getAuthor();
 	public int getYear();
 	public String getWeb();
-	public String getEnlaceWeb();
-	public String getAutoria();
-	public HashMap<String, GeneralOption> getOpcionesGenerales();
-	public boolean esPantallaPrincipal(String codigoOpcion, String codigoPantalla);
-	public String getNombrePantallaPrincipal(String codigoOpcion);
-	public String getEnlacePantallaPrincipal(String codigoOpcion);
-	public String getNombrePantalla(String codigoOpcion, String codigoPantalla);
-	public String getMensajeVacio(String codigoOpcion);
+	public String getWebUrl();
+	public String getAuthorship();
+	public HashMap<String, GeneralOption> getGeneralOptions();
+	public boolean isMainScreen(String optionCode, String screenCode);
+	public String getMainScreenName(String optionCode);
+	public String getMainScreenLink(String optionCode);
+	public String getScreenName(String optionCode, String screenCode);
+	public String getEmptyMessage(String optionCode);
 }

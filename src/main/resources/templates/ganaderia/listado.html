@@ -17,7 +17,7 @@
 
 	<div class="row mt-3 opciones-generales">
 		<div class="col-2">
-			<a class="btn boton-normal" th:href="@{/ganaderia/form}" th:text="${datosAplicacion.getNombrePantalla(codigoOpcion,'ALTA')}"></a>
+			<a class="btn boton-normal" th:href="@{/ganaderia/form}" th:text="${datosAplicacion.getScreenName(optionCode,'ALTA')}"></a>
 		</div>
 		<div class="col-10">
 		
@@ -27,7 +27,7 @@
 		</div>
 	</div>
 
-<h5 class="text-center my-5 mx-5" th:if="${numeroganaderias==0}" th:text="${datosAplicacion.getMensajeVacio(codigoOpcion)}"></h5>
+<h5 class="text-center my-5 mx-5" th:if="${numeroganaderias==0}" th:text="${datosAplicacion.getEmptyMessage(optionCode)}"></h5>
 
 <table th:if="${numeroganaderias>0}" class="table table-striped">
 <thead>

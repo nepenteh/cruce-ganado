@@ -4,45 +4,45 @@ import java.util.HashMap;
 
 public class GeneralOption {
 
-	private String nombre; //nombre de la opción
-	private String enlace; //enlace de la opción general
-	private String codigoPantallaPrincipal; //código de la pantalla principal
+	private String name; //nombre de la opción
+	private String link; //enlace de la opción general
+	private String mainScreenCode; //código de la pantalla principal
 	
 		
-	private HashMap<String, String> pantallas; //nombre de pantallas 
-	private String mensajeVacio; //mensaje si no hay registros
+	private HashMap<String, String> screens; //nombre de pantallas 
+	private String emptyMessage; //mensaje si no hay registros
 	
 
-	public GeneralOption(String nombre, String enlace, String codigoPantallaPrincipal) {
-		this.nombre = nombre;
-		this.enlace = enlace;
-		this.codigoPantallaPrincipal = codigoPantallaPrincipal;
-		pantallas = new HashMap<>();
+	public GeneralOption(String name, String link, String mainScreenCode) {
+		this.name = name;
+		this.link = link;
+		this.mainScreenCode = mainScreenCode;
+		screens = new HashMap<>();
 	}
 	
-	public String getNombre() {return nombre;}
-	public String getEnlace() {return enlace;}
-	public String getCodigoPantallaPrincipal() {return codigoPantallaPrincipal;}
+	public String getName() {return name;}
+	public String getLink() {return link;}
+	public String getMainScreenCode() {return mainScreenCode;}
 	
 	
-	public void addPantalla(String codigo, String nombre) {
-		pantallas.put(codigo, nombre);
+	public void addScreen(String code, String name) {
+		screens.put(code, name);
 	}
 	
-	public String getPantalla(String codigo) {
-		return pantallas.get(codigo);
+	public String getScreen(String code) {
+		return screens.get(code);
 	}
 	
-	public String getNombrePantallaPrincipal() {
-		return pantallas.get(codigoPantallaPrincipal);
+	public String getMainScreenName() {
+		return screens.get(mainScreenCode);
 	}
 
-	public String getMensajeVacio() {
-		return mensajeVacio;
+	public String getEmptyMessage() {
+		return emptyMessage;
 	}
 	
-	public void setMensajeVacio(String mensajeVacio) {
-		this.mensajeVacio = mensajeVacio;
+	public void setEmptyMessage(String emptyMessage) {
+		this.emptyMessage = emptyMessage;
 	}
 
 	
