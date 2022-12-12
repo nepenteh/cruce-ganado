@@ -24,7 +24,7 @@ public class AppDataImpl  implements AppData {
 		generalOptions = new HashMap<>();
 		
 		
-		GeneralOption opAnimales = new GeneralOption("Animales","/animales/listado","LIST");
+		GeneralOption opAnimales = new GeneralOption("Animales","/animales/list","LIST");
 
 		opAnimales.addScreen("LIST","Listado de Animales");
 		opAnimales.addScreen("CREATE","Alta de Animal");
@@ -37,7 +37,7 @@ public class AppDataImpl  implements AppData {
 		
 		
 		
-		GeneralOption opGanaderias = new GeneralOption("Ganaderías","/ganaderias/listado","LIST");
+		GeneralOption opGanaderias = new GeneralOption("Ganaderías","/ganaderias/list","LIST");
 
 		opGanaderias.addScreen("LIST","Listado de Ganaderías");
 		opGanaderias.addScreen("CREATE","Alta de Ganadería");

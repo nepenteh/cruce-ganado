@@ -59,8 +59,8 @@ public class AnimalController {
 	}
 
 	
-	@GetMapping({"","/","/listado"})
-	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+	@GetMapping({"","/","/list"})
+	public String list(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 		
 		rellenarDatosAplicacion(model,"LIST");
 		
@@ -69,13 +69,13 @@ public class AnimalController {
 		//obtengo ese listado de elementos de la página
 		Page<Animal> paginaAnimales = animalService.findAll(pageRequest); 
 		//creo un paginador (de solo cinco cuadros de página) para la vista
-		PageRender<Animal> paginador = new PageRender<>("/animales/listado",paginaAnimales,5);
+		PageRender<Animal> paginador = new PageRender<>("/animales/list",paginaAnimales,5);
 		
 		model.addAttribute("numeroanimales", animalService.count());
 		model.addAttribute("animales",paginaAnimales);
 		model.addAttribute("paginador", paginador);
 				
-		return "/animales/listado";
+		return "/animales/list";
 	}
 	
 	@GetMapping("/form")
@@ -93,7 +93,7 @@ public class AnimalController {
 		Animal animal = animalService.findOne(idA);
 		if(animal==null) {
 			flash.addFlashAttribute("error", "Animal no existente");
-			return "redirect:/animales/listado";
+			return "redirect:/animales/list";
 		}
 		
 		model.addAttribute("animal", animal);
@@ -162,7 +162,7 @@ public class AnimalController {
 		flash.addFlashAttribute("success", mensaje);
 		status.setComplete();
 		
-		return "redirect:/animales/listado";
+		return "redirect:/animales/list";
 		
 	}
 	
@@ -180,7 +180,7 @@ public class AnimalController {
 				flash.addFlashAttribute("success","Animal eliminado con éxito");
 			} else {
 				flash.addFlashAttribute("error","Animal  no existente");
-				return "redirect:/animales/listado";
+				return "redirect:/animales/list";
 			}
 			
 			if(animal.getFotoA()!=null)
@@ -188,7 +188,7 @@ public class AnimalController {
 			flash.addFlashAttribute("success","Animal eliminado con éxito");
 		}
 		
-		return "redirect:/animales/listado";
+		return "redirect:/animales/list";
 	}
 	
 	@GetMapping("/ver/{idA}")

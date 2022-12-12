@@ -60,8 +60,8 @@ public class SecurityConfig {
  		
  		//************* USADO PARA EL ACCESO A LA CONSOLA DE H2 CON SPRING SECURITY
  		//************* ELIMINAR EN PRODUCCIÓN!!!!
- 		http.csrf().disable();
- 		http.headers().frameOptions().disable();
+ 		//http.csrf().disable();
+ 		//http.headers().frameOptions().disable();
  		//*************
  		
  		return http.build();

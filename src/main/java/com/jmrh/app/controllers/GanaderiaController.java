@@ -54,8 +54,8 @@ public class GanaderiaController {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	
-	@GetMapping({"","/","/listado"})
-	public String listado(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+	@GetMapping({"","/","/list"})
+	public String list(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
 	
 		rellenarDatosAplicacion(model,"LIST");
 		
@@ -64,7 +64,7 @@ public class GanaderiaController {
 		//obtengo ese listado de elementos de la página
 		Page<Ganaderia> paginaGanaderias = ganaderiaService.findAll(pageRequest); 
 		//creo un paginador (de solo cinco cuadros de página) para la vista
-		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderias/listado",paginaGanaderias,5);
+		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderias/list",paginaGanaderias,5);
 		
 		log.info("elementos por pagina (getSize): "+paginaGanaderias.getSize());
 		log.info("total páginas (getTotalPages): "+paginaGanaderias.getTotalPages());
@@ -74,7 +74,7 @@ public class GanaderiaController {
 		model.addAttribute("ganaderias", paginaGanaderias); //listado solo de la página actual
 		model.addAttribute("paginador",paginador);
 		
-		return "/ganaderias/listado";
+		return "/ganaderias/list";
 	}
 	
 	@GetMapping("/form")
@@ -92,7 +92,7 @@ public class GanaderiaController {
 		Ganaderia ganaderia = ganaderiaService.findOne(idGan);
 		if(ganaderia==null) {
 			flash.addFlashAttribute("error","Ganadería no existente");
-			return "redirect:/ganaderias/listado";
+			return "redirect:/ganaderias/list";
 		}
 		
 		model.addAttribute("ganaderia", ganaderia);
@@ -157,7 +157,7 @@ public class GanaderiaController {
 		ganaderiaService.save(ganaderia);
 		status.setComplete();
 		flash.addFlashAttribute("success",mensaje);
-		return "redirect:/ganaderias/listado";
+		return "redirect:/ganaderias/list";
 	}
 
 	@Secured("ROLE_ADMIN")
@@ -173,7 +173,7 @@ public class GanaderiaController {
 				ganaderiaService.remove(idGan);
 			} else {
 				flash.addFlashAttribute("error","Ganadería no existente");
-				return "redirect:/ganaderias/listado";
+				return "redirect:/ganaderias/list";
 			}
 			
 			//elimino la imagen gracias a la copia aux
@@ -182,7 +182,7 @@ public class GanaderiaController {
 			flash.addFlashAttribute("success","Ganadería eliminada con éxito");
 		}
 		
-		return "redirect:/ganaderias/listado";
+		return "redirect:/ganaderias/list";
 	}
 	
 	private void rellenarDatosAplicacion(Model model, String pantalla) {
