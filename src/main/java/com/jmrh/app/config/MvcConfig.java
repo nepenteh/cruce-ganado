@@ -9,7 +9,7 @@ public class MvcConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/error_403").setViewName("/errores/error_403");
+		registry.addViewController("/error_403").setViewName("/errors/error_403");
 	}
 	
 }
