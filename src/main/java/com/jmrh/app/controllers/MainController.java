@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.jmrh.app.models.services.UploadService;
 
 @Controller
-public class PrincipalController {
+public class MainController {
 
 	private final UploadService uploadService;
 	
-	public PrincipalController(UploadService uploadService) {
+	public MainController(UploadService uploadService) {
 		this.uploadService = uploadService;
 	}
 
@@ -26,19 +26,19 @@ public class PrincipalController {
 	}
 	
 	@GetMapping("/uploads/{filename:.+}")
-	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
+	public ResponseEntity<Resource> viewImage(@PathVariable String filename) {
 		
-		Resource recurso = null;
+		Resource resource = null;
 		
 		try {
-			recurso = uploadService.load(filename);
+			resource = uploadService.load(filename);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+recurso.getFilename()+"\"")
-				.body(recurso);
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+resource.getFilename()+"\"")
+				.body(resource);
 		
 	}
 	

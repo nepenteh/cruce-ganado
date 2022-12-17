@@ -13,10 +13,10 @@ import com.jmrh.app.appdata.AppDataImpl;
 @Controller
 public class LoginController {
 	
-	private final AppDataImpl datosAplicacion;
+	private final AppDataImpl appData;
 	
-	public LoginController(AppDataImpl datosAplicacion) {
-		this.datosAplicacion = datosAplicacion;
+	public LoginController(AppDataImpl appData) {
+		this.appData = appData;
 	}
 
 
@@ -26,22 +26,18 @@ public class LoginController {
 			@RequestParam(value="logout", required=false) String logout,
 			Model model, Principal principal, RedirectAttributes flash) {
 		
-		//si ya está logueado se reenvía a la página principal
-		//(evitar doble inicio de sesión)
 		if(principal != null) {
 			flash.addFlashAttribute("info","Ya ha iniciado sesión anteriormente");
 			return "redirect:/";
 		}
-		
-		//mensaje de desconexión
+
 		if(logout != null)
 			model.addAttribute("success","Ha cerrado la sesión");
-		
-		//credenciales incorrectas
+
 		if(error != null) 
 			model.addAttribute("error","Nombre de usuario o password incorrectos");
 		
-		model.addAttribute("datosAplicacion", datosAplicacion);
+		model.addAttribute("appData", appData);
 			
 		return "/login/login";
 	}
