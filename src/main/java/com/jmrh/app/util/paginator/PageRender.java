@@ -6,9 +6,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 /**
- * Un paginador.
- * Determina una serie de cuadros con números de páginas en la parte inferior del listado.
- * 
+ * A paginator
+ *  
  * @author josep
  *
  * @param <T>
@@ -17,45 +16,45 @@ import org.springframework.data.domain.Page;
 public class PageRender<T> {
 
 	private String url;
-	private Page<T> paginaElementos;	//una página de elementos T
-	private int totalPaginas;	//total de páginas que hay
-	private int paginaActual; //página actual
-	private int numElementosPorPagina;
-	private int numCuadros; //número de cuadros de paginación que se desean mostrar
-	private List<PageItem> paginaItems;  //items de paginación (cuadros en la zona de paginación) 
+	private Page<T> pageElements;	
+	private int totalPages;	
+	private int actualPage; 
+	private int elementsPerPage;
+	private int nSquares; 
+	private List<PageItem> pageItems;   
 	
-	public PageRender(String url, Page<T> paginaElementos, int numCuadros) {
+	public PageRender(String url, Page<T> pageElements, int nSquares) {
 		this.url = url;
-		this.paginaElementos = paginaElementos;
-		this.paginaItems = new ArrayList<PageItem>();
-		this.numCuadros = numCuadros;
+		this.pageElements = pageElements;
+		this.pageItems = new ArrayList<PageItem>();
+		this.nSquares = nSquares;
 		
-		numElementosPorPagina = paginaElementos.getSize();
-		totalPaginas = paginaElementos.getTotalPages();
-		paginaActual = paginaElementos.getNumber()+1;
+		elementsPerPage = pageElements.getSize();
+		totalPages = pageElements.getTotalPages();
+		actualPage = pageElements.getNumber()+1;
 		
-		int desde, hasta;
+		int from, to;
 		
-		if(totalPaginas <= numCuadros) { //número de páginas es menor al número de cuadros que se quiere mostrar
-			desde = 1;
-			hasta = totalPaginas;
-		} else { //número de páginas mayor al número de cuadros a mostrar
+		if(totalPages <= nSquares) { 
+			from = 1;
+			to = totalPages;
+		} else { 
 			
-			desde = paginaActual - (numCuadros/2);
-			hasta = paginaActual + (numCuadros/2);
+			from = actualPage - (nSquares/2);
+			to = actualPage + (nSquares/2);
 			
-			if(desde<=0) {
-				desde = 1;
-				hasta = numCuadros;
-			} else if(hasta>totalPaginas) {
-				desde = totalPaginas - numCuadros + 1;
-				hasta = totalPaginas;
+			if(from<=0) {
+				from = 1;
+				to = nSquares;
+			} else if(to>totalPages) {
+				from = totalPages - nSquares + 1;
+				to = totalPages;
 			}
 			
 		}
 		
-		for(int i=desde;i<=hasta;i++) {
-			paginaItems.add(new PageItem(i,i==paginaActual));
+		for(int i=from;i<=to;i++) {
+			pageItems.add(new PageItem(i,i==actualPage));
 		}
 		
 	}
@@ -68,56 +67,56 @@ public class PageRender<T> {
 
 
 
-	public Page<T> getPaginaElementos() {
-		return paginaElementos;
+	public Page<T> getPageElements() {
+		return pageElements;
 	}
 
 
 
-	public int getTotalPaginas() {
-		return totalPaginas;
+	public int getTotalPages() {
+		return totalPages;
 	}
 
 
 
-	public int getPaginaActual() {
-		return paginaActual;
+	public int getActualPage() {
+		return actualPage;
 	}
 
 
 
-	public int getNumElementosPorPagina() {
-		return numElementosPorPagina;
+	public int getElementsPerPage() {
+		return elementsPerPage;
 	}
 
 
 
-	public int getNumCuadros() {
-		return numCuadros;
+	public int getNSquares() {
+		return nSquares;
 	}
 
 
 
-	public List<PageItem> getPaginaItems() {
-		return paginaItems;
+	public List<PageItem> getPageItems() {
+		return pageItems;
 	}
 
 
 
 	public boolean isFirst() {
-		return paginaElementos.isFirst();
+		return pageElements.isFirst();
 	}
 	
 	public boolean isLast() {
-		return paginaElementos.isLast();
+		return pageElements.isLast();
 	}
 	
 	public boolean isHasNext() {
-		return paginaElementos.hasNext();
+		return pageElements.hasNext();
 	}
 	
 	public boolean isHasPrevious() {
-		return paginaElementos.hasPrevious();
+		return pageElements.hasPrevious();
 	}
 	
 }

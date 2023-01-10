@@ -10,16 +10,16 @@ package com.jmrh.app.util.paginator;
  */
 public class PageItem {
 
-	private int numero; //número de página que muestra
+	private int pageNumber; //número de página que muestra
 	private boolean actual; //es la página que se está mostrando
 	
-	public PageItem(int numero, boolean actual) {
-		this.numero = numero;
+	public PageItem(int pageNumber, boolean actual) {
+		this.pageNumber = pageNumber;
 		this.actual = actual;
 	}
 
-	public int getNumero() {
-		return numero;
+	public int getPageNumber() {
+		return pageNumber;
 	}
 
 	public boolean isActual() {

@@ -3,8 +3,6 @@ package com.jmrh.app.controllers;
 import java.io.IOException;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +33,7 @@ import com.jmrh.app.util.paginator.PageRender;
 @RequestMapping("/ganaderias")
 public class GanaderiaController {
 
-	private final AppData datosAplicacion;
+	private final AppData appData;
 	private final GanaderiaService ganaderiaService;
 	private final AnimalService animalService;
 	private final UploadService uploadService;
@@ -44,35 +42,27 @@ public class GanaderiaController {
 	
 	public GanaderiaController(AppData datosAplicacion, GanaderiaService ganaderiaService,
 			AnimalService animalService, UploadService uploadService) {
-		this.datosAplicacion = datosAplicacion;
+		this.appData = datosAplicacion;
 		this.ganaderiaService = ganaderiaService;
 		this.animalService = animalService;
 		this.uploadService = uploadService;
 	}
 
-	//depuración
-	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	
 	@GetMapping({"","/","/list"})
-	public String list(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+	public String list(@RequestParam(name="page", defaultValue="0") int page, Model model) {
 	
 		rellenarDatosAplicacion(model,"LIST");
 		
-		//paginación de elementos de la página pagina, teniendo 10 elementos por página
-		Pageable pageRequest = PageRequest.of(pagina, 10);
-		//obtengo ese listado de elementos de la página
-		Page<Ganaderia> paginaGanaderias = ganaderiaService.findAll(pageRequest); 
-		//creo un paginador (de solo cinco cuadros de página) para la vista
-		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderias/list",paginaGanaderias,5);
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Ganaderia> pageGanaderias = ganaderiaService.findAll(pageRequest); 
+		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderias/list",pageGanaderias,5);
 		
-		log.info("elementos por pagina (getSize): "+paginaGanaderias.getSize());
-		log.info("total páginas (getTotalPages): "+paginaGanaderias.getTotalPages());
-		log.info("página actual (getNumber): "+paginaGanaderias.getNumber());
 
 		model.addAttribute("numeroganaderias", ganaderiaService.count());
-		model.addAttribute("ganaderias", paginaGanaderias); //listado solo de la página actual
-		model.addAttribute("paginador",paginador);
+		model.addAttribute("ganaderias", pageGanaderias); 
+		model.addAttribute("paginator",paginador);
 		
 		return "/ganaderias/list";
 	}
@@ -186,7 +176,7 @@ public class GanaderiaController {
 	}
 	
 	private void rellenarDatosAplicacion(Model model, String pantalla) {
-		model.addAttribute("datosAplicacion",datosAplicacion);
+		model.addAttribute("datosAplicacion",appData);
 		model.addAttribute("optionCode",OPGEN);
 		model.addAttribute("screen",pantalla);
 	}

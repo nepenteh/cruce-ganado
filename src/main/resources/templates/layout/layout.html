@@ -74,35 +74,35 @@
 	</div>
 
 
-	<!-- paginador -->
+	<!-- paginator -->
 	
-	<nav aria-label="..." th:fragment="paginador">
+	<nav aria-label="..." th:fragment="paginator">
 		<ul class="pagination pagination-sm justify-content-end">
-			<li class="page-item" th:classappend="${paginador.first ? 'disabled' : ''}">
-				<a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=0)}">|&lt;</a>
+			<li class="page-item" th:classappend="${paginator.first ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginator.url}(page=0)}">|&lt;</a>
 			</li>
-			<li class="page-item" th:classappend="${not paginador.hasPrevious ? 'disabled' : ''}">
-			  <a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=${paginador.paginaActual-2})}">&lt;&lt;</a>
+			<li class="page-item" th:classappend="${not paginator.hasPrevious ? 'disabled' : ''}">
+			  <a class="page-link fw-bold" th:href="@{${paginator.url}(page=${paginator.actualPage-2})}">&lt;&lt;</a>
 			</li>
-			<th:block th:each="cuadro: ${paginador.paginaItems}">
+			<th:block th:each="cuadro: ${paginator.pageItems}">
 			<li class="page-item" th:classappend="${cuadro.actual ? 'active' : ''}">
 				<a class="page-link" 
 					th:if="${cuadro.actual}"
 					href="#"
-					th:text="${cuadro.numero}">
+					th:text="${cuadro.pageNumber}">
 				</a>
 				<a class="page-link" 
 					th:if="${not cuadro.actual}"
-					th:href="@{${paginador.url}(pagina=${cuadro.numero-1})}"
-					th:text="${cuadro.numero}">
+					th:href="@{${paginator.url}(page=${cuadro.pageNumber-1})}"
+					th:text="${cuadro.pageNumber}">
 				</a>
 			</li>
 			</th:block>
-			<li class="page-item" th:classappend="${not paginador.hasNext ? 'disabled' : ''}">
-				<a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=${paginador.paginaActual})}">&gt;&gt;</a>
+			<li class="page-item" th:classappend="${not paginator.hasNext ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginator.url}(page=${paginator.actualPage})}">&gt;&gt;</a>
 			</li>
-			<li class="page-item" th:classappend="${paginador.last ? 'disabled' : ''}">
-				<a class="page-link fw-bold" th:href="@{${paginador.url}(pagina=${paginador.totalPaginas-1})}">&gt;|</a>
+			<li class="page-item" th:classappend="${paginator.last ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginator.url}(page=${paginator.totalPages-1})}">&gt;|</a>
 			</li>
 		</ul>
 	</nav>

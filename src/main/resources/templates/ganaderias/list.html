@@ -22,7 +22,7 @@
 		<div class="col-10">
 		
 		<th:block th:if="${numeroganaderias>0}">
-		  <nav th:if="${numeroganaderias>0}" th:replace="layout/layout :: paginador"></nav>
+		  <nav th:if="${numeroganaderias>0}" th:replace="layout/layout :: paginator"></nav>
 		</th:block> 
 		</div>
 	</div>
@@ -58,7 +58,7 @@
 </table>
 
 <th:block th:if="${numeroganaderias>0}">
-	<nav th:replace="layout/layout :: paginador"></nav>
+	<nav th:replace="layout/layout :: paginator"></nav>
 </th:block>
 
 </div>

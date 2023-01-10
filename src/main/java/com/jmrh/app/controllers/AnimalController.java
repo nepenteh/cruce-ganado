@@ -60,20 +60,17 @@ public class AnimalController {
 
 	
 	@GetMapping({"","/","/list"})
-	public String list(@RequestParam(name="pagina", defaultValue="0") int pagina, Model model) {
+	public String list(@RequestParam(name="page", defaultValue="0") int page, Model model) {
 		
 		rellenarDatosAplicacion(model,"LIST");
 		
-		//paginación de elementos de la página pagina, teniendo 10 elementos por página
-		Pageable pageRequest = PageRequest.of(pagina, 10);
-		//obtengo ese listado de elementos de la página
-		Page<Animal> paginaAnimales = animalService.findAll(pageRequest); 
-		//creo un paginador (de solo cinco cuadros de página) para la vista
-		PageRender<Animal> paginador = new PageRender<>("/animales/list",paginaAnimales,5);
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Animal> pageAnimales = animalService.findAll(pageRequest); 
+		PageRender<Animal> paginator = new PageRender<>("/animales/list",pageAnimales,5);
 		
 		model.addAttribute("numeroanimales", animalService.count());
-		model.addAttribute("animales",paginaAnimales);
-		model.addAttribute("paginador", paginador);
+		model.addAttribute("animales",pageAnimales);
+		model.addAttribute("paginator", paginator);
 				
 		return "/animales/list";
 	}
