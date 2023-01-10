@@ -21,15 +21,15 @@
 		</div>
 		<div class="col-10">
 		
-		<th:block th:if="${numeroganaderias>0}">
-		  <nav th:if="${numeroganaderias>0}" th:replace="layout/layout :: paginator"></nav>
+		<th:block th:if="${numganaderias>0}">
+		  <nav th:if="${numganaderias>0}" th:replace="layout/layout :: paginator"></nav>
 		</th:block> 
 		</div>
 	</div>
 
-<h5 class="text-center my-5 mx-5" th:if="${numeroganaderias==0}" th:text="${datosAplicacion.getEmptyMessage(optionCode)}"></h5>
+<h5 class="text-center my-5 mx-5" th:if="${numganaderias==0}" th:text="${datosAplicacion.getEmptyMessage(optionCode)}"></h5>
 
-<table th:if="${numeroganaderias>0}" class="table table-striped">
+<table th:if="${numganaderias>0}" class="table table-striped">
 <thead>
 	<tr>
 		<th scope="col">Id</th>
@@ -57,7 +57,7 @@
 </tbody>
 </table>
 
-<th:block th:if="${numeroganaderias>0}">
+<th:block th:if="${numganaderias>0}">
 	<nav th:replace="layout/layout :: paginator"></nav>
 </th:block>
 

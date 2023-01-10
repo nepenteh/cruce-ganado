@@ -60,7 +60,7 @@ public class GanaderiaController {
 		PageRender<Ganaderia> paginador = new PageRender<>("/ganaderias/list",pageGanaderias,5);
 		
 
-		model.addAttribute("numeroganaderias", ganaderiaService.count());
+		model.addAttribute("numganaderias", ganaderiaService.count());
 		model.addAttribute("ganaderias", pageGanaderias); 
 		model.addAttribute("paginator",paginador);
 		
