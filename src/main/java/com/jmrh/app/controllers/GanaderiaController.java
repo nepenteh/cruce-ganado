@@ -61,7 +61,7 @@ public class GanaderiaController {
 		
 
 		model.addAttribute("numganaderias", ganaderiaService.count());
-		model.addAttribute("ganaderias", pageGanaderias); 
+		model.addAttribute("listganaderias", pageGanaderias); 
 		model.addAttribute("paginator",paginador);
 		
 		return "/ganaderias/list";

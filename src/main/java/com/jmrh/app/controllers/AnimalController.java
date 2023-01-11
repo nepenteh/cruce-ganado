@@ -69,7 +69,7 @@ public class AnimalController {
 		PageRender<Animal> paginator = new PageRender<>("/animales/list",pageAnimales,5);
 		
 		model.addAttribute("numanimales", animalService.count());
-		model.addAttribute("animales",pageAnimales);
+		model.addAttribute("listanimales",pageAnimales);
 		model.addAttribute("paginator", paginator);
 				
 		return "/animales/list";
