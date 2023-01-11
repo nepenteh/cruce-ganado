@@ -31,14 +31,14 @@
 
 <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-  	<span class="navbar-brand" th:text="${datosAplicacion.name}"></span>
+  	<span class="navbar-brand" th:text="${applicationData.name}"></span>
     <img th:src="@{/images/logo.png}" width="80px">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      	<li th:each="generalOption : ${datosAplicacion.generalOptions}">
+      	<li th:each="generalOption : ${applicationData.generalOptions}">
       		<a class="nav-link" th:classappend="${#strings.equals(generalOption.key,optionCode) ? 'active' : ''}" th:href="@{${generalOption.value.link}}"
       			th:text="${generalOption.value.name}"></a>
       	</li>
@@ -55,10 +55,10 @@
 
 	<!-- Título de la pantalla -->
 	<div th:fragment="titulo-pantalla" class="titulo-pantalla py-1 text-center position-relative">
-		<div th:if="${!datosAplicacion.isMainScreen(optionCode,screen)}" class="position-absolute mt-1 ms-3 d-none d-md-block">
-		   <a class="fst-italic fw-light" th:href="@{${datosAplicacion.getMainScreenLink(optionCode)}}" th:text="${'Volver a '+datosAplicacion.getMainScreenName(optionCode)}"></a>
+		<div th:if="${!applicationData.isMainScreen(optionCode,screen)}" class="position-absolute mt-1 ms-3 d-none d-md-block">
+		   <a class="fst-italic fw-light" th:href="@{${applicationData.getMainScreenLink(optionCode)}}" th:text="${'Volver a '+applicationData.getMainScreenName(optionCode)}"></a>
 		</div>
-		<h1 th:text="${datosAplicacion.getScreenName(optionCode,screen)}"></h1>
+		<h1 th:text="${applicationData.getScreenName(optionCode,screen)}"></h1>
 	</div>
 
 	<!-- Zona de mensajes superior (flash mensajes) -->
@@ -165,7 +165,7 @@
 
 <!-- COPYRIGHT INFERIOR -->
 <div class="autoria py-2 mt-5 small text-center" th:fragment="autoria">
-	<a th:href="@{${datosAplicacion.webUrl}}" th:text="${datosAplicacion.authorship}" target="_blank"></a>
+	<a th:href="@{${applicationData.webUrl}}" th:text="${applicationData.authorship}" target="_blank"></a>
 </div>
 
 	<div th:fragment="jquery-js">

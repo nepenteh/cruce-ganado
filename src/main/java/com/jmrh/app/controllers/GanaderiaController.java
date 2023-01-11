@@ -53,7 +53,7 @@ public class GanaderiaController {
 	@GetMapping({"","/","/list"})
 	public String list(@RequestParam(name="page", defaultValue="0") int page, Model model) {
 	
-		rellenarDatosAplicacion(model,"LIST");
+		fillApplicationData(model,"LIST");
 		
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Ganaderia> pageGanaderias = ganaderiaService.findAll(pageRequest); 
@@ -72,7 +72,7 @@ public class GanaderiaController {
 		Ganaderia ganaderia = new Ganaderia();		
 		model.addAttribute("ganaderia",ganaderia);
 		
-		rellenarDatosAplicacion(model,"CREATE");
+		fillApplicationData(model,"CREATE");
 		
 		return "/ganaderias/form";
 	}
@@ -87,7 +87,7 @@ public class GanaderiaController {
 		
 		model.addAttribute("ganaderia", ganaderia);
 		
-		rellenarDatosAplicacion(model,"UPDATE");
+		fillApplicationData(model,"UPDATE");
 		
 		return "/ganaderias/form";
 	}
@@ -102,9 +102,9 @@ public class GanaderiaController {
 					   SessionStatus status) {
 		
 		if(ganaderia.getIdGan()==null)
-			rellenarDatosAplicacion(model,"CREATE");
+			fillApplicationData(model,"CREATE");
 		else
-			rellenarDatosAplicacion(model,"UPDATE");
+			fillApplicationData(model,"UPDATE");
 		
 		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
 		
@@ -175,10 +175,10 @@ public class GanaderiaController {
 		return "redirect:/ganaderias/list";
 	}
 	
-	private void rellenarDatosAplicacion(Model model, String pantalla) {
-		model.addAttribute("datosAplicacion",appData);
+	private void fillApplicationData(Model model, String screen) {
+		model.addAttribute("applicationData",appData);
 		model.addAttribute("optionCode",OPGEN);
-		model.addAttribute("screen",pantalla);
+		model.addAttribute("screen",screen);
 	}
 	
 		

@@ -53,7 +53,7 @@ public class AnimalPDFView extends AbstractPdfView {
 		//filename define el título del documento descargado.
 		response.setHeader("Content-Disposition", "inline; filename=\"" + titulo.replaceAll(" ", "").toUpperCase() + ".pdf\"");
 
-		aniadirDatosAplicacion((AppDataImpl) model.get("datosAplicacion"), document);
+		aniadirDatosAplicacion((AppDataImpl) model.get("applicationData"), document);
 		
 		anadirGeneracion(arbol, 1, 0, document);	//generación 1 (animal que se investiga)
 		lineas(1, document);						//líneas a la siguiente generación

@@ -62,7 +62,7 @@ public class AnimalController {
 	@GetMapping({"","/","/list"})
 	public String list(@RequestParam(name="page", defaultValue="0") int page, Model model) {
 		
-		rellenarDatosAplicacion(model,"LIST");
+		fillApplicationData(model,"LIST");
 		
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Animal> pageAnimales = animalService.findAll(pageRequest); 
@@ -80,7 +80,7 @@ public class AnimalController {
 		Animal animal = new Animal();
 		model.addAttribute("animal", animal);
 		
-		rellenarDatosAplicacion(model,"CREATE");
+		fillApplicationData(model,"CREATE");
 						
 		return "/animales/form";
 	}
@@ -95,7 +95,7 @@ public class AnimalController {
 		
 		model.addAttribute("animal", animal);
 		
-		rellenarDatosAplicacion(model,"UPDATE");
+		fillApplicationData(model,"UPDATE");
 		
 		return "/animales/form";
 	}
@@ -113,9 +113,9 @@ public class AnimalController {
 		
 		
 		if(animal.getIdA()==null)
-			rellenarDatosAplicacion(model,"CREATE");
+			fillApplicationData(model,"CREATE");
 		else
-			rellenarDatosAplicacion(model,"UPDATE");
+			fillApplicationData(model,"UPDATE");
 			
 		String mensaje = (animal.getIdA()==null) ? "Animal creado con éxito" : "Animal modificado con éxito";
 		
@@ -197,7 +197,7 @@ public class AnimalController {
 		
 		model.addAttribute("arbol",arbol);
 		
-		rellenarDatosAplicacion(model,"ASCENDENTES");
+		fillApplicationData(model,"ASCENDENTES");
 		
 
 		return "animales/ver";
@@ -228,10 +228,10 @@ public class AnimalController {
 		return animalService.findMachoByNombre(cadena);
 	}
 	
-	private void rellenarDatosAplicacion(Model model, String pantalla) {
-		model.addAttribute("datosAplicacion",datosAplicacion);
+	private void fillApplicationData(Model model, String screen) {
+		model.addAttribute("applicationData",datosAplicacion);
 		model.addAttribute("optionCode",OPGEN);
-		model.addAttribute("screen",pantalla);
+		model.addAttribute("screen",screen);
 	}
 	
 }
