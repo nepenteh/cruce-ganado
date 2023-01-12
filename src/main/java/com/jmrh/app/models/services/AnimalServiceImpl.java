@@ -91,8 +91,8 @@ public class AnimalServiceImpl implements AnimalService {
 	
 	@Transactional
 	@Override
-	public void quitarGanaderia(Long idGan) {
-		animalDAO.quitarGanaderia(idGan);
+	public void deleteGanaderia(Long idGan) {
+		animalDAO.deleteGanaderia(idGan);
 	}
 
 }

@@ -151,22 +151,19 @@ public class GanaderiaController {
 	}
 
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/eliminar/{idGan}")
-	public String eliminar(@PathVariable Long idGan, RedirectAttributes flash) {
+	@GetMapping("/delete/{idGan}")
+	public String delete(@PathVariable Long idGan, RedirectAttributes flash) {
 		
-		if(idGan>0) { //validación id
-			//copia aux
+		if(idGan>0) { 			
 			Ganaderia ganaderia = ganaderiaService.findOne(idGan);
-			//elimino la ganadería
 			if(ganaderia!=null) {
-				animalService.quitarGanaderia(idGan);
+				animalService.deleteGanaderia(idGan);
 				ganaderiaService.remove(idGan);
 			} else {
 				flash.addFlashAttribute("error","Ganadería no existente");
 				return "redirect:/ganaderias/list";
 			}
 			
-			//elimino la imagen gracias a la copia aux
 			if(ganaderia.getHierroGan()!=null)
 				uploadService.delete(ganaderia.getHierroGan());
 			flash.addFlashAttribute("success","Ganadería eliminada con éxito");

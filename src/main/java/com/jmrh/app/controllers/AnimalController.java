@@ -164,8 +164,8 @@ public class AnimalController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/eliminar/{idA}")
-	public String eliminar(@PathVariable Long idA, Model model, RedirectAttributes flash) {
+	@GetMapping("/delete/{idA}")
+	public String delete(@PathVariable Long idA, Model model, RedirectAttributes flash) {
 		
 		if(idA>0) {
 			Animal animal = animalService.findOne(idA);

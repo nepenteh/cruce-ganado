@@ -10,7 +10,7 @@ function mostrarConfirmacionEliminar(id,nombre) {
 	texto.innerHTML = "¿Eliminar al animal <strong>"+nombre.toUpperCase()+"</strong>?";
 	var botonOk = document.getElementById('modalOk');
 	botonOk.innerHTML = "Eliminar";
-	botonOk.href="/animales/eliminar/"+id;
+	botonOk.href="/animales/delete/"+id;
 	
 	myModal.show();
 }
