@@ -117,7 +117,7 @@ public class AnimalController {
 		else
 			fillApplicationData(model,"UPDATE");
 			
-		String mensaje = (animal.getIdA()==null) ? "Animal creado con éxito" : "Animal modificado con éxito";
+		String msg = (animal.getIdA()==null) ? "Animal creado con éxito" : "Animal modificado con éxito";
 		
 		/* en caso de ganadería obligatoria y validarla */
 		/*
@@ -130,6 +130,24 @@ public class AnimalController {
 		if(result.hasErrors() /*|| errorGanaderia*/)
 			return "/animales/form";
 		
+		AddUpdateImageFotoa(fotoa,animal);
+		
+		
+		
+		if(ganaderia_id!=null) animal.setGanaderiaA(ganaderiaService.findOne(ganaderia_id));
+		if(madre_id!=null) animal.setMadreA(animalService.findOne(madre_id));
+		if(padre_id!=null) animal.setPadreA(animalService.findOne(padre_id));
+		animalService.save(animal);
+		
+		
+		flash.addFlashAttribute("success", msg);
+		status.setComplete();
+		
+		return "redirect:/animales/list";
+		
+	}
+	
+	private void AddUpdateImageFotoa(MultipartFile fotoa, Animal animal) {
 		if(!fotoa.isEmpty()) {
 			if(animal.getIdA()!=null && 
 			   animal.getIdA()>0 &&
@@ -149,18 +167,6 @@ public class AnimalController {
 
 			animal.setFotoA(nombreUnico);
 		}
-		
-		if(ganaderia_id!=null) animal.setGanaderiaA(ganaderiaService.findOne(ganaderia_id));
-		if(madre_id!=null) animal.setMadreA(animalService.findOne(madre_id));
-		if(padre_id!=null) animal.setPadreA(animalService.findOne(padre_id));
-		animalService.save(animal);
-		
-		
-		flash.addFlashAttribute("success", mensaje);
-		status.setComplete();
-		
-		return "redirect:/animales/list";
-		
 	}
 	
 	@Secured("ROLE_ADMIN")

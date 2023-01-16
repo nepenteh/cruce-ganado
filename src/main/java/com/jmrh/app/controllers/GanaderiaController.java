@@ -63,7 +63,7 @@ public class GanaderiaController {
 		model.addAttribute("numganaderias", ganaderiaService.count());
 		model.addAttribute("listganaderias", pageGanaderias); 
 		model.addAttribute("paginator",paginador);
-		
+				
 		return "/ganaderias/list";
 	}
 	
@@ -106,48 +106,40 @@ public class GanaderiaController {
 		else
 			fillApplicationData(model,"UPDATE");
 		
-		String mensaje = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
+		String msg = (ganaderia.getIdGan()==null) ? "Ganadería creada con éxito" : "Ganadería modificada con éxito";
 		
-		//Si errores de validación, corto.
 		if(result.hasErrors()) {
-			model.addAttribute("titulo", "Cruce de Ganado".concat(ganaderia.getIdGan()==null ? " - Alta de Ganadería" : " - Modificación de Ganadería"));
 			return "/ganaderias/form";
 		}
 		
-		//si hay foto en el formulario...
-		if(!hierrogan.isEmpty()) {
+		AddUpdateImageHierrogan(hierrogan,ganaderia);
+		
+		ganaderiaService.save(ganaderia);
+		status.setComplete();
+		flash.addFlashAttribute("success",msg);
+		return "redirect:/ganaderias/list";
+	}
+	
+	private void AddUpdateImageHierrogan(MultipartFile image, Ganaderia ganaderia) {
+		if(!image.isEmpty()) {
 			
-			//si la ganadería ya existe y tiene foto (es una modificación)
 			if(ganaderia.getIdGan()!=null &&
 			   ganaderia.getIdGan()>0 && 
 			   ganaderia.getHierroGan()!=null &&
 			   ganaderia.getHierroGan().length() > 0) {
 			
-				//borro la foto anterior de la ganadería que se modifica
 				uploadService.delete(ganaderia.getHierroGan());
 			}
 			
-			//ahora añado la foto
-			String nombreUnico = null;
+			String uniqueName = null;
 			try {
-				//la copio en la carpeta y obtengo su nombre único
-				nombreUnico = uploadService.copy(hierrogan);
+				uniqueName = uploadService.copy(image);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-			//asigno el nombre único a la entidad
-			ganaderia.setHierroGan(nombreUnico);
-			
+			ganaderia.setHierroGan(uniqueName);
 		}
-		
-		
-		//guardo la entidad
-		
-		ganaderiaService.save(ganaderia);
-		status.setComplete();
-		flash.addFlashAttribute("success",mensaje);
-		return "redirect:/ganaderias/list";
 	}
 
 	@Secured("ROLE_ADMIN")

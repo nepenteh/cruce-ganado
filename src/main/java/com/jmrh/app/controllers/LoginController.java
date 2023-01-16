@@ -37,7 +37,7 @@ public class LoginController {
 		if(error != null) 
 			model.addAttribute("error","Nombre de usuario o password incorrectos");
 		
-		model.addAttribute("appData", appData);
+		model.addAttribute("applicationData", appData);
 			
 		return "/login/login";
 	}
