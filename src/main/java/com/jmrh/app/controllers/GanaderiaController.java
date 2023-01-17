@@ -1,32 +1,35 @@
 package com.jmrh.app.controllers;
 
-import java.io.IOException;
-import javax.validation.Valid;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.jmrh.app.util.paginator.PageRender;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
+import org.springframework.web.bind.support.SessionStatus;
+
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import com.jmrh.app.models.services.UploadService;
 
 import com.jmrh.app.appdata.AppData;
 import com.jmrh.app.models.entities.Ganaderia;
-import com.jmrh.app.models.services.AnimalService;
 import com.jmrh.app.models.services.GanaderiaService;
-import com.jmrh.app.models.services.UploadService;
-import com.jmrh.app.util.paginator.PageRender;
+
+import com.jmrh.app.models.services.AnimalService;
+
+
 
 @Controller
 @SessionAttributes("ganaderia")
@@ -40,9 +43,9 @@ public class GanaderiaController {
 	
 	public static final String OPGEN = "GANADERIAS"; 
 	
-	public GanaderiaController(AppData datosAplicacion, GanaderiaService ganaderiaService,
+	public GanaderiaController(AppData applicationData, GanaderiaService ganaderiaService,
 			AnimalService animalService, UploadService uploadService) {
-		this.appData = datosAplicacion;
+		this.appData = applicationData;
 		this.ganaderiaService = ganaderiaService;
 		this.animalService = animalService;
 		this.uploadService = uploadService;

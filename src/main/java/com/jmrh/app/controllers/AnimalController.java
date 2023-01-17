@@ -49,9 +49,9 @@ public class AnimalController {
 
 	public static final String OPGEN = "ANIMALES";
 	
-	public AnimalController(AppData datosAplicacion, AnimalService animalService, GanaderiaService ganaderiaService,
+	public AnimalController(AppData applicationData, AnimalService animalService, GanaderiaService ganaderiaService,
 			UploadService uploadService, ArbolAnimalesService arbolAnimales) {
-		this.datosAplicacion = datosAplicacion;
+		this.datosAplicacion = applicationData;
 		this.animalService = animalService;
 		this.ganaderiaService = ganaderiaService;
 		this.uploadService = uploadService;
