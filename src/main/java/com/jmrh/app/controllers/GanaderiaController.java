@@ -152,8 +152,18 @@ public class GanaderiaController {
 		if(idGan>0) { 			
 			Ganaderia ganaderia = ganaderiaService.findOne(idGan);
 			if(ganaderia!=null) {
+				
+				/*
+				 //this code would be necessary if ganaderia were required for animal
+				if(animalService.animalWithGanaderia(idGan).size()>0) {
+					flash.addFlashAttribute("error","No se puede eliminar la ganadería, ya que hay animales con esa ganadería");
+					return "redirect:/ganaderias/list";
+				}
+				*/ 
+				
 				animalService.deleteGanaderia(idGan);
 				ganaderiaService.remove(idGan);
+				
 			} else {
 				flash.addFlashAttribute("error","Ganadería no existente");
 				return "redirect:/ganaderias/list";

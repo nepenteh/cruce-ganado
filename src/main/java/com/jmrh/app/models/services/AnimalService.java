@@ -22,5 +22,6 @@ public interface AnimalService {
 	public void quitarPadres(Long idA);
 	public void quitarMadres(Long idA);
 	public void deleteGanaderia(Long idGan);
+	public List<Animal> animalWithGanaderia(Long idGan);
 	
 }

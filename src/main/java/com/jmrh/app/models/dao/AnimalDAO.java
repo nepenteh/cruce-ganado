@@ -27,4 +27,7 @@ public interface AnimalDAO extends PagingAndSortingRepository<Animal, Long> {
 	@Modifying
 	@Query("update Animal a set a.ganaderiaA=null where a.ganaderiaA.idGan=?1")
 	public void deleteGanaderia(Long idGan);
+	
+	@Query("select a from Animal a where a.ganaderiaA.idGan=?1")
+	public List<Animal> animalWithGanaderia(Long idGan);
 }

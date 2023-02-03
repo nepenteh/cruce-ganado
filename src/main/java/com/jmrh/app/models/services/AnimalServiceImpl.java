@@ -94,5 +94,11 @@ public class AnimalServiceImpl implements AnimalService {
 	public void deleteGanaderia(Long idGan) {
 		animalDAO.deleteGanaderia(idGan);
 	}
+	
+	@Transactional(readOnly=true)
+	@Override
+	public List<Animal> animalWithGanaderia(Long idGan) {
+		return animalDAO.animalWithGanaderia(idGan);
+	}
 
 }
