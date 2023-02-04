@@ -11,10 +11,10 @@ import com.jmrh.app.models.entities.Animal;
 public interface AnimalDAO extends PagingAndSortingRepository<Animal, Long> {
 
 	@Query("select a from Animal a where a.sexoA='H' and a.nombreA like %?1%")
-	public List<Animal> findHembraByNombre(String cadena);
+	public List<Animal> findHembraByNombre(String string);
 
 	@Query("select a from Animal a where a.sexoA='M' and a.nombreA like %?1%")
-	public List<Animal> findMachoByNombre(String cadena);
+	public List<Animal> findMachoByNombre(String string);
 	
 	@Modifying
 	@Query("update Animal a set a.padreA=null where a.padreA.idA=?1")

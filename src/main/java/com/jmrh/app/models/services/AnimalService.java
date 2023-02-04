@@ -16,9 +16,9 @@ public interface AnimalService {
 	public void save(Animal animal);
 	public void remove(Long idA);
 	public Long count();
-	public List<Ganaderia> findByNombre(String cadena);
-	public List<Animal> findHembraByNombre(String cadena);
-	public List<Animal> findMachoByNombre(String cadena);
+	public List<Ganaderia> findByNombre(String string);
+	public List<Animal> findHembraByNombre(String string);
+	public List<Animal> findMachoByNombre(String string);
 	public void quitarPadres(Long idA);
 	public void quitarMadres(Long idA);
 	public void deleteGanaderia(Long idGan);

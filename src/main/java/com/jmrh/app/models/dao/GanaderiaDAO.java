@@ -10,6 +10,6 @@ import com.jmrh.app.models.entities.Ganaderia;
 public interface GanaderiaDAO extends PagingAndSortingRepository<Ganaderia, Long> {
 	
 	@Query("select g from Ganaderia g where g.nombreGan like %?1%")
-	public List<Ganaderia> findByNombre(String cadena);
+	public List<Ganaderia> findByNombre(String string);
 	
 }
