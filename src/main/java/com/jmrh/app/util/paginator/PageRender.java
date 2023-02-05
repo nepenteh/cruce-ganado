@@ -5,13 +5,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-/**
- * A paginator
- *  
- * @author josep
- *
- * @param <T>
- */
 
 public class PageRender<T> {
 
