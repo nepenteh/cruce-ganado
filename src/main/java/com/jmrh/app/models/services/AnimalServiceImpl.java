@@ -61,20 +61,20 @@ public class AnimalServiceImpl implements AnimalService {
 	
 	@Transactional(readOnly=true)
 	@Override
-	public List<Ganaderia> findByNombre(String cadena) {
-		return ganaderiaDAO.findByNombre(cadena);
+	public List<Ganaderia> findByNombre(String string) {
+		return ganaderiaDAO.findByNombre(string);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
-	public List<Animal> findHembraByNombre(String cadena) {
-		return animalDAO.findHembraByNombre(cadena);
+	public List<Animal> findHembraByNombre(String string) {
+		return animalDAO.findHembraByNombre(string);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
-	public List<Animal> findMachoByNombre(String cadena) {
-		return animalDAO.findMachoByNombre(cadena);
+	public List<Animal> findMachoByNombre(String string) {
+		return animalDAO.findMachoByNombre(string);
 	}
 
 	@Transactional
