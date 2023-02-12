@@ -53,6 +53,7 @@
 		<a th:href="@{'/ganaderias/form/'+${ganaderia.idGan}}" title="Modificar"><svg th:replace="/layout/iconos_svg :: svg-modificar"></svg></a>
 		<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Eliminar" th:attr="onclick=|mostrarConfirmacionEliminar('${ganaderia.idGan}','${ganaderia.nombreGan}')|"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></a>
 		<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="/layout/iconos_svg :: svg-eliminar"></svg></span>
+	</td>
 	</tr>
 </tbody>
 </table>
