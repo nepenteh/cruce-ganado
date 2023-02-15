@@ -15,7 +15,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <section class="vh-100">
 	<div
-		class="d-flex justify-content-between flex-column flex-md-row text-center text-white text-md-start  py-3 px-4 px-xl-5 bg-dark">
+		class="d-flex justify-content-between flex-column flex-md-row text-center text-white text-md-start  py-3 px-4 px-xl-5 menu-bar">
 		<div th:text="${#strings.toUpperCase(applicationData.name)}"></div>
 		<div class="float-end"><a class="enlace-claro" th:href="${applicationData.webUrl}" th:text="${applicationData.authorship}" target="_blank"></a></div>
 	</div>

@@ -35,12 +35,15 @@
 
 <body>
 
-<nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="menu" class="navbar navbar-expand-lg menu-bar">
   <div class="container-fluid">
   	<span class="navbar-brand" th:text="${applicationData.name}"></span>
     <img th:src="@{/images/logo.png}" width="80px">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line no-line"></div>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">

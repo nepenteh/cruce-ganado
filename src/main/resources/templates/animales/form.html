@@ -136,9 +136,11 @@
 						<div class="col-md-2 mt-4">
 							<input class="btn boton-normal"
 								sec:authorize="hasRole('ROLE_ADMIN')" type="submit"
-								value="Enviar"> <input
+								th:value="${#strings.equalsIgnoreCase(screen,'CREATE')?'Alta Animal':'Modificar Animal'}"> 
+							<input
 								sec:authorize="!hasRole('ROLE_ADMIN')" type="submit"
-								value="Enviar" disabled>
+								th:value="${#strings.equalsIgnoreCase(screen,'CREATE')?'Alta Animal':'Modificar Animal'}"  
+								disabled>
 						</div>
 					</div>
 

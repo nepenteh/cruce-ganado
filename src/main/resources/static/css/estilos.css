@@ -1,4 +1,9 @@
+/*
 :root {
+	--bgcolor-menu: #212529;
+	--color-menu: white;
+	--color-menu-hover: lightgray;
+	--color-menu-active: #707584;
 	--bgcolor-titulos-pantalla: #4d4033;
 	--bgcolor-boton-normal: #4d4033;
 	--color-boton-normal: white;
@@ -7,9 +12,68 @@
 	--color-enlace-claro: white;
 	--color-enlace-claro-hover: lightgray;
 	--color-fondo-formulario: lightgray;
+	--shadow-formulario: rgba(229, 103, 23, 0.075);
 	--color-sutil: gray;
-	
-	
+}
+*/
+
+:root {
+	--bgcolor-menu: #0E415B;
+	--color-menu: white;
+	--color-menu-hover: lightgray;
+	--color-menu-active: #9FC4C6;
+	--bgcolor-titulos-pantalla: #187489;
+	--bgcolor-boton-normal: #187489;
+	--color-boton-normal: white;
+	--bgcolor-boton-normal-hover: #569FAF;
+	--color-boton-normal-hover: white;
+	--color-enlace-claro: white;
+	--color-enlace-claro-hover: #DBE5E5;
+	--color-fondo-formulario: #DBE5E5;
+	--shadow-formulario: rgba(229, 103, 23, 0.075);
+	--color-sutil: gray;
+}
+
+.menu-bar {
+	background-color: var(--bgcolor-menu);
+	color:var(--color-menu)!important;
+}
+
+.menu-bar a {
+	color: var(--color-menu)!important;
+}
+
+.menu-bar a:hover {
+	color: var(--color-menu-hover)!important;
+}
+
+.menu-bar a.active {
+	color: var(--color-menu-active)!important;
+}
+
+.menu-bar .navbar-toggler .navbar-toggler-icon{
+	fill: var(--color-menu)!important;
+}
+
+.navbar-toggler {
+	width: 40px;
+	height: 40px;
+	border-color:var(--color-menu)!important;
+	padding: 3px 8px!important;
+}
+
+.navbar-toggler:hover .line, .navbar-toggler:hover {
+	border-color: var(--color-menu-hover);
+}
+
+.line {
+	border-bottom: solid 3px var(--color-menu);
+	height:25%;
+}
+
+.no-line {
+	border-bottom: none;
+	height:20%;
 }
 
 .titulo-pantalla {
@@ -93,7 +157,7 @@ a .svg-opcion:hover {
 
 .form-control:focus, .boton-normal:focus, .page-item a:focus {
     border-color: var(--bgcolor-boton-normal-hover)!important;
-    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px var(--bgcolor-boton-normal-hover);
+    box-shadow: 0 1px 1px var(--shadow-formulario) inset, 0 0 8px var(--bgcolor-boton-normal-hover);
     outline: 0 none;
 }
 
